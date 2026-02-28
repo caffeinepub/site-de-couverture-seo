@@ -1,132 +1,40 @@
 {
   "kind": "build_request",
-  "title": "Improve page load performance: optimize FCP and LCP",
+  "title": "Audit and fix contact form email address (sv.couverture95@gmail.com) in all mailto links and form fields",
   "projectName": "Verdier Couverture",
   "priority": "high",
   "requirements": [
     {
-      "id": "REQ-32",
-      "text": "In `frontend/index.html`, add `<link rel='preconnect' href='https://fonts.googleapis.com' />` and `<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />` before the Google Fonts `<link>` stylesheet tag. Additionally, convert the Google Fonts `<link rel='stylesheet'>` to use `media='print' onload=\"this.media='all'\"` for non-blocking font loading, and add a `<noscript>` fallback. This eliminates render-blocking font requests that delay First Contentful Paint.",
+      "id": "REQ-39",
+      "text": "Audit every location in the codebase where a contact email address appears — including the Contact section form action/mailto link, the contact info card email display link, the Footer email link, and any other mailto: href — and verify that each one uses exactly 'sv.couverture95@gmail.com'. Correct any mismatched, missing, or malformed email addresses so that all mailto: links and form submission targets point to sv.couverture95@gmail.com.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-latest"
         ],
         "quotes": [
-          "First Contentful Paint",
-          "Largest Contentful Paint"
+          "Je ne reçois pas je me suis fait une demande a moi même je ne reçois rien peut tu regarder que cest la bonne adresse email sv.couverture95@gmail.com"
         ]
       },
       "acceptanceCriteria": [
-        "Google Fonts stylesheet is loaded asynchronously and does not block rendering",
-        "preconnect hints for fonts.googleapis.com and fonts.gstatic.com are present in <head> before the fonts link",
-        "A <noscript> fallback link for the fonts stylesheet is present"
-      ]
-    },
-    {
-      "id": "REQ-33",
-      "text": "In `frontend/src/components/Hero.tsx`, add `loading='eager'` and `fetchpriority='high'` attributes to the hero background `<img>` element (or equivalent inline style background). If the hero image is rendered as a CSS background-image, convert it to an `<img>` tag positioned absolutely behind the content so it can receive these priority hints. This ensures the hero image — the Largest Contentful Paint element — is fetched with highest priority.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "Largest Contentful Paint"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The hero background image is loaded eagerly with high fetch priority",
-        "The LCP image is not lazy-loaded",
-        "The hero section visual appearance is unchanged"
-      ]
-    },
-    {
-      "id": "REQ-34",
-      "text": "In `frontend/src/components/Services.tsx`, add `loading='lazy'` to all six service card `<img>` elements so that off-screen images are not downloaded during initial page load. All other images below the fold in `About.tsx`, `Testimonials.tsx`, and `Footer.tsx` should also receive `loading='lazy'` if not already set. Only the hero image (above the fold) must remain eager.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "First Contentful Paint",
-          "Largest Contentful Paint"
-        ]
-      },
-      "acceptanceCriteria": [
-        "All service card images have loading='lazy'",
-        "No below-the-fold images trigger network requests on initial load",
-        "Hero image remains loading='eager' with fetchpriority='high'"
-      ]
-    },
-    {
-      "id": "REQ-35",
-      "text": "In `frontend/index.html`, add a `<link rel='preload' as='image' href='/assets/generated/[hero-image-filename]' />` tag inside `<head>` to preload the hero/LCP image. Use the exact filename of the hero background image currently referenced in `Hero.tsx`. This tells the browser to start fetching the hero image as soon as the HTML is parsed, before CSS and JS are processed.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "Largest Contentful Paint"
-        ]
-      },
-      "acceptanceCriteria": [
-        "A <link rel='preload' as='image'> tag for the hero image is present in <head>",
-        "The href matches the actual hero image path used in Hero.tsx",
-        "The preload tag appears early in <head>, before render-blocking resources"
-      ]
-    },
-    {
-      "id": "REQ-36",
-      "text": "In `frontend/index.html`, inline the critical above-the-fold CSS (font-face declarations, hero section base styles, navigation styles, and color custom properties from `index.css`) directly in a `<style>` tag inside `<head>`. Extract only the styles needed to render the visible viewport without waiting for the external CSS bundle. This reduces render-blocking time and improves First Contentful Paint.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "First Contentful Paint"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Critical CSS for hero and navigation is inlined in a <style> block in <head>",
-        "The page renders its above-the-fold content without waiting for the full CSS bundle",
-        "No visual regression — all sections still appear correctly styled"
-      ]
-    },
-    {
-      "id": "REQ-37",
-      "text": "In `frontend/index.html`, add `<meta http-equiv='Cache-Control' content='max-age=31536000, immutable' />` for static assets and ensure the `<html>` tag has `lang='fr'` set (if not already). Also add a DNS prefetch hint `<link rel='dns-prefetch' href='https://fonts.googleapis.com' />` to speed up DNS resolution for external font resources.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "First Contentful Paint",
-          "Largest Contentful Paint"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The <html> element has lang='fr'",
-        "A dns-prefetch hint for fonts.googleapis.com is present in <head>",
-        "No existing meta tags are removed or broken"
+        "Every mailto: href in Contact.tsx, Footer.tsx, and any other component uses exactly 'mailto:sv.couverture95@gmail.com' with no typos, extra spaces, or alternate addresses.",
+        "The contact form 'Envoyer' / submit button or form action opens a mailto: link pre-filled with sv.couverture95@gmail.com as the recipient.",
+        "The email displayed as text/link in the Contact section info card shows 'sv.couverture95@gmail.com' and its href is 'mailto:sv.couverture95@gmail.com'.",
+        "The email displayed as text/link in the Footer shows 'sv.couverture95@gmail.com' and its href is 'mailto:sv.couverture95@gmail.com'.",
+        "No other email address appears anywhere in the site components.",
+        "A test click on any email link opens a mail client with sv.couverture95@gmail.com as the pre-filled recipient."
       ]
     }
   ],
   "constraints": [
-    "Do not remove or modify the Google site verification meta tags, canonical tag, Open Graph tags, or JSON-LD structured data in index.html",
-    "Do not alter the visual design, layout, or French content of any section",
-    "Do not remove the Google Search Console verification file frontend/public/google2ea9c3e7d5d4abde.html",
-    "Do not modify files listed in frontend.immutablePaths"
+    "Do not change any existing SEO meta tags, JSON-LD structured data, sitemap, or robots.txt.",
+    "Do not alter any content other than email address values and their associated mailto: hrefs.",
+    "Do not modify files listed in frontend.immutablePaths."
   ],
   "nonGoals": [
-    "Server-side rendering or static site generation",
-    "Image format conversion (WebP/AVIF) via build tooling — only HTML attribute and loading strategy changes",
-    "Backend changes — the Motoko actor has no role in page load performance",
-    "Changes to SEO content, testimonials, structured data, or any existing feature outside of performance"
+    "Implementing a server-side email sending backend — the site uses mailto: links only.",
+    "Adding new form fields or changing the form layout.",
+    "Any SEO, performance, or scroll-related changes."
   ],
   "imageRequirements": {
     "required": [],

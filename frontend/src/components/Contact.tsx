@@ -16,6 +16,8 @@ interface FormErrors {
     message?: string;
 }
 
+const CONTACT_EMAIL = 'sv.couverture95@gmail.com';
+
 const serviceOptions = [
     'Réfection de toiture complète',
     'Pose de tuiles ou ardoises',
@@ -64,14 +66,35 @@ export default function Contact() {
         }
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (!validate()) return;
         setIsSubmitting(true);
-        // Simulate form submission (mailto fallback)
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        setIsSubmitting(false);
-        setSubmitted(true);
+
+        const subject = encodeURIComponent(
+            `Demande de devis – ${formData.service || 'Couverture'} – ${formData.nom}`
+        );
+
+        const body = encodeURIComponent(
+            `Bonjour,\n\nVous avez reçu une nouvelle demande de devis via votre site web.\n\n` +
+            `Nom : ${formData.nom}\n` +
+            `E-mail : ${formData.email}\n` +
+            `Téléphone : ${formData.telephone}\n` +
+            `Service souhaité : ${formData.service || 'Non précisé'}\n\n` +
+            `Message :\n${formData.message}\n\n` +
+            `---\nEnvoyé depuis le formulaire de contact VERDIER COUVERTURE`
+        );
+
+        const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+
+        // Open the mailto link to trigger the user's email client
+        window.location.href = mailtoLink;
+
+        // Short delay to allow the mailto to trigger before showing confirmation
+        setTimeout(() => {
+            setIsSubmitting(false);
+            setSubmitted(true);
+        }, 500);
     };
 
     return (
@@ -144,16 +167,16 @@ export default function Contact() {
                                 </a>
                                 {/* Email */}
                                 <a
-                                    href="mailto:sv.couverture95@gmail.com"
+                                    href={`mailto:${CONTACT_EMAIL}`}
                                     className="flex items-start gap-3 group"
-                                    aria-label="E-mail : sv.couverture95@gmail.com"
+                                    aria-label={`E-mail : ${CONTACT_EMAIL}`}
                                 >
                                     <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[oklch(0.55_0.13_42/0.1)] flex items-center justify-center text-[oklch(0.55_0.13_42)] group-hover:bg-[oklch(0.55_0.13_42)] group-hover:text-white transition-all duration-200">
                                         <Mail size={18} />
                                     </div>
                                     <div>
                                         <div className="text-xs text-[oklch(0.52_0.02_60)] font-medium uppercase tracking-wider mb-0.5">E-mail</div>
-                                        <div className="text-[oklch(0.22_0.015_50)] font-medium text-sm group-hover:text-[oklch(0.55_0.13_42)] transition-colors">sv.couverture95@gmail.com</div>
+                                        <div className="text-[oklch(0.22_0.015_50)] font-medium text-sm group-hover:text-[oklch(0.55_0.13_42)] transition-colors">{CONTACT_EMAIL}</div>
                                     </div>
                                 </a>
                                 {/* Address */}
@@ -230,8 +253,18 @@ export default function Contact() {
                                         Demande envoyée !
                                     </h3>
                                     <p className="text-[oklch(0.42_0.02_55)] text-base max-w-sm mx-auto">
-                                        Merci pour votre message. Nous vous recontacterons sous 24h pour étudier votre projet.
+                                        Votre client de messagerie s'est ouvert avec votre demande pré-remplie.
+                                        Envoyez l'e-mail pour que nous puissions vous recontacter sous 24h.
                                     </p>
+                                    <p className="mt-3 text-sm text-[oklch(0.52_0.02_60)]">
+                                        Destinataire : <strong className="text-[oklch(0.22_0.015_50)]">{CONTACT_EMAIL}</strong>
+                                    </p>
+                                    <button
+                                        onClick={() => setSubmitted(false)}
+                                        className="mt-6 text-sm text-[oklch(0.55_0.13_42)] underline hover:no-underline"
+                                    >
+                                        Envoyer une autre demande
+                                    </button>
                                 </div>
                             </div>
                         ) : (
@@ -241,6 +274,14 @@ export default function Contact() {
                                 aria-label="Formulaire de demande de devis"
                                 className="space-y-5"
                             >
+                                {/* Info banner */}
+                                <div className="flex items-start gap-2.5 bg-[oklch(0.975_0.005_80)] border border-[oklch(0.87_0.015_70)] rounded-lg px-4 py-3 text-sm text-[oklch(0.42_0.02_55)]">
+                                    <Mail size={15} className="text-[oklch(0.55_0.13_42)] flex-shrink-0 mt-0.5" aria-hidden="true" />
+                                    <span>
+                                        Votre demande sera envoyée à <strong className="text-[oklch(0.22_0.015_50)]">{CONTACT_EMAIL}</strong> via votre client de messagerie.
+                                    </span>
+                                </div>
+
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                     {/* Nom */}
                                     <div>
@@ -267,7 +308,7 @@ export default function Contact() {
                                     {/* Email */}
                                     <div>
                                         <label htmlFor="email" className="block text-sm font-medium text-[oklch(0.32_0.015_50)] mb-1.5">
-                                            Adresse e-mail <span className="text-[oklch(0.55_0.13_42)]" aria-hidden="true">*</span>
+                                            Votre adresse e-mail <span className="text-[oklch(0.55_0.13_42)]" aria-hidden="true">*</span>
                                         </label>
                                         <input
                                             id="email"
@@ -313,7 +354,7 @@ export default function Contact() {
                                     {/* Service */}
                                     <div>
                                         <label htmlFor="service" className="block text-sm font-medium text-[oklch(0.32_0.015_50)] mb-1.5">
-                                            Type de prestation
+                                            Type de service
                                         </label>
                                         <select
                                             id="service"
@@ -322,8 +363,8 @@ export default function Contact() {
                                             onChange={handleChange}
                                             className="form-input"
                                         >
-                                            <option value="">Sélectionner un service</option>
-                                            {serviceOptions.map((opt) => (
+                                            <option value="">Sélectionnez un service</option>
+                                            {serviceOptions.map(opt => (
                                                 <option key={opt} value={opt}>{opt}</option>
                                             ))}
                                         </select>
@@ -342,7 +383,7 @@ export default function Contact() {
                                         value={formData.message}
                                         onChange={handleChange}
                                         className={`form-input resize-none ${errors.message ? 'border-red-400 focus:ring-red-300' : ''}`}
-                                        placeholder="Décrivez votre projet de toiture, la surface approximative, le type de matériaux souhaités..."
+                                        placeholder="Décrivez votre projet : type de toiture, surface approximative, travaux souhaités, urgence éventuelle..."
                                         aria-required="true"
                                         aria-describedby={errors.message ? 'message-error' : undefined}
                                     />
@@ -354,21 +395,28 @@ export default function Contact() {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="btn-terracotta w-full py-4 text-base font-semibold flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                                    className="btn-terracotta w-full flex items-center justify-center gap-2 py-3.5 text-base disabled:opacity-60 disabled:cursor-not-allowed"
                                     aria-label="Envoyer la demande de devis"
                                 >
                                     {isSubmitting ? (
                                         <>
-                                            <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" aria-hidden="true" />
-                                            Envoi en cours…
+                                            <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                                            </svg>
+                                            Ouverture du client mail...
                                         </>
                                     ) : (
                                         <>
-                                            <Send size={18} aria-hidden="true" />
+                                            <Send size={16} aria-hidden="true" />
                                             Envoyer ma demande de devis
                                         </>
                                     )}
                                 </button>
+
+                                <p className="text-xs text-center text-[oklch(0.52_0.02_60)]">
+                                    En cliquant sur « Envoyer », votre client de messagerie s'ouvrira avec votre demande pré-remplie à destination de <strong>{CONTACT_EMAIL}</strong>.
+                                </p>
                             </form>
                         )}
                     </div>

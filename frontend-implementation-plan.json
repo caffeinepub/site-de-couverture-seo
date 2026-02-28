@@ -1,116 +1,29 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Improve page load performance: optimize FCP and LCP",
+  "title": "Audit and fix contact form email address (sv.couverture95@gmail.com) in all mailto links and form fields",
   "requirements": [
     {
-      "id": "REQ-32",
-      "summary": "Implement non-blocking Google Fonts loading with preconnect hints to eliminate render-blocking font requests and improve First Contentful Paint",
+      "id": "REQ-39",
+      "summary": "Audit and correct all email addresses and mailto: links throughout the frontend to ensure they use exactly 'sv.couverture95@gmail.com'",
       "acceptanceCriteria": [
-        "Google Fonts stylesheet is loaded asynchronously and does not block rendering",
-        "preconnect hints for fonts.googleapis.com and fonts.gstatic.com are present in <head> before the fonts link",
-        "A <noscript> fallback link for the fonts stylesheet is present"
+        "Every mailto: href in Contact.tsx, Footer.tsx, and any other component uses exactly 'mailto:sv.couverture95@gmail.com' with no typos, extra spaces, or alternate addresses.",
+        "The contact form 'Envoyer' / submit button or form action opens a mailto: link pre-filled with sv.couverture95@gmail.com as the recipient.",
+        "The email displayed as text/link in the Contact section info card shows 'sv.couverture95@gmail.com' and its href is 'mailto:sv.couverture95@gmail.com'.",
+        "The email displayed as text/link in the Footer shows 'sv.couverture95@gmail.com' and its href is 'mailto:sv.couverture95@gmail.com'.",
+        "No other email address appears anywhere in the site components.",
+        "A test click on any email link opens a mail client with sv.couverture95@gmail.com as the pre-filled recipient."
       ],
       "file_operations": [
         {
-          "path": "frontend/index.html",
+          "path": "frontend/src/components/Contact.tsx",
           "operation": "modify",
-          "description": "Add <link rel='preconnect'> tags for fonts.googleapis.com and fonts.gstatic.com before the Google Fonts stylesheet link. Convert the existing Google Fonts <link rel='stylesheet'> to use media='print' onload=\"this.media='all'\" for async loading. Add a <noscript> fallback with the original stylesheet link to ensure fonts load when JavaScript is disabled. These changes eliminate render-blocking font requests that delay FCP."
-        }
-      ]
-    },
-    {
-      "id": "REQ-33",
-      "summary": "Add loading='eager' and fetchpriority='high' to the hero background image to ensure the Largest Contentful Paint element loads with highest priority",
-      "acceptanceCriteria": [
-        "The hero background image is loaded eagerly with high fetch priority",
-        "The LCP image is not lazy-loaded",
-        "The hero section visual appearance is unchanged"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/Hero.tsx",
-          "operation": "modify",
-          "description": "Locate the hero background image element (currently rendered as a CSS background-image or inline style). Convert it to an <img> tag with loading='eager' and fetchpriority='high' attributes, positioned absolutely behind the hero content using Tailwind classes (absolute, inset-0, z-0, object-cover). Reference the generated hero image at frontend/public/assets/generated/hero-bg.dim_1920x1080.png. Ensure the existing hero content remains above the image (relative z-index). This ensures the LCP element is fetched with highest priority and not lazy-loaded."
-        }
-      ]
-    },
-    {
-      "id": "REQ-34",
-      "summary": "Add loading='lazy' to all below-the-fold images to prevent off-screen images from downloading during initial page load, improving FCP and LCP",
-      "acceptanceCriteria": [
-        "All service card images have loading='lazy'",
-        "No below-the-fold images trigger network requests on initial load",
-        "Hero image remains loading='eager' with fetchpriority='high'"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/Services.tsx",
-          "operation": "modify",
-          "description": "Add loading='lazy' attribute to all six service card <img> elements (service-refection-toiture.dim_800x500.png, service-pose-tuiles.dim_800x500.png, service-reparation.dim_800x500.png, service-isolation.dim_800x500.png, service-zinguerie.dim_800x500.png, service-nettoyage.dim_800x500.png). This prevents below-the-fold service images from downloading during initial page load."
-        },
-        {
-          "path": "frontend/src/components/About.tsx",
-          "operation": "modify",
-          "description": "Review all <img> elements in the About section. If any images are present and do not already have loading='lazy', add the attribute to defer loading until the user scrolls near the section."
-        },
-        {
-          "path": "frontend/src/components/Testimonials.tsx",
-          "operation": "modify",
-          "description": "Review all <img> elements in the Testimonials section. If any images are present and do not already have loading='lazy', add the attribute to defer loading until the user scrolls near the section."
+          "description": "Audit and correct all email references in the Contact component: (1) Verify the email info card displays 'sv.couverture95@gmail.com' as text and uses 'mailto:sv.couverture95@gmail.com' as the href. (2) Ensure the contact form submit button or form action uses a mailto: link targeting 'sv.couverture95@gmail.com' with appropriate subject/body parameters. (3) Replace any incorrect, missing, or mismatched email addresses with the correct value."
         },
         {
           "path": "frontend/src/components/Footer.tsx",
           "operation": "modify",
-          "description": "Review all <img> elements in the Footer section. If any images are present (logos, icons) and do not already have loading='lazy', add the attribute to defer loading until the user scrolls to the footer."
-        }
-      ]
-    },
-    {
-      "id": "REQ-35",
-      "summary": "Preload the hero/LCP image in the HTML head to start fetching it before CSS and JS processing, improving Largest Contentful Paint",
-      "acceptanceCriteria": [
-        "A <link rel='preload' as='image'> tag for the hero image is present in <head>",
-        "The href matches the actual hero image path used in Hero.tsx",
-        "The preload tag appears early in <head>, before render-blocking resources"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/index.html",
-          "operation": "modify",
-          "description": "Add <link rel='preload' as='image' href='/assets/generated/hero-bg.dim_1920x1080.png' /> inside <head>, positioned early (after charset/viewport but before stylesheets). This tells the browser to immediately fetch the hero image (frontend/public/assets/generated/hero-bg.dim_1920x1080.png) as soon as the HTML is parsed, before CSS and JS processing, improving LCP timing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-36",
-      "summary": "Inline critical above-the-fold CSS in the HTML head to reduce render-blocking time and improve First Contentful Paint",
-      "acceptanceCriteria": [
-        "Critical CSS for hero and navigation is inlined in a <style> block in <head>",
-        "The page renders its above-the-fold content without waiting for the full CSS bundle",
-        "No visual regression — all sections still appear correctly styled"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/index.html",
-          "operation": "modify",
-          "description": "Extract critical above-the-fold CSS from frontend/src/index.css and inline it in a <style> tag inside <head>. Include: font-face declarations for the primary font stack, CSS custom properties (color tokens from :root), base hero section styles (positioning, typography, background), and navigation styles (positioning, background, transitions). Place the <style> block after meta tags but before external CSS links. This allows the browser to render visible content immediately without waiting for the full CSS bundle, improving FCP."
-        }
-      ]
-    },
-    {
-      "id": "REQ-37",
-      "summary": "Add lang attribute, DNS prefetch hint, and cache control meta tag to optimize resource loading and improve FCP/LCP",
-      "acceptanceCriteria": [
-        "The <html> element has lang='fr'",
-        "A dns-prefetch hint for fonts.googleapis.com is present in <head>",
-        "No existing meta tags are removed or broken"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/index.html",
-          "operation": "modify",
-          "description": "Ensure the <html> tag has lang='fr' attribute (add if missing). Add <link rel='dns-prefetch' href='https://fonts.googleapis.com' /> in <head> to speed up DNS resolution for Google Fonts. Add <meta http-equiv='Cache-Control' content='max-age=31536000, immutable' /> to optimize caching of static assets. Do not remove or modify existing meta tags (Google site verification, canonical, Open Graph, JSON-LD structured data)."
+          "description": "Audit and correct the email link in the Footer component: Verify the email is displayed as 'sv.couverture95@gmail.com' and the href is exactly 'mailto:sv.couverture95@gmail.com'. Replace any incorrect or malformed email addresses."
         }
       ]
     }

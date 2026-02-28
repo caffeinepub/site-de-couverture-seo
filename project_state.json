@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 31,
+  "projectStateVersion": 35,
   "summary": "Site de couverture (landing page) avec référencement naturel (SEO) optimisé pour VERDIER COUVERTURE, Pierrelaye 95480.",
   "architectural_notes": [
     "Site statique HTML/CSS/JS pour maximiser les performances et le SEO",
@@ -11,7 +11,9 @@
     "Google Search Console : aucun sitemap référent détecté, aucune page d'origine détectée",
     "Google Search Console : 'Adresse de sitemap incorrecte' — le sitemap.xml n'est pas reconnu comme valide par Google",
     "Google Search Console : problèmes d'exploration — 'Dernière exploration Sans objet', URL canonique non détectée, page non récupérée ni indexée par Google",
-    "Google PageSpeed Insights : mauvais scores FCP (First Contentful Paint) et LCP (Largest Contentful Paint) — vitesse de chargement insuffisante"
+    "Google PageSpeed Insights : mauvais scores FCP (First Contentful Paint) et LCP (Largest Contentful Paint) — vitesse de chargement insuffisante",
+    "Bug de scroll : les sections défilent de manière incorrecte ou des éléments 'suivent' le scroll vers le bas (comportement de sticky/fixed mal configuré)",
+    "Formulaire de contact : l'utilisateur ne reçoit pas les demandes de devis à sv.couverture95@gmail.com — adresse email à vérifier dans tous les liens mailto et champs du formulaire"
   ],
   "isFixRequest": true,
   "existing_features": [
@@ -270,6 +272,14 @@
         "REQ-37"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-audit-every-location-in-the-codebase-where-a-contact-email-address-appears-including-the-contact-section-form-action-mailto-link-the-contact-info-card-email-display-link-the-footer-email-link-and-any-other-mailto-href-and-verify-that-each-one-uses-exactly-sv-couverture95-gmail-com-correct-any-mismatched-missing-or-malformed-email-addresses-so-that-all-mailto-links-and-form-submission-targets-point-to-sv-couverture95-gmail-com",
+      "title": "Audit every location in the codebase where a contact email address appears — including the Contact section form action/mailto link, the contact info card email display link, the Footer email link, and any other mailto: href — and verify that each one uses exactly 'sv.couverture95@gmail.com'. Correct any mismatched, missing, or malformed email addresses so that all mailto: links and form submission targets point to sv.couverture95@gmail.com.",
+      "reqIds": [
+        "REQ-39"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -425,6 +435,26 @@
       "reqIds": [
         "REQ-33"
       ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-27",
+      "summary": "Corriger le bug de défilement : les sections/pages 'suivent' (comportement inattendu) quand on défile vers le bas sur le site",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-28",
+      "summary": "Audit and fix the scroll bug where page sections follow (stick to) the viewport as the user scrolls down. Identify any element in Navigation.tsx, Hero.tsx, Services.tsx, About.tsx, Testimonials.tsx, Contact.tsx, ServiceAreas.tsx, or Footer.tsx that incorrectly uses `position: fixed`, `position: sticky`, `transform`, or `will-change` CSS properties causing sections to trail the scroll position. Remove or correct the offending styles so every section scrolls naturally and remains static relative to the document flow. The Navigation bar may remain fixed at the top as intended, but no other section or element should follow the scroll.",
+      "reqIds": [
+        "REQ-38"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-29",
+      "summary": "Vérifier et corriger l'adresse email du formulaire de contact : s'assurer que sv.couverture95@gmail.com est bien configurée dans tous les liens mailto et champs du formulaire de devis",
+      "reqIds": [],
       "status": "pending"
     }
   ],

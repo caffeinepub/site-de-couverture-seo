@@ -1,44 +1,14 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-28T04:08:15.852Z",
-  "summary": "The diff implements most of the required performance improvements. REQ-32 (preconnect + async fonts + noscript), REQ-34 (lazy loading on service/about images), REQ-35 (preload hero image), REQ-36 (inlined critical CSS), and REQ-37 (lang='fr', dns-prefetch) are all evidenced. REQ-33 (Hero.tsx eager loading with fetchpriority='high') is mentioned in the file summary for Hero.tsx but the actual Hero.tsx diff is not shown. REQ-37's Cache-Control meta tag is not evidenced anywhere in the diff.",
-  "missing_requirements": [
-    {
-      "id": "REQ-37",
-      "requirement": "Add <meta http-equiv='Cache-Control' content='max-age=31536000, immutable' /> for static assets",
-      "reason": "The index.html diff and the frontend-file-summaries.txt description of index.html do not mention a Cache-Control meta http-equiv tag being added. Only dns-prefetch and lang='fr' are described.",
-      "evidence": [
-        "frontend/index.html",
-        "frontend-file-summaries.txt"
-      ]
-    }
-  ],
-  "hallucinated_features": [
-    {
-      "description": "Added decoding='async' attribute to service card images and the about section image",
-      "reason": "The build request only required loading='lazy' for below-the-fold images (REQ-34). The diff summary explicitly mentions decoding='async' was also added to Services.tsx and About.tsx, which was not requested.",
-      "evidence": [
-        "frontend/src/components/Services.tsx",
-        "frontend/src/components/About.tsx",
-        "frontend-file-summaries.txt"
-      ]
-    },
-    {
-      "description": "Fixed Google Structured Data microdata by adding itemReviewed property to Testimonials.tsx review articles",
-      "reason": "This change to Testimonials.tsx is described in frontend-file-summaries.txt but was not part of the performance build request. The non-goals explicitly state no changes to testimonials or structured data.",
-      "evidence": [
-        "frontend/src/components/Testimonials.tsx",
-        "frontend-file-summaries.txt"
-      ]
-    }
-  ],
-  "confidence": 0.72,
+  "generatedAt": "2026-02-28T04:27:16.507Z",
+  "summary": "The diff implements REQ-39 by updating Contact.tsx to use a CONTACT_EMAIL constant ('sv.couverture95@gmail.com') for all mailto links and form submission, and Footer.tsx is described in the file summaries as updated with the correct email address. All acceptance criteria appear to be addressed.",
+  "missing_requirements": [],
+  "hallucinated_features": [],
+  "confidence": 0.88,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/index.html",
-    "frontend/src/components/About.tsx",
-    "frontend/src/components/Services.tsx",
+    "frontend/src/components/Contact.tsx",
     "project_state.json"
   ]
 }

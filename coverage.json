@@ -1,81 +1,25 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-28T04:08:15.856Z",
+  "generatedAt": "2026-02-28T04:27:16.511Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 6,
-    "implemented": 5,
+    "total": 1,
+    "implemented": 1,
     "items": [
       {
-        "id": "REQ-32",
-        "summary": "In `frontend/index.html`, add `<link rel='preconnect' href='https://fonts.googleapis.com' />` and `<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />` before the Google Fonts `<link>` stylesheet tag. Additionally, convert the Google Fonts `<link rel='stylesheet'>` to use `media='print' onload=\"this.media='all'\"` for non-blocking font loading, and add a `<noscript>` fallback. This eliminates render-blocking font requests that delay First Contentful Paint.",
+        "id": "REQ-39",
+        "summary": "Audit every location in the codebase where a contact email address appears — including the Contact section form action/mailto link, the contact info card email display link, the Footer email link, and any other mailto: href — and verify that each one uses exactly 'sv.couverture95@gmail.com'. Correct any mismatched, missing, or malformed email addresses so that all mailto: links and form submission targets point to sv.couverture95@gmail.com.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/index.html"
-        ],
-        "matchedFiles": [
-          "frontend/index.html"
-        ]
-      },
-      {
-        "id": "REQ-33",
-        "summary": "In `frontend/src/components/Hero.tsx`, add `loading='eager'` and `fetchpriority='high'` attributes to the hero background `<img>` element (or equivalent inline style background). If the hero image is rendered as a CSS background-image, convert it to an `<img>` tag positioned absolutely behind the content so it can receive these priority hints. This ensures the hero image — the Largest Contentful Paint element — is fetched with highest priority.",
-        "status": "missing",
-        "plannedFiles": [
-          "frontend/src/components/Hero.tsx"
-        ],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-34",
-        "summary": "In `frontend/src/components/Services.tsx`, add `loading='lazy'` to all six service card `<img>` elements so that off-screen images are not downloaded during initial page load. All other images below the fold in `About.tsx`, `Testimonials.tsx`, and `Footer.tsx` should also receive `loading='lazy'` if not already set. Only the hero image (above the fold) must remain eager.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/Services.tsx",
-          "frontend/src/components/About.tsx",
-          "frontend/src/components/Testimonials.tsx",
+          "frontend/src/components/Contact.tsx",
           "frontend/src/components/Footer.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/Services.tsx",
-          "frontend/src/components/About.tsx"
-        ]
-      },
-      {
-        "id": "REQ-35",
-        "summary": "In `frontend/index.html`, add a `<link rel='preload' as='image' href='/assets/generated/[hero-image-filename]' />` tag inside `<head>` to preload the hero/LCP image. Use the exact filename of the hero background image currently referenced in `Hero.tsx`. This tells the browser to start fetching the hero image as soon as the HTML is parsed, before CSS and JS are processed.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/index.html"
-        ],
-        "matchedFiles": [
-          "frontend/index.html"
-        ]
-      },
-      {
-        "id": "REQ-36",
-        "summary": "In `frontend/index.html`, inline the critical above-the-fold CSS (font-face declarations, hero section base styles, navigation styles, and color custom properties from `index.css`) directly in a `<style>` tag inside `<head>`. Extract only the styles needed to render the visible viewport without waiting for the external CSS bundle. This reduces render-blocking time and improves First Contentful Paint.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/index.html"
-        ],
-        "matchedFiles": [
-          "frontend/index.html"
-        ]
-      },
-      {
-        "id": "REQ-37",
-        "summary": "In `frontend/index.html`, add `<meta http-equiv='Cache-Control' content='max-age=31536000, immutable' />` for static assets and ensure the `<html>` tag has `lang='fr'` set (if not already). Also add a DNS prefetch hint `<link rel='dns-prefetch' href='https://fonts.googleapis.com' />` to speed up DNS resolution for external font resources.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/index.html"
-        ],
-        "matchedFiles": [
-          "frontend/index.html"
+          "frontend/src/components/Contact.tsx"
         ]
       }
     ]
@@ -85,9 +29,7 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/index.html",
-    "frontend/src/components/About.tsx",
-    "frontend/src/components/Services.tsx",
+    "frontend/src/components/Contact.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

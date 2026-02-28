@@ -84,8 +84,8 @@
         --color-muted: oklch(0.42 0.02 55);
       }
 
-      /* Navigation — sticky, above the fold */
-      nav, header { position: sticky; top: 0; z-index: 50; }
+      /* Navigation banner — fixed at top, scoped to role="banner" only */
+      header[role="banner"] { position: fixed; top: 0; left: 0; right: 0; z-index: 50; }
 
       /* Hero section — full screen, above the fold */
       #accueil {
