@@ -91,6 +91,8 @@ export default function Services() {
                                     src={service.imgSrc}
                                     alt={service.imgAlt}
                                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                                 {/* Subtle overlay for text readability */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-[oklch(0.22_0.015_50/0.35)] to-transparent" aria-hidden="true" />

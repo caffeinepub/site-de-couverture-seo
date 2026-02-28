@@ -1,4 +1,101 @@
 {
   "kind": "feature_evidence_report",
-  "features": []
+  "features": [
+    {
+      "featureId": "feature-in-frontend-index-html-add-link-rel-preconnect-href-https-fonts-googleapis-com-and-link-rel-preconnect-href-https-fonts-gstatic-com-crossorigin-before-the-google-fonts-link-stylesheet-tag-additionally-convert-the-google-fonts-link-rel-stylesheet-to-use-media-print-onload-this-media-all-for-non-blocking-font-loading-and-add-a-noscript-fallback-this-eliminates-render-blocking-font-requests-that-delay-first-contentful-paint",
+      "featureTitle": "In `frontend/index.html`, add `<link rel='preconnect' href='https://fonts.googleapis.com' />` and `<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />` before the Google Fonts `<link>` stylesheet tag. Additionally, convert the Google Fonts `<link rel='stylesheet'>` to use `media='print' onload=\"this.media='all'\"` for non-blocking font loading, and add a `<noscript>` fallback. This eliminates render-blocking font requests that delay First Contentful Paint.",
+      "files": [
+        "frontend/index.html"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-32"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-in-frontend-src-components-services-tsx-add-loading-lazy-to-all-six-service-card-img-elements-so-that-off-screen-images-are-not-downloaded-during-initial-page-load-all-other-images-below-the-fold-in-about-tsx-testimonials-tsx-and-footer-tsx-should-also-receive-loading-lazy-if-not-already-set-only-the-hero-image-above-the-fold-must-remain-eager",
+      "featureTitle": "In `frontend/src/components/Services.tsx`, add `loading='lazy'` to all six service card `<img>` elements so that off-screen images are not downloaded during initial page load. All other images below the fold in `About.tsx`, `Testimonials.tsx`, and `Footer.tsx` should also receive `loading='lazy'` if not already set. Only the hero image (above the fold) must remain eager.",
+      "files": [
+        "frontend/src/components/About.tsx",
+        "frontend/src/components/Services.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-34"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-in-frontend-index-html-add-a-link-rel-preload-as-image-href-assets-generated-hero-image-filename-tag-inside-head-to-preload-the-hero-lcp-image-use-the-exact-filename-of-the-hero-background-image-currently-referenced-in-hero-tsx-this-tells-the-browser-to-start-fetching-the-hero-image-as-soon-as-the-html-is-parsed-before-css-and-js-are-processed",
+      "featureTitle": "In `frontend/index.html`, add a `<link rel='preload' as='image' href='/assets/generated/[hero-image-filename]' />` tag inside `<head>` to preload the hero/LCP image. Use the exact filename of the hero background image currently referenced in `Hero.tsx`. This tells the browser to start fetching the hero image as soon as the HTML is parsed, before CSS and JS are processed.",
+      "files": [
+        "frontend/index.html"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-35"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-in-frontend-index-html-inline-the-critical-above-the-fold-css-font-face-declarations-hero-section-base-styles-navigation-styles-and-color-custom-properties-from-index-css-directly-in-a-style-tag-inside-head-extract-only-the-styles-needed-to-render-the-visible-viewport-without-waiting-for-the-external-css-bundle-this-reduces-render-blocking-time-and-improves-first-contentful-paint",
+      "featureTitle": "In `frontend/index.html`, inline the critical above-the-fold CSS (font-face declarations, hero section base styles, navigation styles, and color custom properties from `index.css`) directly in a `<style>` tag inside `<head>`. Extract only the styles needed to render the visible viewport without waiting for the external CSS bundle. This reduces render-blocking time and improves First Contentful Paint.",
+      "files": [
+        "frontend/index.html"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-36"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-in-frontend-index-html-add-meta-http-equiv-cache-control-content-max-age-31536000-immutable-for-static-assets-and-ensure-the-html-tag-has-lang-fr-set-if-not-already-also-add-a-dns-prefetch-hint-link-rel-dns-prefetch-href-https-fonts-googleapis-com-to-speed-up-dns-resolution-for-external-font-resources",
+      "featureTitle": "In `frontend/index.html`, add `<meta http-equiv='Cache-Control' content='max-age=31536000, immutable' />` for static assets and ensure the `<html>` tag has `lang='fr'` set (if not already). Also add a DNS prefetch hint `<link rel='dns-prefetch' href='https://fonts.googleapis.com' />` to speed up DNS resolution for external font resources.",
+      "files": [
+        "frontend/index.html"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-37"
+      ],
+      "confidence": "high"
+    }
+  ]
 }

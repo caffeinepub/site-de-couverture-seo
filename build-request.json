@@ -1,39 +1,132 @@
 {
   "kind": "build_request",
-  "title": "Fix missing 'itemReviewed' field in Review structured data (Schema.org)",
+  "title": "Improve page load performance: optimize FCP and LCP",
   "projectName": "Verdier Couverture",
-  "priority": "normal",
+  "priority": "high",
   "requirements": [
     {
-      "id": "REQ-19",
-      "text": "In `frontend/index.html`, update the JSON-LD structured data block to fix the Google Rich Results error 'Champ itemReviewed manquant'. Each `Review` object inside the `review` array of the `LocalBusiness` schema must include an `itemReviewed` property referencing the business (type `LocalBusiness`, with `name: 'VERDIER COUVERTURE'`). If an `AggregateRating` is present, ensure it is correctly nested inside the `LocalBusiness` entity. Validate that the resulting JSON-LD passes Google's Rich Results Test without the 'itemReviewed missing' error.",
+      "id": "REQ-32",
+      "text": "In `frontend/index.html`, add `<link rel='preconnect' href='https://fonts.googleapis.com' />` and `<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />` before the Google Fonts `<link>` stylesheet tag. Additionally, convert the Google Fonts `<link rel='stylesheet'>` to use `media='print' onload=\"this.media='all'\"` for non-blocking font loading, and add a `<noscript>` fallback. This eliminates render-blocking font requests that delay First Contentful Paint.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-user-last"
+          "msg-4"
         ],
         "quotes": [
-          "Champ \"itemReviewed\" manquant",
-          "je pense que cela et lié au avis"
+          "First Contentful Paint",
+          "Largest Contentful Paint"
         ]
       },
       "acceptanceCriteria": [
-        "Every `Review` object in the JSON-LD structured data includes an `itemReviewed` property with `@type: 'LocalBusiness'` and `name: 'VERDIER COUVERTURE'`.",
-        "The JSON-LD block remains valid JSON and does not break any existing structured data fields (LocalBusiness, areaServed, knowsAbout, AggregateRating, etc.).",
-        "Google Rich Results Test no longer reports the 'itemReviewed missing' error for the page.",
-        "No other structured data warnings or errors are introduced by the change."
+        "Google Fonts stylesheet is loaded asynchronously and does not block rendering",
+        "preconnect hints for fonts.googleapis.com and fonts.gstatic.com are present in <head> before the fonts link",
+        "A <noscript> fallback link for the fonts stylesheet is present"
+      ]
+    },
+    {
+      "id": "REQ-33",
+      "text": "In `frontend/src/components/Hero.tsx`, add `loading='eager'` and `fetchpriority='high'` attributes to the hero background `<img>` element (or equivalent inline style background). If the hero image is rendered as a CSS background-image, convert it to an `<img>` tag positioned absolutely behind the content so it can receive these priority hints. This ensures the hero image — the Largest Contentful Paint element — is fetched with highest priority.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Largest Contentful Paint"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The hero background image is loaded eagerly with high fetch priority",
+        "The LCP image is not lazy-loaded",
+        "The hero section visual appearance is unchanged"
+      ]
+    },
+    {
+      "id": "REQ-34",
+      "text": "In `frontend/src/components/Services.tsx`, add `loading='lazy'` to all six service card `<img>` elements so that off-screen images are not downloaded during initial page load. All other images below the fold in `About.tsx`, `Testimonials.tsx`, and `Footer.tsx` should also receive `loading='lazy'` if not already set. Only the hero image (above the fold) must remain eager.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "First Contentful Paint",
+          "Largest Contentful Paint"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All service card images have loading='lazy'",
+        "No below-the-fold images trigger network requests on initial load",
+        "Hero image remains loading='eager' with fetchpriority='high'"
+      ]
+    },
+    {
+      "id": "REQ-35",
+      "text": "In `frontend/index.html`, add a `<link rel='preload' as='image' href='/assets/generated/[hero-image-filename]' />` tag inside `<head>` to preload the hero/LCP image. Use the exact filename of the hero background image currently referenced in `Hero.tsx`. This tells the browser to start fetching the hero image as soon as the HTML is parsed, before CSS and JS are processed.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Largest Contentful Paint"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A <link rel='preload' as='image'> tag for the hero image is present in <head>",
+        "The href matches the actual hero image path used in Hero.tsx",
+        "The preload tag appears early in <head>, before render-blocking resources"
+      ]
+    },
+    {
+      "id": "REQ-36",
+      "text": "In `frontend/index.html`, inline the critical above-the-fold CSS (font-face declarations, hero section base styles, navigation styles, and color custom properties from `index.css`) directly in a `<style>` tag inside `<head>`. Extract only the styles needed to render the visible viewport without waiting for the external CSS bundle. This reduces render-blocking time and improves First Contentful Paint.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "First Contentful Paint"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Critical CSS for hero and navigation is inlined in a <style> block in <head>",
+        "The page renders its above-the-fold content without waiting for the full CSS bundle",
+        "No visual regression — all sections still appear correctly styled"
+      ]
+    },
+    {
+      "id": "REQ-37",
+      "text": "In `frontend/index.html`, add `<meta http-equiv='Cache-Control' content='max-age=31536000, immutable' />` for static assets and ensure the `<html>` tag has `lang='fr'` set (if not already). Also add a DNS prefetch hint `<link rel='dns-prefetch' href='https://fonts.googleapis.com' />` to speed up DNS resolution for external font resources.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "First Contentful Paint",
+          "Largest Contentful Paint"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The <html> element has lang='fr'",
+        "A dns-prefetch hint for fonts.googleapis.com is present in <head>",
+        "No existing meta tags are removed or broken"
       ]
     }
   ],
   "constraints": [
-    "Do not remove or modify any existing structured data fields (LocalBusiness type, areaServed, knowsAbout, telephone, address, openingHours, etc.).",
-    "Do not delete or modify `frontend/public/google2ea9c3e7d5d4abde.html`.",
-    "Do not edit any file listed under frontend.immutablePaths."
+    "Do not remove or modify the Google site verification meta tags, canonical tag, Open Graph tags, or JSON-LD structured data in index.html",
+    "Do not alter the visual design, layout, or French content of any section",
+    "Do not remove the Google Search Console verification file frontend/public/google2ea9c3e7d5d4abde.html",
+    "Do not modify files listed in frontend.immutablePaths"
   ],
   "nonGoals": [
-    "Changing testimonial text, names, dates, or ratings in Testimonials.tsx.",
-    "Adding new reviews or modifying any visible review content on the page.",
-    "Any SEO changes beyond fixing the itemReviewed structured data error."
+    "Server-side rendering or static site generation",
+    "Image format conversion (WebP/AVIF) via build tooling — only HTML attribute and loading strategy changes",
+    "Backend changes — the Motoko actor has no role in page load performance",
+    "Changes to SEO content, testimonials, structured data, or any existing feature outside of performance"
   ],
   "imageRequirements": {
     "required": [],

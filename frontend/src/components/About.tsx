@@ -108,6 +108,8 @@ export default function About() {
                                             src="/assets/generated/quality-icon.dim_128x128.png"
                                             alt="Icône de bouclier avec coche représentant la garantie qualité de nos travaux de couverture"
                                             className="w-16 h-16 object-contain"
+                                            loading="lazy"
+                                            decoding="async"
                                         />
                                     </div>
                                     <div className="absolute -bottom-1 -right-1 w-8 h-8 bg-[oklch(0.55_0.13_42)] rounded-full flex items-center justify-center" aria-hidden="true">

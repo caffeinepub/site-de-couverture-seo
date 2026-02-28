@@ -1,13 +1,17 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 19,
+  "projectStateVersion": 31,
   "summary": "Site de couverture (landing page) avec référencement naturel (SEO) optimisé pour VERDIER COUVERTURE, Pierrelaye 95480.",
   "architectural_notes": [
     "Site statique HTML/CSS/JS pour maximiser les performances et le SEO",
     "Structure sémantique HTML5 pour favoriser l'indexation par les moteurs de recherche"
   ],
   "known_issues": [
-    "Erreur Google Rich Results : champ 'itemReviewed' manquant dans les données structurées des avis (Review/AggregateRating)"
+    "Erreur Google Rich Results : champ 'itemReviewed' manquant dans les données structurées des avis (Review/AggregateRating)",
+    "Google Search Console : aucun sitemap référent détecté, aucune page d'origine détectée",
+    "Google Search Console : 'Adresse de sitemap incorrecte' — le sitemap.xml n'est pas reconnu comme valide par Google",
+    "Google Search Console : problèmes d'exploration — 'Dernière exploration Sans objet', URL canonique non détectée, page non récupérée ni indexée par Google",
+    "Google PageSpeed Insights : mauvais scores FCP (First Contentful Paint) et LCP (Largest Contentful Paint) — vitesse de chargement insuffisante"
   ],
   "isFixRequest": true,
   "existing_features": [
@@ -154,6 +158,118 @@
         "REQ-18"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-create-a-static-sitemap-file-at-frontend-public-sitemap-xml-listing-the-canonical-url-of-the-site-https-site-de-couverture-seo-3wk-caffeine-xyz-with-all-relevant-anchor-section-urls-e-g-services-about-contact-temoignages-set-lastmod-to-the-current-date-changefreq-to-monthly-and-priority-to-1-0-for-the-root-url-and-0-8-for-section-anchors-the-file-must-be-valid-xml-conforming-to-the-sitemap-protocol-xmlns-http-www-sitemaps-org-schemas-sitemap-0-9",
+      "title": "Create a static sitemap file at `frontend/public/sitemap.xml` listing the canonical URL of the site (`https://site-de-couverture-seo-3wk.caffeine.xyz/`) with all relevant anchor section URLs (e.g., `/#services`, `/#about`, `/#contact`, `/#temoignages`). Set `<lastmod>` to the current date, `<changefreq>` to `monthly`, and `<priority>` to `1.0` for the root URL and `0.8` for section anchors. The file must be valid XML conforming to the sitemap protocol (xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\").",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-frontend-public-robots-txt-file-that-allows-all-crawlers-user-agent-allow-and-includes-a-sitemap-directive-pointing-to-https-site-de-couverture-seo-3wk-caffeine-xyz-sitemap-xml-so-search-engines-can-autodiscover-the-sitemap",
+      "title": "Create a `frontend/public/robots.txt` file that allows all crawlers (`User-agent: *`, `Allow: /`) and includes a `Sitemap:` directive pointing to `https://site-de-couverture-seo-3wk.caffeine.xyz/sitemap.xml` so search engines can autodiscover the sitemap.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-frontend-index-html-add-a-link-rel-sitemap-type-application-xml-title-sitemap-href-sitemap-xml-tag-inside-the-head-section-to-advertise-the-sitemap-to-crawlers-via-html-discovery",
+      "title": "In `frontend/index.html`, add a `<link rel=\"sitemap\" type=\"application/xml\" title=\"Sitemap\" href=\"/sitemap.xml\" />` tag inside the `<head>` section to advertise the sitemap to crawlers via HTML discovery.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-rewrite-frontend-public-sitemap-xml-so-it-is-a-fully-valid-xml-sitemap-that-google-search-console-accepts-the-file-must-1-use-the-correct-xml-declaration-xml-version-1-0-encoding-utf-8-2-use-the-exact-namespace-xmlns-http-www-sitemaps-org-schemas-sitemap-0-9-3-list-only-absolute-crawlable-urls-the-root-https-site-de-couverture-seo-3wk-caffeine-xyz-plus-section-anchors-https-site-de-couverture-seo-3wk-caffeine-xyz-services-https-site-de-couverture-seo-3wk-caffeine-xyz-about-https-site-de-couverture-seo-3wk-caffeine-xyz-temoignages-https-site-de-couverture-seo-3wk-caffeine-xyz-contact-4-include-a-lastmod-today-s-date-in-yyyy-mm-dd-changefreq-monthly-changefreq-and-priority-1-0-for-root-0-8-for-anchors-for-every-url-entry-5-contain-no-extra-whitespace-bom-characters-html-tags-or-any-content-before-the-xml-declaration-that-could-cause-a-parse-error",
+      "title": "Rewrite `frontend/public/sitemap.xml` so it is a fully valid XML sitemap that Google Search Console accepts. The file must: (1) use the correct XML declaration `<?xml version=\"1.0\" encoding=\"UTF-8\"?>`, (2) use the exact namespace `xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"`, (3) list only absolute, crawlable URLs — the root `https://site-de-couverture-seo-3wk.caffeine.xyz/` plus section anchors `https://site-de-couverture-seo-3wk.caffeine.xyz/#services`, `https://site-de-couverture-seo-3wk.caffeine.xyz/#about`, `https://site-de-couverture-seo-3wk.caffeine.xyz/#temoignages`, `https://site-de-couverture-seo-3wk.caffeine.xyz/#contact`, (4) include a `<lastmod>` (today's date in YYYY-MM-DD), `<changefreq>monthly</changefreq>`, and `<priority>` (1.0 for root, 0.8 for anchors) for every `<url>` entry, (5) contain no extra whitespace, BOM characters, HTML tags, or any content before the XML declaration that could cause a parse error.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-verify-that-frontend-index-html-contains-a-link-rel-sitemap-type-application-xml-title-sitemap-href-sitemap-xml-tag-in-the-head-section-pointing-to-the-correct-root-relative-path-sitemap-xml-if-missing-or-incorrect-add-or-correct-it",
+      "title": "Verify that `frontend/index.html` contains a `<link rel=\"sitemap\" type=\"application/xml\" title=\"Sitemap\" href=\"/sitemap.xml\" />` tag in the `<head>` section pointing to the correct root-relative path `/sitemap.xml`. If missing or incorrect, add or correct it.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-rewrite-frontend-public-sitemap-xml-to-contain-only-the-canonical-root-url-https-site-de-couverture-seo-3wk-caffeine-xyz-as-a-single-url-entry-remove-all-fragment-anchor-urls-e-g-services-about-contact-temoignages-because-google-search-console-rejects-fragment-based-urls-as-non-crawlable-the-file-must-1-start-with-exactly-xml-version-1-0-encoding-utf-8-with-no-bom-no-leading-whitespace-no-blank-lines-before-the-xml-declaration-2-use-namespace-xmlns-http-www-sitemaps-org-schemas-sitemap-0-9-3-include-lastmod-2025-07-17-lastmod-changefreq-monthly-changefreq-and-priority-1-0-priority-for-the-root-url-entry-4-contain-no-html-tags-no-comments-and-no-extra-whitespace-that-could-cause-a-parse-error",
+      "title": "Rewrite `frontend/public/sitemap.xml` to contain ONLY the canonical root URL `https://site-de-couverture-seo-3wk.caffeine.xyz/` as a single `<url>` entry. Remove all fragment/anchor URLs (e.g. `/#services`, `/#about`, `/#contact`, `/#temoignages`) because Google Search Console rejects fragment-based URLs as non-crawlable. The file must: (1) start with exactly `<?xml version=\"1.0\" encoding=\"UTF-8\"?>` with no BOM, no leading whitespace, no blank lines before the XML declaration; (2) use namespace `xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"`; (3) include `<lastmod>2025-07-17</lastmod>`, `<changefreq>monthly</changefreq>`, and `<priority>1.0</priority>` for the root URL entry; (4) contain no HTML tags, no comments, and no extra whitespace that could cause a parse error.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-frontend-public-robots-txt-ensure-the-file-allows-all-crawlers-and-the-sitemap-directive-points-to-exactly-https-site-de-couverture-seo-3wk-caffeine-xyz-sitemap-xml-with-no-trailing-slash-on-the-filename-and-no-extra-whitespace-the-file-must-be-plain-text-with-no-bom-and-no-html-content",
+      "title": "In `frontend/public/robots.txt`, ensure the file allows all crawlers and the `Sitemap:` directive points to exactly `https://site-de-couverture-seo-3wk.caffeine.xyz/sitemap.xml` with no trailing slash on the filename and no extra whitespace. The file must be plain text with no BOM and no HTML content.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-frontend-index-html-audit-and-fix-all-crawlability-and-indexability-signals-to-resolve-the-google-search-console-sans-objet-n-a-crawl-status-1-ensure-there-is-no-meta-name-robots-content-noindex-or-meta-name-robots-content-nofollow-or-any-x-robots-tag-that-would-block-indexing-2-ensure-the-canonical-link-rel-canonical-href-https-site-de-couverture-seo-3wk-caffeine-xyz-tag-is-present-and-correct-in-head-3-ensure-the-link-rel-sitemap-type-application-xml-title-sitemap-href-sitemap-xml-tag-is-present-in-head-4-verify-the-open-graph-og-url-meta-tag-is-set-to-https-site-de-couverture-seo-3wk-caffeine-xyz-5-remove-any-noindex-directives-that-may-be-embedded-anywhere-in-the-document",
+      "title": "In `frontend/index.html`, audit and fix all crawlability and indexability signals to resolve the Google Search Console 'Sans objet' (N/A) crawl status: (1) Ensure there is NO `<meta name=\"robots\" content=\"noindex\">` or `<meta name=\"robots\" content=\"nofollow\">` or any `X-Robots-Tag` that would block indexing. (2) Ensure the canonical `<link rel=\"canonical\" href=\"https://site-de-couverture-seo-3wk.caffeine.xyz/\" />` tag is present and correct in `<head>`. (3) Ensure the `<link rel=\"sitemap\" type=\"application/xml\" title=\"Sitemap\" href=\"/sitemap.xml\" />` tag is present in `<head>`. (4) Verify the Open Graph `og:url` meta tag is set to `https://site-de-couverture-seo-3wk.caffeine.xyz/`. (5) Remove any `noindex` directives that may be embedded anywhere in the document.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-frontend-index-html-fix-the-json-ld-localbusiness-structured-data-to-ensure-it-does-not-trigger-google-validation-errors-1-remove-any-review-objects-from-the-json-ld-if-they-lack-a-valid-itemreviewed-property-either-add-the-required-itemreviewed-field-with-type-localbusiness-name-verdier-couverture-to-each-review-object-or-remove-the-inline-reviews-array-from-the-json-ld-entirely-and-keep-only-the-aggregaterating-2-ensure-the-aggregaterating-is-correctly-nested-as-a-direct-property-of-the-localbusiness-entity-3-validate-that-the-resulting-json-ld-is-syntactically-correct-no-trailing-commas-no-unclosed-brackets",
+      "title": "In `frontend/index.html`, fix the JSON-LD LocalBusiness structured data to ensure it does not trigger Google validation errors: (1) Remove any `Review` objects from the JSON-LD if they lack a valid `itemReviewed` property — either add the required `itemReviewed` field with `{ \"@type\": \"LocalBusiness\", \"name\": \"VERDIER COUVERTURE\" }` to each `Review` object, or remove the inline reviews array from the JSON-LD entirely and keep only the `AggregateRating`. (2) Ensure the `AggregateRating` is correctly nested as a direct property of the `LocalBusiness` entity. (3) Validate that the resulting JSON-LD is syntactically correct (no trailing commas, no unclosed brackets).",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-frontend-index-html-add-link-rel-preconnect-href-https-fonts-googleapis-com-and-link-rel-preconnect-href-https-fonts-gstatic-com-crossorigin-before-the-google-fonts-link-stylesheet-tag-additionally-convert-the-google-fonts-link-rel-stylesheet-to-use-media-print-onload-this-media-all-for-non-blocking-font-loading-and-add-a-noscript-fallback-this-eliminates-render-blocking-font-requests-that-delay-first-contentful-paint",
+      "title": "In `frontend/index.html`, add `<link rel='preconnect' href='https://fonts.googleapis.com' />` and `<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />` before the Google Fonts `<link>` stylesheet tag. Additionally, convert the Google Fonts `<link rel='stylesheet'>` to use `media='print' onload=\"this.media='all'\"` for non-blocking font loading, and add a `<noscript>` fallback. This eliminates render-blocking font requests that delay First Contentful Paint.",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-frontend-src-components-services-tsx-add-loading-lazy-to-all-six-service-card-img-elements-so-that-off-screen-images-are-not-downloaded-during-initial-page-load-all-other-images-below-the-fold-in-about-tsx-testimonials-tsx-and-footer-tsx-should-also-receive-loading-lazy-if-not-already-set-only-the-hero-image-above-the-fold-must-remain-eager",
+      "title": "In `frontend/src/components/Services.tsx`, add `loading='lazy'` to all six service card `<img>` elements so that off-screen images are not downloaded during initial page load. All other images below the fold in `About.tsx`, `Testimonials.tsx`, and `Footer.tsx` should also receive `loading='lazy'` if not already set. Only the hero image (above the fold) must remain eager.",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-frontend-index-html-add-a-link-rel-preload-as-image-href-assets-generated-hero-image-filename-tag-inside-head-to-preload-the-hero-lcp-image-use-the-exact-filename-of-the-hero-background-image-currently-referenced-in-hero-tsx-this-tells-the-browser-to-start-fetching-the-hero-image-as-soon-as-the-html-is-parsed-before-css-and-js-are-processed",
+      "title": "In `frontend/index.html`, add a `<link rel='preload' as='image' href='/assets/generated/[hero-image-filename]' />` tag inside `<head>` to preload the hero/LCP image. Use the exact filename of the hero background image currently referenced in `Hero.tsx`. This tells the browser to start fetching the hero image as soon as the HTML is parsed, before CSS and JS are processed.",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-frontend-index-html-inline-the-critical-above-the-fold-css-font-face-declarations-hero-section-base-styles-navigation-styles-and-color-custom-properties-from-index-css-directly-in-a-style-tag-inside-head-extract-only-the-styles-needed-to-render-the-visible-viewport-without-waiting-for-the-external-css-bundle-this-reduces-render-blocking-time-and-improves-first-contentful-paint",
+      "title": "In `frontend/index.html`, inline the critical above-the-fold CSS (font-face declarations, hero section base styles, navigation styles, and color custom properties from `index.css`) directly in a `<style>` tag inside `<head>`. Extract only the styles needed to render the visible viewport without waiting for the external CSS bundle. This reduces render-blocking time and improves First Contentful Paint.",
+      "reqIds": [
+        "REQ-36"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-frontend-index-html-add-meta-http-equiv-cache-control-content-max-age-31536000-immutable-for-static-assets-and-ensure-the-html-tag-has-lang-fr-set-if-not-already-also-add-a-dns-prefetch-hint-link-rel-dns-prefetch-href-https-fonts-googleapis-com-to-speed-up-dns-resolution-for-external-font-resources",
+      "title": "In `frontend/index.html`, add `<meta http-equiv='Cache-Control' content='max-age=31536000, immutable' />` for static assets and ensure the `<html>` tag has `lang='fr'` set (if not already). Also add a DNS prefetch hint `<link rel='dns-prefetch' href='https://fonts.googleapis.com' />` to speed up DNS resolution for external font resources.",
+      "reqIds": [
+        "REQ-37"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -252,6 +368,62 @@
       "summary": "In `frontend/index.html`, update the JSON-LD structured data block to fix the Google Rich Results error 'Champ itemReviewed manquant'. Each `Review` object inside the `review` array of the `LocalBusiness` schema must include an `itemReviewed` property referencing the business (type `LocalBusiness`, with `name: 'VERDIER COUVERTURE'`). If an `AggregateRating` is present, ensure it is correctly nested inside the `LocalBusiness` entity. Validate that the resulting JSON-LD passes Google's Rich Results Test without the 'itemReviewed missing' error.",
       "reqIds": [
         "REQ-19"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Créer et référencer un fichier sitemap.xml pour le site afin que Google Search Console puisse détecter et indexer les pages",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Ensure the current application build — including the sitemap.xml, robots.txt, Google Search Console verification file, all SEO improvements, and all existing features — is deployed and live in production without any changes to the codebase.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "Ensure the current application build — including the sitemap.xml, robots.txt, Google Search Console verification file, all SEO improvements, and all existing features — is deployed and live in production without any changes to the codebase.",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-20",
+      "summary": "Corriger l'adresse du sitemap : Google Search Console signale une 'Adresse de sitemap incorrecte'. Vérifier et corriger l'URL et le contenu du fichier sitemap.xml pour qu'il soit accessible et valide.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-22",
+      "summary": "Verify that `frontend/public/robots.txt` contains a `Sitemap:` directive pointing to the exact absolute URL `https://site-de-couverture-seo-3wk.caffeine.xyz/sitemap.xml` (no trailing slash issues, no relative path). If the directive is missing or incorrect, correct it.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-23",
+      "summary": "Résoudre les problèmes d'exploration Google Search Console : 'Dernière exploration Sans objet', 'Explorée avec Sans objet', 'Exploration autorisée Sans objet', 'Récupération de page Sans objet', 'Indexation autorisée Sans objet', 'URL canonique Sans objet' — le site n'est pas crawlé ni indexé par Google.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-24",
+      "summary": "Améliorer la vitesse de chargement des pages : optimiser First Contentful Paint (FCP) et Largest Contentful Paint (LCP) selon les recommandations Google PageSpeed Insights",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-26",
+      "summary": "In `frontend/src/components/Hero.tsx`, add `loading='eager'` and `fetchpriority='high'` attributes to the hero background `<img>` element (or equivalent inline style background). If the hero image is rendered as a CSS background-image, convert it to an `<img>` tag positioned absolutely behind the content so it can receive these priority hints. This ensures the hero image — the Largest Contentful Paint element — is fetched with highest priority.",
+      "reqIds": [
+        "REQ-33"
       ],
       "status": "pending"
     }

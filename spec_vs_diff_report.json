@@ -1,24 +1,44 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-28T02:59:28.419Z",
-  "summary": "REQ-19 requires updating `frontend/index.html` JSON-LD structured data to add `itemReviewed` to each Review object. The diff shows changes to `frontend/src/components/Testimonials.tsx` (HTML microdata attributes) and `frontend-file-summaries.txt`. The file-summaries.txt description of `frontend/index.html` does not mention any addition of `itemReviewed` to the JSON-LD block. The fix was applied to Testimonials.tsx microdata but the requirement specifically targets the JSON-LD in `frontend/index.html`.",
+  "generatedAt": "2026-02-28T04:08:15.852Z",
+  "summary": "The diff implements most of the required performance improvements. REQ-32 (preconnect + async fonts + noscript), REQ-34 (lazy loading on service/about images), REQ-35 (preload hero image), REQ-36 (inlined critical CSS), and REQ-37 (lang='fr', dns-prefetch) are all evidenced. REQ-33 (Hero.tsx eager loading with fetchpriority='high') is mentioned in the file summary for Hero.tsx but the actual Hero.tsx diff is not shown. REQ-37's Cache-Control meta tag is not evidenced anywhere in the diff.",
   "missing_requirements": [
     {
-      "id": "REQ-19",
-      "requirement": "In `frontend/index.html`, update the JSON-LD structured data block so that every `Review` object in the `review` array includes an `itemReviewed` property with `@type: 'LocalBusiness'` and `name: 'VERDIER COUVERTURE'`.",
-      "reason": "The diff does not show any modification to `frontend/index.html`. The `frontend-file-summaries.txt` summary of `frontend/index.html` describes it as containing JSON-LD structured data but makes no mention of `itemReviewed` being added to Review objects. The fix was applied only to React component microdata in `Testimonials.tsx`, not to the JSON-LD in `index.html`.",
+      "id": "REQ-37",
+      "requirement": "Add <meta http-equiv='Cache-Control' content='max-age=31536000, immutable' /> for static assets",
+      "reason": "The index.html diff and the frontend-file-summaries.txt description of index.html do not mention a Cache-Control meta http-equiv tag being added. Only dns-prefetch and lang='fr' are described.",
       "evidence": [
-        "frontend-file-summaries.txt",
-        "frontend/src/components/Testimonials.tsx"
+        "frontend/index.html",
+        "frontend-file-summaries.txt"
       ]
     }
   ],
-  "hallucinated_features": [],
-  "confidence": 0.8,
+  "hallucinated_features": [
+    {
+      "description": "Added decoding='async' attribute to service card images and the about section image",
+      "reason": "The build request only required loading='lazy' for below-the-fold images (REQ-34). The diff summary explicitly mentions decoding='async' was also added to Services.tsx and About.tsx, which was not requested.",
+      "evidence": [
+        "frontend/src/components/Services.tsx",
+        "frontend/src/components/About.tsx",
+        "frontend-file-summaries.txt"
+      ]
+    },
+    {
+      "description": "Fixed Google Structured Data microdata by adding itemReviewed property to Testimonials.tsx review articles",
+      "reason": "This change to Testimonials.tsx is described in frontend-file-summaries.txt but was not part of the performance build request. The non-goals explicitly state no changes to testimonials or structured data.",
+      "evidence": [
+        "frontend/src/components/Testimonials.tsx",
+        "frontend-file-summaries.txt"
+      ]
+    }
+  ],
+  "confidence": 0.72,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/src/components/Testimonials.tsx",
+    "frontend/index.html",
+    "frontend/src/components/About.tsx",
+    "frontend/src/components/Services.tsx",
     "project_state.json"
   ]
 }
