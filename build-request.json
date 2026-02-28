@@ -1,0 +1,40 @@
+{
+  "kind": "build_request",
+  "title": "Update contact email address to sv.couverture95@gmail.com",
+  "projectName": "Verdier Couverture",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-9",
+      "text": "Replace the existing email address with 'sv.couverture95@gmail.com' in all locations where an email address appears across the site: the Contact section info card, the Footer contact details, and the JSON-LD LocalBusiness structured data in index.html (if an email field is present). The email must be displayed as a clickable mailto: link and formatted consistently everywhere it appears.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Change aussi l'adresse email pour sv.couverture95@gmail.com"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The email 'sv.couverture95@gmail.com' appears in the Contact section info card.",
+        "The email 'sv.couverture95@gmail.com' appears in the Footer contact details.",
+        "If an email field exists in the JSON-LD LocalBusiness structured data in index.html, it is updated to 'sv.couverture95@gmail.com'.",
+        "Every displayed email is a clickable mailto:sv.couverture95@gmail.com link.",
+        "No old or placeholder email address remains anywhere on the site."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not change any phone numbers, address, or other contact details.",
+    "Do not modify files listed under frontend.immutablePaths."
+  ],
+  "nonGoals": [
+    "Adding a contact form email submission backend.",
+    "Changing any other content, styling, or layout."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

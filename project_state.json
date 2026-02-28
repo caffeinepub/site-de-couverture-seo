@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 7,
+  "summary": "Site de couverture (landing page) avec référencement naturel (SEO) optimisé pour VERDIER COUVERTURE, Pierrelaye 95480.",
+  "architectural_notes": [
+    "Site statique HTML/CSS/JS pour maximiser les performances et le SEO",
+    "Structure sémantique HTML5 pour favoriser l'indexation par les moteurs de recherche"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-modern-responsive-landing-page-with-a-clear-hero-section-navigation-bar-services-section-about-section-testimonials-section-and-a-contact-call-to-action-section-all-content-must-be-written-in-french-and-target-a-roofing-couverture-business",
+      "title": "Create a modern, responsive landing page with a clear hero section, navigation bar, services section, about section, testimonials section, and a contact/call-to-action section. All content must be written in French and target a roofing (couverture) business.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-on-page-seo-best-practices-add-a-semantic-html-structure-with-a-single-h1-per-page-hierarchical-h2-h3-headings-a-descriptive-meta-title-and-meta-description-tag-in-the-document-head-open-graph-tags-structured-data-json-ld-for-localbusiness-clean-url-friendly-section-ids-and-descriptive-alt-attributes-on-all-images",
+      "title": "Implement on-page SEO best practices: add a semantic HTML structure with a single H1 per page, hierarchical H2/H3 headings, a descriptive meta title and meta description tag in the document head, Open Graph tags, structured data (JSON-LD for LocalBusiness), clean URL-friendly section IDs, and descriptive alt attributes on all images.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-cohesive-visual-theme-suited-to-a-professional-roofing-business-use-a-warm-earthy-color-palette-slate-grays-terracotta-off-white-strong-serif-or-slab-serif-typography-for-headings-and-clean-sans-serif-for-body-text-bold-section-separators-and-subtle-texture-cues-that-evoke-roofing-materials-enforce-the-theme-consistently-across-all-sections",
+      "title": "Apply a cohesive visual theme suited to a professional roofing business: use a warm, earthy color palette (slate grays, terracotta, off-white), strong serif or slab-serif typography for headings and clean sans-serif for body text, bold section separators, and subtle texture cues that evoke roofing materials. Enforce the theme consistently across all sections.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-render-the-generated-hero-background-image-and-any-other-generated-static-assets-from-frontend-public-assets-generated-within-the-appropriate-page-sections",
+      "title": "Render the generated hero background image and any other generated static assets from frontend/public/assets/generated within the appropriate page sections.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-all-mentions-of-rge-label-badge-certification-text-from-every-component-across-the-site-including-the-floating-rge-badge-in-the-about-section-any-rge-references-in-the-certifications-list-and-any-rge-text-in-the-footer",
+      "title": "Remove all mentions of 'RGE' (label, badge, certification text) from every component across the site, including the floating RGE badge in the About section, any RGE references in the certifications list, and any RGE text in the Footer.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-company-site-name-throughout-the-entire-site-with-verdier-couverture-update-it-in-the-navigation-logo-hero-section-headline-subtext-about-section-footer-brand-name-the-html-title-tag-open-graph-meta-tags-and-the-json-ld-localbusiness-structured-data-in-index-html",
+      "title": "Replace the company/site name throughout the entire site with 'VERDIER COUVERTURE'. Update it in the Navigation logo, Hero section headline/subtext, About section, Footer brand name, the HTML <title> tag, Open Graph meta tags, and the JSON-LD LocalBusiness structured data in index.html.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-existing-mobile-phone-number-with-06-63-73-94-00-and-add-a-landline-number-01-72-76-17-63-in-all-locations-where-contact-phone-numbers-appear-navigation-cta-button-hero-section-highlights-contact-section-info-cards-and-footer-contact-details-both-numbers-must-be-displayed-and-formatted-consistently",
+      "title": "Replace the existing mobile phone number with '06 63 73 94 00' and add a landline number '01 72 76 17 63' in all locations where contact phone numbers appear: Navigation CTA button, Hero section highlights, Contact section info cards, and Footer contact details. Both numbers must be displayed and formatted consistently.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-company-address-to-206-chemin-de-la-petite-patelle-pierrelaye-95480-in-all-locations-where-the-address-appears-contact-section-info-card-footer-contact-details-and-the-json-ld-localbusiness-structured-data-in-index-html-streetaddress-addresslocality-postalcode-fields",
+      "title": "Update the company address to '206 chemin de la petite patelle, Pierrelaye 95480' in all locations where the address appears: Contact section info card, Footer contact details, and the JSON-LD LocalBusiness structured data in index.html (streetAddress, addressLocality, postalCode fields).",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-existing-email-address-with-sv-couverture95-gmail-com-in-all-locations-where-an-email-address-appears-across-the-site-the-contact-section-info-card-the-footer-contact-details-and-the-json-ld-localbusiness-structured-data-in-index-html-if-an-email-field-is-present-the-email-must-be-displayed-as-a-clickable-mailto-link-and-formatted-consistently-everywhere-it-appears",
+      "title": "Replace the existing email address with 'sv.couverture95@gmail.com' in all locations where an email address appears across the site: the Contact section info card, the Footer contact details, and the JSON-LD LocalBusiness structured data in index.html (if an email field is present). The email must be displayed as a clickable mailto: link and formatted consistently everywhere it appears.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Page de couverture (landing page) responsive et moderne",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Optimisation SEO on-page : balises meta, titres H1/H2, descriptions, données structurées",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Contenu optimisé pour le référencement naturel (mots-clés, textes alt, URL propres)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Supprimer la mention RGE du site",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Remplacer le nom du site par VERDIER COUVERTURE",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Remplacer le numéro de téléphone mobile par 06 63 73 94 00 et ajouter le fixe 01 72 76 17 63",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Mettre à jour l'adresse : 206 chemin de la petite patelle, Pierrelaye 95480",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Mettre à jour l'adresse email par sv.couverture95@gmail.com dans toutes les sections du site",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Site de Couverture SEO",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

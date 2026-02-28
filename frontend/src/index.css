@@ -1,0 +1,308 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.375rem;
+
+        /* Brand palette — warm earthy roofing theme */
+        /* Charcoal (dark slate) */
+        --background: 0.975 0.005 80;
+        --foreground: 0.22 0.015 50;
+
+        /* Cards */
+        --card: 1 0 0;
+        --card-foreground: 0.22 0.015 50;
+
+        /* Popover */
+        --popover: 1 0 0;
+        --popover-foreground: 0.22 0.015 50;
+
+        /* Primary = Terracotta */
+        --primary: 0.55 0.13 42;
+        --primary-foreground: 0.98 0.005 80;
+
+        /* Secondary = Warm slate */
+        --secondary: 0.92 0.01 70;
+        --secondary-foreground: 0.28 0.02 50;
+
+        /* Muted */
+        --muted: 0.93 0.008 75;
+        --muted-foreground: 0.52 0.02 60;
+
+        /* Accent = Deep terracotta */
+        --accent: 0.88 0.04 65;
+        --accent-foreground: 0.28 0.02 50;
+
+        /* Destructive */
+        --destructive: 0.577 0.245 27.325;
+        --destructive-foreground: 0.985 0 0;
+
+        /* Border / Input / Ring */
+        --border: 0.87 0.015 70;
+        --input: 0.87 0.015 70;
+        --ring: 0.55 0.13 42;
+
+        /* Charts */
+        --chart-1: 0.55 0.13 42;
+        --chart-2: 0.42 0.08 55;
+        --chart-3: 0.65 0.09 75;
+        --chart-4: 0.72 0.11 60;
+        --chart-5: 0.38 0.06 45;
+
+        /* Sidebar */
+        --sidebar: 0.975 0.005 80;
+        --sidebar-foreground: 0.22 0.015 50;
+        --sidebar-primary: 0.55 0.13 42;
+        --sidebar-primary-foreground: 0.98 0.005 80;
+        --sidebar-accent: 0.92 0.01 70;
+        --sidebar-accent-foreground: 0.28 0.02 50;
+        --sidebar-border: 0.87 0.015 70;
+        --sidebar-ring: 0.55 0.13 42;
+
+        /* Custom brand tokens */
+        --terracotta: 0.55 0.13 42;
+        --terracotta-dark: 0.45 0.14 38;
+        --terracotta-light: 0.72 0.09 48;
+        --slate-dark: 0.28 0.02 50;
+        --slate-mid: 0.42 0.02 55;
+        --offwhite: 0.975 0.005 80;
+        --cream: 0.96 0.012 75;
+    }
+
+    .dark {
+        --background: 0.18 0.015 50;
+        --foreground: 0.95 0.008 75;
+        --card: 0.22 0.015 50;
+        --card-foreground: 0.95 0.008 75;
+        --popover: 0.25 0.015 50;
+        --popover-foreground: 0.95 0.008 75;
+        --primary: 0.62 0.12 44;
+        --primary-foreground: 0.12 0.01 50;
+        --secondary: 0.28 0.02 50;
+        --secondary-foreground: 0.92 0.008 75;
+        --muted: 0.28 0.02 50;
+        --muted-foreground: 0.65 0.02 60;
+        --accent: 0.32 0.025 52;
+        --accent-foreground: 0.92 0.008 75;
+        --destructive: 0.704 0.191 22.216;
+        --destructive-foreground: 0.205 0 0;
+        --border: 1 0 0 / 12%;
+        --input: 1 0 0 / 15%;
+        --ring: 0.62 0.12 44;
+        --sidebar: 0.22 0.015 50;
+        --sidebar-foreground: 0.95 0.008 75;
+        --sidebar-primary: 0.62 0.12 44;
+        --sidebar-primary-foreground: 0.12 0.01 50;
+        --sidebar-accent: 0.28 0.02 50;
+        --sidebar-accent-foreground: 0.92 0.008 75;
+        --sidebar-border: 1 0 0 / 12%;
+        --sidebar-ring: 0.62 0.12 44;
+    }
+
+    * {
+        @apply border-border;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+        font-family: 'Inter', system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 700;
+        line-height: 1.2;
+        color: oklch(var(--slate-dark));
+    }
+}
+
+@layer components {
+    .section-heading {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 700;
+        color: oklch(var(--slate-dark));
+    }
+
+    .section-subheading {
+        font-family: 'Inter', system-ui, sans-serif;
+        color: oklch(var(--muted-foreground));
+        font-weight: 400;
+    }
+
+    .btn-terracotta {
+        background-color: oklch(var(--terracotta));
+        color: oklch(var(--offwhite));
+        font-family: 'Inter', system-ui, sans-serif;
+        font-weight: 600;
+        letter-spacing: 0.025em;
+        transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-terracotta:hover {
+        background-color: oklch(var(--terracotta-dark));
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px oklch(var(--terracotta) / 0.35);
+    }
+
+    .btn-terracotta:active {
+        transform: translateY(0);
+    }
+
+    .btn-outline-terracotta {
+        border: 2px solid oklch(var(--terracotta));
+        color: oklch(var(--terracotta));
+        background: transparent;
+        font-family: 'Inter', system-ui, sans-serif;
+        font-weight: 600;
+        letter-spacing: 0.025em;
+        transition: all 0.2s ease;
+    }
+
+    .btn-outline-terracotta:hover {
+        background-color: oklch(var(--terracotta));
+        color: oklch(var(--offwhite));
+    }
+
+    .tile-pattern {
+        background-image:
+            repeating-linear-gradient(
+                135deg,
+                oklch(var(--terracotta) / 0.04) 0px,
+                oklch(var(--terracotta) / 0.04) 1px,
+                transparent 1px,
+                transparent 20px
+            ),
+            repeating-linear-gradient(
+                45deg,
+                oklch(var(--terracotta) / 0.04) 0px,
+                oklch(var(--terracotta) / 0.04) 1px,
+                transparent 1px,
+                transparent 20px
+            );
+    }
+
+    .section-divider {
+        width: 60px;
+        height: 4px;
+        background: oklch(var(--terracotta));
+        border-radius: 2px;
+        margin: 0 auto 1.5rem;
+    }
+
+    .section-divider-left {
+        width: 60px;
+        height: 4px;
+        background: oklch(var(--terracotta));
+        border-radius: 2px;
+        margin: 0 0 1.5rem;
+    }
+
+    .card-service {
+        background: white;
+        border: 1px solid oklch(var(--border));
+        border-radius: 8px;
+        padding: 2rem;
+        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .card-service:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px oklch(var(--slate-dark) / 0.1);
+        border-color: oklch(var(--terracotta) / 0.4);
+    }
+
+    .nav-link {
+        font-family: 'Inter', system-ui, sans-serif;
+        font-weight: 500;
+        font-size: 0.9rem;
+        letter-spacing: 0.03em;
+        color: oklch(var(--offwhite) / 0.85);
+        transition: color 0.2s ease;
+        position: relative;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: oklch(var(--terracotta-light));
+        transition: width 0.25s ease;
+    }
+
+    .nav-link:hover {
+        color: oklch(var(--offwhite));
+    }
+
+    .nav-link:hover::after {
+        width: 100%;
+    }
+
+    .stat-number {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 800;
+        color: oklch(var(--terracotta));
+        line-height: 1;
+    }
+
+    .testimonial-card {
+        background: white;
+        border: 1px solid oklch(var(--border));
+        border-radius: 8px;
+        padding: 2rem;
+        position: relative;
+    }
+
+    .testimonial-card::before {
+        content: '"';
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 5rem;
+        line-height: 1;
+        color: oklch(var(--terracotta) / 0.15);
+        position: absolute;
+        top: 0.5rem;
+        left: 1.25rem;
+        font-weight: 700;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1.5px solid oklch(var(--border));
+        border-radius: 6px;
+        background: white;
+        font-family: 'Inter', system-ui, sans-serif;
+        font-size: 0.95rem;
+        color: oklch(var(--foreground));
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        outline: none;
+    }
+
+    .form-input:focus {
+        border-color: oklch(var(--terracotta));
+        box-shadow: 0 0 0 3px oklch(var(--terracotta) / 0.12);
+    }
+
+    .form-input::placeholder {
+        color: oklch(var(--muted-foreground));
+    }
+
+    .form-label {
+        display: block;
+        font-family: 'Inter', system-ui, sans-serif;
+        font-weight: 500;
+        font-size: 0.875rem;
+        color: oklch(var(--slate-dark));
+        margin-bottom: 0.375rem;
+    }
+}

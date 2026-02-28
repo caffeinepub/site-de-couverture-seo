@@ -1,0 +1,35 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Update contact email address to sv.couverture95@gmail.com",
+  "requirements": [
+    {
+      "id": "REQ-9",
+      "summary": "Replace all instances of the existing email address with 'sv.couverture95@gmail.com' across the Contact section, Footer, and JSON-LD structured data, ensuring all emails are clickable mailto: links with consistent formatting",
+      "acceptanceCriteria": [
+        "The email 'sv.couverture95@gmail.com' appears in the Contact section info card.",
+        "The email 'sv.couverture95@gmail.com' appears in the Footer contact details.",
+        "If an email field exists in the JSON-LD LocalBusiness structured data in index.html, it is updated to 'sv.couverture95@gmail.com'.",
+        "Every displayed email is a clickable mailto:sv.couverture95@gmail.com link.",
+        "No old or placeholder email address remains anywhere on the site."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Contact.tsx",
+          "operation": "modify",
+          "description": "Update the email address in the Contact section info card to 'sv.couverture95@gmail.com' and ensure it is rendered as a clickable mailto: link with consistent formatting matching the existing phone number links"
+        },
+        {
+          "path": "frontend/src/components/Footer.tsx",
+          "operation": "modify",
+          "description": "Update the email address in the Footer contact details to 'sv.couverture95@gmail.com' and ensure it is rendered as a clickable mailto: link with consistent formatting matching other footer contact information"
+        },
+        {
+          "path": "frontend/index.html",
+          "operation": "modify",
+          "description": "If an email field exists in the JSON-LD LocalBusiness structured data, update it to 'sv.couverture95@gmail.com'. If no email field is present, add one with the new email address to improve SEO and local business discoverability"
+        }
+      ]
+    }
+  ]
+}
