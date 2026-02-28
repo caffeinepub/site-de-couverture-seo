@@ -1,41 +1,90 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Update testimonial dates to January 2026 and add service photos to Services section",
+  "title": "Enrich SEO content with maximum keywords and neighboring cities",
   "requirements": [
     {
-      "id": "REQ-11",
-      "summary": "Update all testimonial dates in Testimonials.tsx so that the most recent reviews are dated up to January 2026, distributing dates realistically across 2025 and early 2026 while keeping all other review content unchanged",
+      "id": "REQ-13",
+      "summary": "Enrich meta title, description, Open Graph tags, and JSON-LD structured data in frontend/index.html with expanded geo-targeted keywords covering all neighboring cities and roofing service keywords",
       "acceptanceCriteria": [
-        "At least one testimonial is dated January 2026",
-        "Dates span across 2025 and early 2026 (no dates earlier than 2024)",
-        "All other review fields (name, location, rating, text, service type) remain intact",
-        "Date formatting remains consistent with the existing style"
+        "The <title> tag includes VERDIER COUVERTURE and at least 5 of the listed neighboring cities.",
+        "The <meta name='description'> includes at least 8 neighboring city names and 5 service keywords.",
+        "Open Graph og:title and og:description are also updated with expanded keywords.",
+        "The JSON-LD LocalBusiness structured data includes an 'areaServed' array listing all the neighboring cities and the Val-d'Oise / Île-de-France region."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/Testimonials.tsx",
+          "path": "frontend/index.html",
           "operation": "modify",
-          "description": "Update the date values for all testimonials in the testimonials array. Distribute dates realistically across 2025 and early 2026, ensuring at least one testimonial is dated January 2026. Keep all other fields (name, location, rating, service, review text) completely unchanged. Maintain the existing date format."
+          "description": "Update the <title> tag to include VERDIER COUVERTURE and at least 5 neighboring cities (e.g., 'VERDIER COUVERTURE - Couvreur Pierrelaye, Cergy, Pontoise, Argenteuil, Conflans | Val-d'Oise 95'). Update the <meta name='description'> to include at least 8 neighboring city names and 5 service keywords (couvreur, toiture, réfection, réparation, pose de tuiles, zinguerie, isolation, nettoyage, traitement) in natural French. Update og:title and og:description with the same expanded keyword-rich content. Ensure all text reads naturally without keyword stuffing."
         }
       ]
     },
     {
-      "id": "REQ-12",
-      "summary": "Replace the icon/square placeholder in each service card within Services.tsx with a relevant illustrative photo from frontend/public/assets/generated, ensuring each of the six service cards displays a dedicated photo with descriptive French alt text",
+      "id": "REQ-14",
+      "summary": "Add a visible 'Zones d'intervention' section listing all served cities between Contact and Footer sections using responsive tag-cloud or grid layout consistent with the earthy roofing theme",
       "acceptanceCriteria": [
-        "Each service card displays a photo image instead of the icon/square",
-        "Six distinct photos are used, one per service type",
-        "Images are loaded from frontend/public/assets/generated",
-        "Each image has a descriptive French alt attribute matching the service type",
-        "Card layout remains visually consistent and responsive across desktop and mobile",
-        "Images are properly sized and cropped to fit the card (e.g., object-cover)"
+        "A 'Zones d'intervention' section or subsection is visible on the page with all listed city names.",
+        "The section uses at least an H2 or H3 heading with a relevant keyword like 'Couvreur Val-d'Oise – Zones d'intervention'.",
+        "City names are rendered as plain text or tags (not hidden via CSS display:none or visibility:hidden).",
+        "The layout is responsive and consistent with the site's earthy terracotta/slate color theme.",
+        "The section appears between the Contact section and the Footer, or is integrated into the Footer."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/Services.tsx",
+          "path": "frontend/src/components/ServiceAreas.tsx",
+          "operation": "create",
+          "description": "Create a new ServiceAreas component that renders a 'Zones d'intervention' section with an H2 heading containing geo-targeted keywords (e.g., 'Couvreur Val-d'Oise – Nos Zones d'Intervention'). Display all neighboring cities (Pierrelaye, Cergy, Pontoise, Saint-Ouen-l'Aumône, Conflans-Sainte-Honorine, Herblay, Taverny, Ermont, Argenteuil, Osny, Jouy-le-Moutier, Vauréal, Neuville-sur-Oise, Méry-sur-Oise, Eaubonne, Sannois, Franconville, Cormeilles-en-Parisis, Montigny-lès-Cormeilles, L'Isle-Adam, Beaumont-sur-Oise, Persan, Saint-Leu-la-Forêt, Bouffémont, Domont, Sarcelles, Garges-lès-Gonesse, Val-d'Oise (95), Île-de-France) using a responsive grid or flexbox tag-cloud layout. Style with the existing terracotta/slate color palette and ensure all city names are fully visible (no display:none or visibility:hidden). Add a brief intro sentence in French (e.g., 'VERDIER COUVERTURE intervient dans toute la région Val-d'Oise et les communes suivantes:')."
+        },
+        {
+          "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Replace the icon/square placeholder in each service card with an <img> element loading the corresponding photo from frontend/public/assets/generated. Use the following exact file paths: frontend/public/assets/generated/service-refection-toiture.dim_800x500.png (for réfection de toiture), frontend/public/assets/generated/service-pose-tuiles.dim_800x500.png (for pose de tuiles), frontend/public/assets/generated/service-reparation.dim_800x500.png (for réparation), frontend/public/assets/generated/service-isolation.dim_800x500.png (for isolation), frontend/public/assets/generated/service-zinguerie.dim_800x500.png (for zinguerie), and frontend/public/assets/generated/service-nettoyage.dim_800x500.png (for nettoyage et traitement). Apply appropriate CSS classes (e.g., object-cover, rounded) to ensure images fit the card layout consistently. Add a descriptive French alt attribute for each image matching the service type (e.g., 'Réfection complète de toiture'). Ensure the card layout remains responsive across desktop and mobile viewports."
+          "description": "Import the ServiceAreas component and add it to the single-page layout between the Contact component and the Footer component. Ensure proper spacing and visual consistency with other sections."
+        }
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "summary": "Update Hero, About, and Contact section text content to naturally weave in geo-targeted keywords referencing neighboring cities in French",
+      "acceptanceCriteria": [
+        "Hero subtitle or highlights mention at least 3 neighboring cities naturally in French.",
+        "About section body text references the service area with at least 5 city names.",
+        "Contact section includes a mention of the cities served (at least 5 city names).",
+        "All added text reads naturally in French and does not appear as keyword stuffing.",
+        "No existing design elements, phone numbers, address, or email are modified."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Hero.tsx",
+          "operation": "modify",
+          "description": "Update the Hero subtitle text to naturally mention at least 3 neighboring cities in French (e.g., change or extend the subtitle to reference 'Pierrelaye, Cergy, Pontoise et toute la région Val-d'Oise'). Ensure the text reads naturally and integrates smoothly with the existing headline and highlights. Do not modify phone numbers or CTA buttons."
+        },
+        {
+          "path": "frontend/src/components/About.tsx",
+          "operation": "modify",
+          "description": "Update the About section body text to naturally reference the service area with at least 5 neighboring city names (e.g., add a sentence or extend existing text mentioning 'Nous intervenons sur Pierrelaye, Cergy, Pontoise, Argenteuil, Conflans-Sainte-Honorine et toutes les communes du Val-d'Oise'). Ensure all added text reads naturally in French without keyword stuffing. Do not modify the three value propositions with icons or the certifications list."
+        },
+        {
+          "path": "frontend/src/components/Contact.tsx",
+          "operation": "modify",
+          "description": "Update the Contact section to include a natural mention of at least 5 cities served (e.g., add a line in the intro or contact info mentioning 'Couvreur disponible sur Cergy, Argenteuil, Conflans-Sainte-Honorine, Herblay, Pontoise et environs'). Ensure the text reads naturally in French and integrates with the existing contact info cards. Do not modify phone numbers, email address, postal address, or the devis form."
+        }
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "summary": "Update JSON-LD LocalBusiness structured data in frontend/index.html to add 'areaServed' array with all neighboring cities and 'knowsAbout' array with roofing service keywords",
+      "acceptanceCriteria": [
+        "The JSON-LD block contains an 'areaServed' array with at least 20 City entries, each with '@type': 'City' and 'name'.",
+        "The JSON-LD block contains a 'knowsAbout' array with at least 8 roofing service keywords in French.",
+        "The JSON-LD remains valid and parseable (no syntax errors).",
+        "Existing fields (name, address, telephone, email, etc.) are not modified."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/index.html",
+          "operation": "modify",
+          "description": "Add an 'areaServed' property to the existing JSON-LD LocalBusiness structured data block as an array of City objects. Include all neighboring municipalities (Pierrelaye, Cergy, Pontoise, Saint-Ouen-l'Aumône, Conflans-Sainte-Honorine, Herblay, Taverny, Ermont, Argenteuil, Osny, Jouy-le-Moutier, Vauréal, Neuville-sur-Oise, Méry-sur-Oise, Eaubonne, Sannois, Franconville, Cormeilles-en-Parisis, Montigny-lès-Cormeilles, L'Isle-Adam, Beaumont-sur-Oise, Persan, Saint-Leu-la-Forêt, Bouffémont, Domont, Sarcelles, Garges-lès-Gonesse) with each city formatted as {'@type': 'City', 'name': 'CityName'}. Add a 'knowsAbout' property as an array with at least 8 roofing service keywords in French (e.g., 'couvreur', 'toiture', 'réfection', 'réparation', 'pose de tuiles', 'zinguerie', 'isolation', 'nettoyage toiture', 'traitement toiture'). Ensure the JSON-LD remains valid and parseable. Do not modify existing fields (name, address, telephone, email, geo, openingHours, etc.)."
         }
       ]
     }

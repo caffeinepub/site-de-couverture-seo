@@ -1,55 +1,77 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-28T01:44:46.055Z",
+  "generatedAt": "2026-02-28T02:02:48.152Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 2,
-    "implemented": 2,
+    "total": 4,
+    "implemented": 4,
     "items": [
       {
-        "id": "REQ-11",
-        "summary": "Update all testimonial dates in frontend/src/components/Testimonials.tsx so that the most recent reviews are dated up to January 2026. Distribute dates realistically across 2025 and early 2026, keeping all other review content (names, locations, ratings, service types, review text) unchanged.",
+        "id": "REQ-13",
+        "summary": "Enrich the meta title and meta description in frontend/index.html with an expanded set of geo-targeted keywords covering VERDIER COUVERTURE's service area: Pierrelaye, Cergy, Pontoise, Saint-Ouen-l'Aumône, Conflans-Sainte-Honorine, Herblay, Taverny, Ermont, Argenteuil, Osny, Jouy-le-Moutier, Vauréal, Neuville-sur-Oise, Méry-sur-Oise, Eaubonne, Sannois, Franconville, Cormeilles-en-Parisis, Montigny-lès-Cormeilles, L'Isle-Adam, Beaumont-sur-Oise, Persan, Saint-Leu-la-Forêt, Bouffémont, Domont, Sarcelles, Garges-lès-Gonesse, Val-d'Oise (95), and Île-de-France. Keywords must also cover services: couvreur, toiture, réfection, réparation, pose de tuiles, zinguerie, isolation, nettoyage toiture, traitement toiture, couvreur urgence, couvreur pas cher.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/Testimonials.tsx"
+          "frontend/index.html"
         ],
         "matchedFiles": [
-          "frontend/src/components/Testimonials.tsx"
+          "frontend/index.html"
         ]
       },
       {
-        "id": "REQ-12",
-        "summary": "Replace the icon/square placeholder in each service card within frontend/src/components/Services.tsx with a relevant illustrative photo. Each of the six service cards (e.g., réfection de toiture, pose de tuiles, réparation, isolation, zinguerie, nettoyage/traitement) must display a dedicated photo image instead of the current icon square. Images must be rendered from frontend/public/assets/generated, fit the card layout, and include a descriptive alt attribute in French.",
+        "id": "REQ-14",
+        "summary": "Add a dedicated hidden-but-indexable SEO keyword section (visually minimal, styled with small muted text or integrated as a 'zones d'intervention' section) in the page — either in the Footer or as a new section between Contact and Footer — listing all served cities and towns: Pierrelaye, Cergy, Pontoise, Saint-Ouen-l'Aumône, Conflans-Sainte-Honorine, Herblay, Taverny, Ermont, Argenteuil, Osny, Jouy-le-Moutier, Vauréal, Neuville-sur-Oise, Méry-sur-Oise, Eaubonne, Sannois, Franconville, Cormeilles-en-Parisis, Montigny-lès-Cormeilles, L'Isle-Adam, Beaumont-sur-Oise, Persan, Saint-Leu-la-Forêt, Bouffémont, Domont, Sarcelles, Garges-lès-Gonesse, Val-d'Oise (95), Île-de-France. Present them as 'Zones d'intervention' using proper H2/H3 heading and a responsive tag-cloud or grid layout consistent with the existing earthy roofing theme.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/Services.tsx"
+          "frontend/src/components/ServiceAreas.tsx",
+          "frontend/src/App.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/Services.tsx"
+          "frontend/src/components/ServiceAreas.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-15",
+        "summary": "Update the text content of the Hero section (frontend/src/components/Hero.tsx), About section (frontend/src/components/About.tsx), and Contact section (frontend/src/components/Contact.tsx) to naturally weave in geo-targeted keywords referencing neighboring cities. For example, the Hero subtitle should mention 'Pierrelaye, Cergy, Pontoise et toute la région Val-d'Oise'; the About section should mention the intervention area; the Contact section should reinforce 'couvreur disponible sur Cergy, Argenteuil, Conflans, Herblay et environs'.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/Hero.tsx",
+          "frontend/src/components/About.tsx",
+          "frontend/src/components/Contact.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/Hero.tsx",
+          "frontend/src/components/About.tsx",
+          "frontend/src/components/Contact.tsx"
+        ]
+      },
+      {
+        "id": "REQ-16",
+        "summary": "Update the JSON-LD LocalBusiness structured data block in frontend/index.html to add an 'areaServed' property as an array of City objects covering all neighboring municipalities: Pierrelaye, Cergy, Pontoise, Saint-Ouen-l'Aumône, Conflans-Sainte-Honorine, Herblay, Taverny, Ermont, Argenteuil, Osny, Jouy-le-Moutier, Vauréal, Neuville-sur-Oise, Méry-sur-Oise, Eaubonne, Sannois, Franconville, Cormeilles-en-Parisis, Montigny-lès-Cormeilles, L'Isle-Adam, Beaumont-sur-Oise, Persan, Saint-Leu-la-Forêt, Bouffémont, Domont, Sarcelles, Garges-lès-Gonesse. Also add a 'knowsAbout' array listing the main roofing services as keywords.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/index.html"
+        ],
+        "matchedFiles": [
+          "frontend/index.html"
         ]
       }
     ]
   },
   "changedFiles": [
-    "backend/blob-storage/Mixin.mo",
-    "backend/blob-storage/Storage.mo",
     "build-request.json",
-    "caffeine.lock.json",
     "feature_evidence.json",
-    "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/service-isolation.dim_800x500.png",
-    "frontend/public/assets/generated/service-nettoyage.dim_800x500.png",
-    "frontend/public/assets/generated/service-pose-tuiles.dim_800x500.png",
-    "frontend/public/assets/generated/service-refection-toiture.dim_800x500.png",
-    "frontend/public/assets/generated/service-reparation.dim_800x500.png",
-    "frontend/public/assets/generated/service-zinguerie.dim_800x500.png",
-    "frontend/src/components/Services.tsx",
-    "frontend/src/components/Testimonials.tsx",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/About.tsx",
+    "frontend/src/components/Contact.tsx",
+    "frontend/src/components/Hero.tsx",
+    "frontend/src/components/ServiceAreas.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 11,
+  "projectStateVersion": 13,
   "summary": "Site de couverture (landing page) avec référencement naturel (SEO) optimisé pour VERDIER COUVERTURE, Pierrelaye 95480.",
   "architectural_notes": [
     "Site statique HTML/CSS/JS pour maximiser les performances et le SEO",
@@ -8,7 +8,6 @@
   ],
   "known_issues": [],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Aerial view of workers performing a full roof replacement on a French residential house with terracotta tiles (service-refection-toiture.dim_800x500.png)\n- Close-up of a roofer carefully laying traditional clay roofing tiles on a sloped roof (service-pose-tuiles.dim_800x500.png)\n- Roofer repairing a cracked or damaged section of a slate roof with tools visible (service-reparation.dim_800x500.png)\n- Cross-section view of roof insulation being installed between wooden rafters in a French attic (service-isolation.dim_800x500.png)\n- Close-up of shiny zinc gutters and flashing being fitted around a roof edge and chimney (service-zinguerie.dim_800x500.png)\n- Pressure washing or moss treatment being applied to a tiled roof surface, showing before/after contrast (service-nettoyage.dim_800x500.png)",
   "existing_features": [
     {
       "id": "feature-create-a-modern-responsive-landing-page-with-a-clear-hero-section-navigation-bar-services-section-about-section-testimonials-section-and-a-contact-call-to-action-section-all-content-must-be-written-in-french-and-target-a-roofing-couverture-business",
@@ -105,6 +104,38 @@
         "REQ-12"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-enrich-the-meta-title-and-meta-description-in-frontend-index-html-with-an-expanded-set-of-geo-targeted-keywords-covering-verdier-couverture-s-service-area-pierrelaye-cergy-pontoise-saint-ouen-l-aum-ne-conflans-sainte-honorine-herblay-taverny-ermont-argenteuil-osny-jouy-le-moutier-vaur-al-neuville-sur-oise-m-ry-sur-oise-eaubonne-sannois-franconville-cormeilles-en-parisis-montigny-l-s-cormeilles-l-isle-adam-beaumont-sur-oise-persan-saint-leu-la-for-t-bouff-mont-domont-sarcelles-garges-l-s-gonesse-val-d-oise-95-and-le-de-france-keywords-must-also-cover-services-couvreur-toiture-r-fection-r-paration-pose-de-tuiles-zinguerie-isolation-nettoyage-toiture-traitement-toiture-couvreur-urgence-couvreur-pas-cher",
+      "title": "Enrich the meta title and meta description in frontend/index.html with an expanded set of geo-targeted keywords covering VERDIER COUVERTURE's service area: Pierrelaye, Cergy, Pontoise, Saint-Ouen-l'Aumône, Conflans-Sainte-Honorine, Herblay, Taverny, Ermont, Argenteuil, Osny, Jouy-le-Moutier, Vauréal, Neuville-sur-Oise, Méry-sur-Oise, Eaubonne, Sannois, Franconville, Cormeilles-en-Parisis, Montigny-lès-Cormeilles, L'Isle-Adam, Beaumont-sur-Oise, Persan, Saint-Leu-la-Forêt, Bouffémont, Domont, Sarcelles, Garges-lès-Gonesse, Val-d'Oise (95), and Île-de-France. Keywords must also cover services: couvreur, toiture, réfection, réparation, pose de tuiles, zinguerie, isolation, nettoyage toiture, traitement toiture, couvreur urgence, couvreur pas cher.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-dedicated-hidden-but-indexable-seo-keyword-section-visually-minimal-styled-with-small-muted-text-or-integrated-as-a-zones-d-intervention-section-in-the-page-either-in-the-footer-or-as-a-new-section-between-contact-and-footer-listing-all-served-cities-and-towns-pierrelaye-cergy-pontoise-saint-ouen-l-aum-ne-conflans-sainte-honorine-herblay-taverny-ermont-argenteuil-osny-jouy-le-moutier-vaur-al-neuville-sur-oise-m-ry-sur-oise-eaubonne-sannois-franconville-cormeilles-en-parisis-montigny-l-s-cormeilles-l-isle-adam-beaumont-sur-oise-persan-saint-leu-la-for-t-bouff-mont-domont-sarcelles-garges-l-s-gonesse-val-d-oise-95-le-de-france-present-them-as-zones-d-intervention-using-proper-h2-h3-heading-and-a-responsive-tag-cloud-or-grid-layout-consistent-with-the-existing-earthy-roofing-theme",
+      "title": "Add a dedicated hidden-but-indexable SEO keyword section (visually minimal, styled with small muted text or integrated as a 'zones d'intervention' section) in the page — either in the Footer or as a new section between Contact and Footer — listing all served cities and towns: Pierrelaye, Cergy, Pontoise, Saint-Ouen-l'Aumône, Conflans-Sainte-Honorine, Herblay, Taverny, Ermont, Argenteuil, Osny, Jouy-le-Moutier, Vauréal, Neuville-sur-Oise, Méry-sur-Oise, Eaubonne, Sannois, Franconville, Cormeilles-en-Parisis, Montigny-lès-Cormeilles, L'Isle-Adam, Beaumont-sur-Oise, Persan, Saint-Leu-la-Forêt, Bouffémont, Domont, Sarcelles, Garges-lès-Gonesse, Val-d'Oise (95), Île-de-France. Present them as 'Zones d'intervention' using proper H2/H3 heading and a responsive tag-cloud or grid layout consistent with the existing earthy roofing theme.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-text-content-of-the-hero-section-frontend-src-components-hero-tsx-about-section-frontend-src-components-about-tsx-and-contact-section-frontend-src-components-contact-tsx-to-naturally-weave-in-geo-targeted-keywords-referencing-neighboring-cities-for-example-the-hero-subtitle-should-mention-pierrelaye-cergy-pontoise-et-toute-la-r-gion-val-d-oise-the-about-section-should-mention-the-intervention-area-the-contact-section-should-reinforce-couvreur-disponible-sur-cergy-argenteuil-conflans-herblay-et-environs",
+      "title": "Update the text content of the Hero section (frontend/src/components/Hero.tsx), About section (frontend/src/components/About.tsx), and Contact section (frontend/src/components/Contact.tsx) to naturally weave in geo-targeted keywords referencing neighboring cities. For example, the Hero subtitle should mention 'Pierrelaye, Cergy, Pontoise et toute la région Val-d'Oise'; the About section should mention the intervention area; the Contact section should reinforce 'couvreur disponible sur Cergy, Argenteuil, Conflans, Herblay et environs'.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-json-ld-localbusiness-structured-data-block-in-frontend-index-html-to-add-an-areaserved-property-as-an-array-of-city-objects-covering-all-neighboring-municipalities-pierrelaye-cergy-pontoise-saint-ouen-l-aum-ne-conflans-sainte-honorine-herblay-taverny-ermont-argenteuil-osny-jouy-le-moutier-vaur-al-neuville-sur-oise-m-ry-sur-oise-eaubonne-sannois-franconville-cormeilles-en-parisis-montigny-l-s-cormeilles-l-isle-adam-beaumont-sur-oise-persan-saint-leu-la-for-t-bouff-mont-domont-sarcelles-garges-l-s-gonesse-also-add-a-knowsabout-array-listing-the-main-roofing-services-as-keywords",
+      "title": "Update the JSON-LD LocalBusiness structured data block in frontend/index.html to add an 'areaServed' property as an array of City objects covering all neighboring municipalities: Pierrelaye, Cergy, Pontoise, Saint-Ouen-l'Aumône, Conflans-Sainte-Honorine, Herblay, Taverny, Ermont, Argenteuil, Osny, Jouy-le-Moutier, Vauréal, Neuville-sur-Oise, Méry-sur-Oise, Eaubonne, Sannois, Franconville, Cormeilles-en-Parisis, Montigny-lès-Cormeilles, L'Isle-Adam, Beaumont-sur-Oise, Persan, Saint-Leu-la-Forêt, Bouffémont, Domont, Sarcelles, Garges-lès-Gonesse. Also add a 'knowsAbout' array listing the main roofing services as keywords.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -171,6 +202,12 @@
     {
       "id": "AR-11",
       "summary": "Ajouter des photos illustratives pour chaque type de service/spécificité (ex: réparation, pose de tuiles, etc.) dans les sections concernées",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Enrichir le contenu SEO avec un maximum de mots-clés ciblés incluant toutes les villes voisines de Pierrelaye (Val-d'Oise, Île-de-France) : Cergy, Pontoise, Saint-Ouen-l'Aumône, Conflans-Sainte-Honorine, Herblay, Taverny, Ermont, Argenteuil, etc.",
       "reqIds": [],
       "status": "pending"
     }

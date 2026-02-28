@@ -47,13 +47,16 @@ export default function About() {
                         </h2>
                         <p className="text-[oklch(0.42_0.02_55)] text-base leading-relaxed mb-4">
                             Fondée en 2004, <strong className="text-[oklch(0.22_0.015_50)] font-semibold">VERDIER COUVERTURE</strong> est une entreprise artisanale
-                            spécialisée dans tous les travaux de couverture et toiture. Basés en Île-de-France,
-                            nous intervenons dans un rayon de 100 km autour de Paris.
+                            spécialisée dans tous les travaux de couverture et toiture. Basés à <strong className="text-[oklch(0.22_0.015_50)] font-semibold">Pierrelaye (95480)</strong>,
+                            nous intervenons sur <strong className="text-[oklch(0.22_0.015_50)] font-semibold">Cergy</strong>, <strong className="text-[oklch(0.22_0.015_50)] font-semibold">Pontoise</strong>, <strong className="text-[oklch(0.22_0.015_50)] font-semibold">Argenteuil</strong>, <strong className="text-[oklch(0.22_0.015_50)] font-semibold">Conflans-Sainte-Honorine</strong> et dans toutes les communes du <strong className="text-[oklch(0.22_0.015_50)] font-semibold">Val-d'Oise (95)</strong>.
                         </p>
-                        <p className="text-[oklch(0.42_0.02_55)] text-base leading-relaxed mb-8">
+                        <p className="text-[oklch(0.42_0.02_55)] text-base leading-relaxed mb-4">
                             Notre philosophie est simple : chaque toit mérite le meilleur. Nous combinons
                             les techniques traditionnelles du métier de couvreur avec les innovations modernes
                             pour vous offrir une toiture durable, esthétique et performante.
+                        </p>
+                        <p className="text-[oklch(0.42_0.02_55)] text-base leading-relaxed mb-8">
+                            De <strong className="text-[oklch(0.22_0.015_50)] font-semibold">Herblay</strong> à <strong className="text-[oklch(0.22_0.015_50)] font-semibold">Taverny</strong>, d'<strong className="text-[oklch(0.22_0.015_50)] font-semibold">Ermont</strong> à <strong className="text-[oklch(0.22_0.015_50)] font-semibold">Sannois</strong>, en passant par <strong className="text-[oklch(0.22_0.015_50)] font-semibold">Franconville</strong> et <strong className="text-[oklch(0.22_0.015_50)] font-semibold">Saint-Leu-la-Forêt</strong> — notre équipe se déplace partout en Île-de-France pour réaliser vos travaux de couverture avec le même soin et la même exigence.
                         </p>
 
                         {/* Values */}

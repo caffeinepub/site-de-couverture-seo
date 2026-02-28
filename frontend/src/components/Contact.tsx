@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle, MapPinned } from 'lucide-react';
 
 interface FormData {
     nom: string;
@@ -97,6 +97,13 @@ export default function Contact() {
                         Obtenez votre devis gratuit sous 24h. Notre équipe est à votre disposition
                         pour étudier votre projet de couverture et vous conseiller.
                     </p>
+                    {/* Zone d'intervention mention */}
+                    <div className="mt-4 inline-flex items-center gap-2 bg-[oklch(0.975_0.005_80)] border border-[oklch(0.87_0.015_70)] rounded-full px-5 py-2 text-sm text-[oklch(0.42_0.02_55)]">
+                        <MapPinned size={15} className="text-[oklch(0.55_0.13_42)] flex-shrink-0" aria-hidden="true" />
+                        <span>
+                            Couvreur disponible sur <strong className="text-[oklch(0.22_0.015_50)]">Cergy</strong>, <strong className="text-[oklch(0.22_0.015_50)]">Argenteuil</strong>, <strong className="text-[oklch(0.22_0.015_50)]">Conflans-Sainte-Honorine</strong>, <strong className="text-[oklch(0.22_0.015_50)]">Herblay</strong>, <strong className="text-[oklch(0.22_0.015_50)]">Pontoise</strong>, <strong className="text-[oklch(0.22_0.015_50)]">Taverny</strong> et environs
+                        </span>
+                    </div>
                 </header>
 
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16">
@@ -316,7 +323,7 @@ export default function Contact() {
                                             className="form-input"
                                         >
                                             <option value="">Sélectionner un service</option>
-                                            {serviceOptions.map(opt => (
+                                            {serviceOptions.map((opt) => (
                                                 <option key={opt} value={opt}>{opt}</option>
                                             ))}
                                         </select>
@@ -326,7 +333,7 @@ export default function Contact() {
                                 {/* Message */}
                                 <div>
                                     <label htmlFor="message" className="block text-sm font-medium text-[oklch(0.32_0.015_50)] mb-1.5">
-                                        Description du projet <span className="text-[oklch(0.55_0.13_42)]" aria-hidden="true">*</span>
+                                        Décrivez votre projet <span className="text-[oklch(0.55_0.13_42)]" aria-hidden="true">*</span>
                                     </label>
                                     <textarea
                                         id="message"
@@ -335,7 +342,7 @@ export default function Contact() {
                                         value={formData.message}
                                         onChange={handleChange}
                                         className={`form-input resize-none ${errors.message ? 'border-red-400 focus:ring-red-300' : ''}`}
-                                        placeholder="Décrivez votre projet : type de toiture, surface approximative, travaux souhaités..."
+                                        placeholder="Décrivez votre projet de toiture, la surface approximative, le type de matériaux souhaités..."
                                         aria-required="true"
                                         aria-describedby={errors.message ? 'message-error' : undefined}
                                     />
@@ -347,28 +354,21 @@ export default function Contact() {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="btn-terracotta w-full flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
-                                    aria-busy={isSubmitting}
+                                    className="btn-terracotta w-full py-4 text-base font-semibold flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                                    aria-label="Envoyer la demande de devis"
                                 >
                                     {isSubmitting ? (
                                         <>
-                                            <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
-                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
-                                            </svg>
+                                            <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" aria-hidden="true" />
                                             Envoi en cours…
                                         </>
                                     ) : (
                                         <>
-                                            <Send size={16} aria-hidden="true" />
+                                            <Send size={18} aria-hidden="true" />
                                             Envoyer ma demande de devis
                                         </>
                                     )}
                                 </button>
-
-                                <p className="text-xs text-[oklch(0.52_0.02_60)] text-center">
-                                    Vos données sont confidentielles et ne seront jamais partagées.
-                                </p>
                             </form>
                         )}
                     </div>

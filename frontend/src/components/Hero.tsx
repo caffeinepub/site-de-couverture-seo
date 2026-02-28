@@ -57,10 +57,16 @@ export default function Hero() {
                     <span className="text-white">et Toiture</span>
                 </h1>
 
-                {/* Subheadline */}
-                <p className="text-lg sm:text-xl text-white/85 max-w-2xl mx-auto mb-8 leading-relaxed font-light">
+                {/* Subheadline with geo keywords */}
+                <p className="text-lg sm:text-xl text-white/85 max-w-2xl mx-auto mb-3 leading-relaxed font-light">
                     Réfection complète, pose de tuiles et ardoises, réparation et entretien —
                     nous protégeons votre maison avec savoir-faire et passion depuis plus de 20 ans.
+                </p>
+                <p className="text-base text-white/70 max-w-2xl mx-auto mb-8 leading-relaxed font-light">
+                    Couvreur à <strong className="text-white/90 font-medium">Pierrelaye</strong>,{' '}
+                    <strong className="text-white/90 font-medium">Cergy</strong>,{' '}
+                    <strong className="text-white/90 font-medium">Pontoise</strong> et dans tout le{' '}
+                    <strong className="text-white/90 font-medium">Val-d'Oise (95)</strong> — devis gratuit sous 24h.
                 </p>
 
                 {/* Highlights */}
