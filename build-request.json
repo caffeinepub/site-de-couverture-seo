@@ -1,100 +1,39 @@
 {
   "kind": "build_request",
-  "title": "Enrich SEO content with maximum keywords and neighboring cities",
+  "title": "Fix missing 'itemReviewed' field in Review structured data (Schema.org)",
   "projectName": "Verdier Couverture",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-13",
-      "text": "Enrich the meta title and meta description in frontend/index.html with an expanded set of geo-targeted keywords covering VERDIER COUVERTURE's service area: Pierrelaye, Cergy, Pontoise, Saint-Ouen-l'Aumône, Conflans-Sainte-Honorine, Herblay, Taverny, Ermont, Argenteuil, Osny, Jouy-le-Moutier, Vauréal, Neuville-sur-Oise, Méry-sur-Oise, Eaubonne, Sannois, Franconville, Cormeilles-en-Parisis, Montigny-lès-Cormeilles, L'Isle-Adam, Beaumont-sur-Oise, Persan, Saint-Leu-la-Forêt, Bouffémont, Domont, Sarcelles, Garges-lès-Gonesse, Val-d'Oise (95), and Île-de-France. Keywords must also cover services: couvreur, toiture, réfection, réparation, pose de tuiles, zinguerie, isolation, nettoyage toiture, traitement toiture, couvreur urgence, couvreur pas cher.",
+      "id": "REQ-19",
+      "text": "In `frontend/index.html`, update the JSON-LD structured data block to fix the Google Rich Results error 'Champ itemReviewed manquant'. Each `Review` object inside the `review` array of the `LocalBusiness` schema must include an `itemReviewed` property referencing the business (type `LocalBusiness`, with `name: 'VERDIER COUVERTURE'`). If an `AggregateRating` is present, ensure it is correctly nested inside the `LocalBusiness` entity. Validate that the resulting JSON-LD passes Google's Rich Results Test without the 'itemReviewed missing' error.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-user-last"
         ],
         "quotes": [
-          "Oui fait le plus de mots cle possible avec toute les ville voisine"
+          "Champ \"itemReviewed\" manquant",
+          "je pense que cela et lié au avis"
         ]
       },
       "acceptanceCriteria": [
-        "The <title> tag includes VERDIER COUVERTURE and at least 5 of the listed neighboring cities.",
-        "The <meta name='description'> includes at least 8 neighboring city names and 5 service keywords.",
-        "Open Graph og:title and og:description are also updated with expanded keywords.",
-        "The JSON-LD LocalBusiness structured data includes an 'areaServed' array listing all the neighboring cities and the Val-d'Oise / Île-de-France region."
-      ]
-    },
-    {
-      "id": "REQ-14",
-      "text": "Add a dedicated hidden-but-indexable SEO keyword section (visually minimal, styled with small muted text or integrated as a 'zones d'intervention' section) in the page — either in the Footer or as a new section between Contact and Footer — listing all served cities and towns: Pierrelaye, Cergy, Pontoise, Saint-Ouen-l'Aumône, Conflans-Sainte-Honorine, Herblay, Taverny, Ermont, Argenteuil, Osny, Jouy-le-Moutier, Vauréal, Neuville-sur-Oise, Méry-sur-Oise, Eaubonne, Sannois, Franconville, Cormeilles-en-Parisis, Montigny-lès-Cormeilles, L'Isle-Adam, Beaumont-sur-Oise, Persan, Saint-Leu-la-Forêt, Bouffémont, Domont, Sarcelles, Garges-lès-Gonesse, Val-d'Oise (95), Île-de-France. Present them as 'Zones d'intervention' using proper H2/H3 heading and a responsive tag-cloud or grid layout consistent with the existing earthy roofing theme.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-last"
-        ],
-        "quotes": [
-          "fait le plus de mots cle possible avec toute les ville voisine"
-        ]
-      },
-      "acceptanceCriteria": [
-        "A 'Zones d'intervention' section or subsection is visible on the page with all listed city names.",
-        "The section uses at least an H2 or H3 heading with a relevant keyword like 'Couvreur Val-d'Oise – Zones d'intervention'.",
-        "City names are rendered as plain text or tags (not hidden via CSS display:none or visibility:hidden).",
-        "The layout is responsive and consistent with the site's earthy terracotta/slate color theme.",
-        "The section appears between the Contact section and the Footer, or is integrated into the Footer."
-      ]
-    },
-    {
-      "id": "REQ-15",
-      "text": "Update the text content of the Hero section (frontend/src/components/Hero.tsx), About section (frontend/src/components/About.tsx), and Contact section (frontend/src/components/Contact.tsx) to naturally weave in geo-targeted keywords referencing neighboring cities. For example, the Hero subtitle should mention 'Pierrelaye, Cergy, Pontoise et toute la région Val-d'Oise'; the About section should mention the intervention area; the Contact section should reinforce 'couvreur disponible sur Cergy, Argenteuil, Conflans, Herblay et environs'.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-last"
-        ],
-        "quotes": [
-          "fait le plus de mots cle possible avec toute les ville voisine"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Hero subtitle or highlights mention at least 3 neighboring cities naturally in French.",
-        "About section body text references the service area with at least 5 city names.",
-        "Contact section includes a mention of the cities served (at least 5 city names).",
-        "All added text reads naturally in French and does not appear as keyword stuffing.",
-        "No existing design elements, phone numbers, address, or email are modified."
-      ]
-    },
-    {
-      "id": "REQ-16",
-      "text": "Update the JSON-LD LocalBusiness structured data block in frontend/index.html to add an 'areaServed' property as an array of City objects covering all neighboring municipalities: Pierrelaye, Cergy, Pontoise, Saint-Ouen-l'Aumône, Conflans-Sainte-Honorine, Herblay, Taverny, Ermont, Argenteuil, Osny, Jouy-le-Moutier, Vauréal, Neuville-sur-Oise, Méry-sur-Oise, Eaubonne, Sannois, Franconville, Cormeilles-en-Parisis, Montigny-lès-Cormeilles, L'Isle-Adam, Beaumont-sur-Oise, Persan, Saint-Leu-la-Forêt, Bouffémont, Domont, Sarcelles, Garges-lès-Gonesse. Also add a 'knowsAbout' array listing the main roofing services as keywords.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-last"
-        ],
-        "quotes": [
-          "fait le plus de mots cle possible avec toute les ville voisine"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The JSON-LD block contains an 'areaServed' array with at least 20 City entries, each with '@type': 'City' and 'name'.",
-        "The JSON-LD block contains a 'knowsAbout' array with at least 8 roofing service keywords in French.",
-        "The JSON-LD remains valid and parseable (no syntax errors).",
-        "Existing fields (name, address, telephone, email, etc.) are not modified."
+        "Every `Review` object in the JSON-LD structured data includes an `itemReviewed` property with `@type: 'LocalBusiness'` and `name: 'VERDIER COUVERTURE'`.",
+        "The JSON-LD block remains valid JSON and does not break any existing structured data fields (LocalBusiness, areaServed, knowsAbout, AggregateRating, etc.).",
+        "Google Rich Results Test no longer reports the 'itemReviewed missing' error for the page.",
+        "No other structured data warnings or errors are introduced by the change."
       ]
     }
   ],
   "constraints": [
-    "Do not modify phone numbers, email address, or postal address already configured.",
-    "Do not alter immutable frontend paths (hooks, main.tsx, ui components).",
-    "All added text must be in natural French — no keyword stuffing patterns.",
-    "City names must not be hidden via CSS (display:none, visibility:hidden, opacity:0) as that is a black-hat SEO practice."
+    "Do not remove or modify any existing structured data fields (LocalBusiness type, areaServed, knowsAbout, telephone, address, openingHours, etc.).",
+    "Do not delete or modify `frontend/public/google2ea9c3e7d5d4abde.html`.",
+    "Do not edit any file listed under frontend.immutablePaths."
   ],
   "nonGoals": [
-    "Creating a Google My Business profile or any external third-party account.",
-    "Submitting the sitemap to Google Search Console.",
-    "Adding a blog or dynamic content pages.",
-    "Changing the visual design, color palette, or typography.",
-    "Modifying backend logic."
+    "Changing testimonial text, names, dates, or ratings in Testimonials.tsx.",
+    "Adding new reviews or modifying any visible review content on the page.",
+    "Any SEO changes beyond fixing the itemReviewed structured data error."
   ],
   "imageRequirements": {
     "required": [],

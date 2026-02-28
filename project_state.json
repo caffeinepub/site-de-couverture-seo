@@ -1,13 +1,15 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 13,
+  "projectStateVersion": 19,
   "summary": "Site de couverture (landing page) avec référencement naturel (SEO) optimisé pour VERDIER COUVERTURE, Pierrelaye 95480.",
   "architectural_notes": [
     "Site statique HTML/CSS/JS pour maximiser les performances et le SEO",
     "Structure sémantique HTML5 pour favoriser l'indexation par les moteurs de recherche"
   ],
-  "known_issues": [],
-  "isFixRequest": false,
+  "known_issues": [
+    "Erreur Google Rich Results : champ 'itemReviewed' manquant dans les données structurées des avis (Review/AggregateRating)"
+  ],
+  "isFixRequest": true,
   "existing_features": [
     {
       "id": "feature-create-a-modern-responsive-landing-page-with-a-clear-hero-section-navigation-bar-services-section-about-section-testimonials-section-and-a-contact-call-to-action-section-all-content-must-be-written-in-french-and-target-a-roofing-couverture-business",
@@ -136,6 +138,22 @@
         "REQ-16"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-create-the-google-search-console-ownership-verification-file-at-frontend-public-google2ea9c3e7d5d4abde-html-the-file-must-be-a-minimal-html-page-containing-only-the-google-required-verification-string-google-site-verification-google2ea9c3e7d5d4abde-so-that-google-can-confirm-site-ownership-at-https-site-de-couverture-seo-3wk-caffeine-xyz-google2ea9c3e7d5d4abde-html-the-file-must-never-be-deleted",
+      "title": "Create the Google Search Console ownership verification file at `frontend/public/google2ea9c3e7d5d4abde.html`. The file must be a minimal HTML page containing only the Google-required verification string (google-site-verification: google2ea9c3e7d5d4abde) so that Google can confirm site ownership at https://site-de-couverture-seo-3wk.caffeine.xyz/google2ea9c3e7d5d4abde.html. The file must never be deleted.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-frontend-index-html-add-meta-name-google-site-verification-content-phjap9bjessqiqarsiznet4pvxtvf-5b1rprlknzhjk-inside-the-head-section-alongside-the-existing-meta-tags-and-add-a-matching-meta-name-google-site-verification-content-phjap9bjessqiqarsiznet4pvxtvf-5b1rprlknzhjk-tag-inside-the-body-element-as-well",
+      "title": "In `frontend/index.html`, add `<meta name=\"google-site-verification\" content=\"phjaP9BjessQIqarSIznET4pvxtvF-5B1rpRlkNzHJk\" />` inside the `<head>` section (alongside the existing meta tags) AND add a matching `<meta name=\"google-site-verification\" content=\"phjaP9BjessQIqarSIznET4pvxtvF-5B1rpRlkNzHJk\" />` tag inside the `<body>` element as well.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -209,6 +227,32 @@
       "id": "AR-12",
       "summary": "Enrichir le contenu SEO avec un maximum de mots-clés ciblés incluant toutes les villes voisines de Pierrelaye (Val-d'Oise, Île-de-France) : Cergy, Pontoise, Saint-Ouen-l'Aumône, Conflans-Sainte-Honorine, Herblay, Taverny, Ermont, Argenteuil, etc.",
       "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Ajouter le fichier de vérification Google Search Console (google2ea9c3e7d5d4abde.html) pour confirmer la propriété du site",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Ajouter la balise meta google-site-verification (phjaP9BjessQIqarSIznET4pvxtvF-5B1rpRlkNzHJk) dans le <head> et le <body> de index.html",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Corriger l'erreur Schema.org : ajouter le champ 'itemReviewed' manquant dans les données structurées des avis (Review) pour passer la validation Google",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "In `frontend/index.html`, update the JSON-LD structured data block to fix the Google Rich Results error 'Champ itemReviewed manquant'. Each `Review` object inside the `review` array of the `LocalBusiness` schema must include an `itemReviewed` property referencing the business (type `LocalBusiness`, with `name: 'VERDIER COUVERTURE'`). If an `AggregateRating` is present, ensure it is correctly nested inside the `LocalBusiness` entity. Validate that the resulting JSON-LD passes Google's Rich Results Test without the 'itemReviewed missing' error.",
+      "reqIds": [
+        "REQ-19"
+      ],
       "status": "pending"
     }
   ],

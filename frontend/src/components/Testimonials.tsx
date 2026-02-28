@@ -129,13 +129,25 @@ export default function Testimonials() {
                             itemScope
                             itemType="https://schema.org/Review"
                         >
+                            {/* itemReviewed — required by Google for Review structured data */}
+                            <div
+                                itemProp="itemReviewed"
+                                itemScope
+                                itemType="https://schema.org/LocalBusiness"
+                                className="hidden"
+                            >
+                                <span itemProp="name">VERDIER COUVERTURE</span>
+                            </div>
+
                             {/* Quote icon */}
                             <div className="flex justify-end mb-2">
                                 <Quote size={20} className="text-[oklch(0.55_0.13_42/0.3)]" aria-hidden="true" />
                             </div>
 
                             {/* Rating */}
-                            <div className="mb-3">
+                            <div className="mb-3" itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+                                <meta itemProp="ratingValue" content={String(testimonial.rating)} />
+                                <meta itemProp="bestRating" content="5" />
                                 <StarRating rating={testimonial.rating} />
                             </div>
 
@@ -167,11 +179,13 @@ export default function Testimonials() {
                                         className="font-bold text-[oklch(0.22_0.015_50)] text-sm not-italic"
                                         style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                                         itemProp="author"
+                                        itemScope
+                                        itemType="https://schema.org/Person"
                                     >
-                                        {testimonial.name}
+                                        <span itemProp="name">{testimonial.name}</span>
                                     </cite>
                                     <div className="text-[oklch(0.52_0.02_60)] text-xs">
-                                        {testimonial.location} · {testimonial.date}
+                                        {testimonial.location} · <span itemProp="datePublished">{testimonial.date}</span>
                                     </div>
                                 </div>
                             </footer>
