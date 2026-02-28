@@ -1,33 +1,41 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Update contact email address to sv.couverture95@gmail.com",
+  "title": "Update testimonial dates to January 2026 and add service photos to Services section",
   "requirements": [
     {
-      "id": "REQ-9",
-      "summary": "Replace all instances of the existing email address with 'sv.couverture95@gmail.com' across the Contact section, Footer, and JSON-LD structured data, ensuring all emails are clickable mailto: links with consistent formatting",
+      "id": "REQ-11",
+      "summary": "Update all testimonial dates in Testimonials.tsx so that the most recent reviews are dated up to January 2026, distributing dates realistically across 2025 and early 2026 while keeping all other review content unchanged",
       "acceptanceCriteria": [
-        "The email 'sv.couverture95@gmail.com' appears in the Contact section info card.",
-        "The email 'sv.couverture95@gmail.com' appears in the Footer contact details.",
-        "If an email field exists in the JSON-LD LocalBusiness structured data in index.html, it is updated to 'sv.couverture95@gmail.com'.",
-        "Every displayed email is a clickable mailto:sv.couverture95@gmail.com link.",
-        "No old or placeholder email address remains anywhere on the site."
+        "At least one testimonial is dated January 2026",
+        "Dates span across 2025 and early 2026 (no dates earlier than 2024)",
+        "All other review fields (name, location, rating, text, service type) remain intact",
+        "Date formatting remains consistent with the existing style"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/Contact.tsx",
+          "path": "frontend/src/components/Testimonials.tsx",
           "operation": "modify",
-          "description": "Update the email address in the Contact section info card to 'sv.couverture95@gmail.com' and ensure it is rendered as a clickable mailto: link with consistent formatting matching the existing phone number links"
-        },
+          "description": "Update the date values for all testimonials in the testimonials array. Distribute dates realistically across 2025 and early 2026, ensuring at least one testimonial is dated January 2026. Keep all other fields (name, location, rating, service, review text) completely unchanged. Maintain the existing date format."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Replace the icon/square placeholder in each service card within Services.tsx with a relevant illustrative photo from frontend/public/assets/generated, ensuring each of the six service cards displays a dedicated photo with descriptive French alt text",
+      "acceptanceCriteria": [
+        "Each service card displays a photo image instead of the icon/square",
+        "Six distinct photos are used, one per service type",
+        "Images are loaded from frontend/public/assets/generated",
+        "Each image has a descriptive French alt attribute matching the service type",
+        "Card layout remains visually consistent and responsive across desktop and mobile",
+        "Images are properly sized and cropped to fit the card (e.g., object-cover)"
+      ],
+      "file_operations": [
         {
-          "path": "frontend/src/components/Footer.tsx",
+          "path": "frontend/src/components/Services.tsx",
           "operation": "modify",
-          "description": "Update the email address in the Footer contact details to 'sv.couverture95@gmail.com' and ensure it is rendered as a clickable mailto: link with consistent formatting matching other footer contact information"
-        },
-        {
-          "path": "frontend/index.html",
-          "operation": "modify",
-          "description": "If an email field exists in the JSON-LD LocalBusiness structured data, update it to 'sv.couverture95@gmail.com'. If no email field is present, add one with the new email address to improve SEO and local business discoverability"
+          "description": "Replace the icon/square placeholder in each service card with an <img> element loading the corresponding photo from frontend/public/assets/generated. Use the following exact file paths: frontend/public/assets/generated/service-refection-toiture.dim_800x500.png (for réfection de toiture), frontend/public/assets/generated/service-pose-tuiles.dim_800x500.png (for pose de tuiles), frontend/public/assets/generated/service-reparation.dim_800x500.png (for réparation), frontend/public/assets/generated/service-isolation.dim_800x500.png (for isolation), frontend/public/assets/generated/service-zinguerie.dim_800x500.png (for zinguerie), and frontend/public/assets/generated/service-nettoyage.dim_800x500.png (for nettoyage et traitement). Apply appropriate CSS classes (e.g., object-cover, rounded) to ensure images fit the card layout consistently. Add a descriptive French alt attribute for each image matching the service type (e.g., 'Réfection complète de toiture'). Ensure the card layout remains responsive across desktop and mobile viewports."
         }
       ]
     }

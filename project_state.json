@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 7,
+  "projectStateVersion": 11,
   "summary": "Site de couverture (landing page) avec référencement naturel (SEO) optimisé pour VERDIER COUVERTURE, Pierrelaye 95480.",
   "architectural_notes": [
     "Site statique HTML/CSS/JS pour maximiser les performances et le SEO",
@@ -8,6 +8,7 @@
   ],
   "known_issues": [],
   "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Aerial view of workers performing a full roof replacement on a French residential house with terracotta tiles (service-refection-toiture.dim_800x500.png)\n- Close-up of a roofer carefully laying traditional clay roofing tiles on a sloped roof (service-pose-tuiles.dim_800x500.png)\n- Roofer repairing a cracked or damaged section of a slate roof with tools visible (service-reparation.dim_800x500.png)\n- Cross-section view of roof insulation being installed between wooden rafters in a French attic (service-isolation.dim_800x500.png)\n- Close-up of shiny zinc gutters and flashing being fitted around a roof edge and chimney (service-zinguerie.dim_800x500.png)\n- Pressure washing or moss treatment being applied to a tiled roof surface, showing before/after contrast (service-nettoyage.dim_800x500.png)",
   "existing_features": [
     {
       "id": "feature-create-a-modern-responsive-landing-page-with-a-clear-hero-section-navigation-bar-services-section-about-section-testimonials-section-and-a-contact-call-to-action-section-all-content-must-be-written-in-french-and-target-a-roofing-couverture-business",
@@ -80,6 +81,30 @@
         "REQ-9"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-replace-the-existing-testimonials-in-the-testimonials-section-frontend-src-components-testimonials-tsx-with-a-new-set-of-at-least-6-recent-customer-reviews-each-review-must-include-a-realistic-french-customer-name-a-location-in-the-le-de-france-region-a-star-rating-4-or-5-stars-a-service-type-e-g-r-fection-de-toiture-pose-de-tuiles-r-paration-isolation-a-recent-date-2024-or-2025-and-a-detailed-review-text-in-french-praising-the-quality-of-work-by-verdier-couverture-initials-avatars-must-be-derived-from-the-customer-names-and-styled-consistently-with-the-existing-earthy-roofing-theme",
+      "title": "Replace the existing testimonials in the Testimonials section (frontend/src/components/Testimonials.tsx) with a new set of at least 6 recent customer reviews. Each review must include: a realistic French customer name, a location in the Île-de-France region, a star rating (4 or 5 stars), a service type (e.g., réfection de toiture, pose de tuiles, réparation, isolation), a recent date (2024 or 2025), and a detailed review text in French praising the quality of work by VERDIER COUVERTURE. Initials avatars must be derived from the customer names and styled consistently with the existing earthy roofing theme.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-all-testimonial-dates-in-frontend-src-components-testimonials-tsx-so-that-the-most-recent-reviews-are-dated-up-to-january-2026-distribute-dates-realistically-across-2025-and-early-2026-keeping-all-other-review-content-names-locations-ratings-service-types-review-text-unchanged",
+      "title": "Update all testimonial dates in frontend/src/components/Testimonials.tsx so that the most recent reviews are dated up to January 2026. Distribute dates realistically across 2025 and early 2026, keeping all other review content (names, locations, ratings, service types, review text) unchanged.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-icon-square-placeholder-in-each-service-card-within-frontend-src-components-services-tsx-with-a-relevant-illustrative-photo-each-of-the-six-service-cards-e-g-r-fection-de-toiture-pose-de-tuiles-r-paration-isolation-zinguerie-nettoyage-traitement-must-display-a-dedicated-photo-image-instead-of-the-current-icon-square-images-must-be-rendered-from-frontend-public-assets-generated-fit-the-card-layout-and-include-a-descriptive-alt-attribute-in-french",
+      "title": "Replace the icon/square placeholder in each service card within frontend/src/components/Services.tsx with a relevant illustrative photo. Each of the six service cards (e.g., réfection de toiture, pose de tuiles, réparation, isolation, zinguerie, nettoyage/traitement) must display a dedicated photo image instead of the current icon square. Images must be rendered from frontend/public/assets/generated, fit the card layout, and include a descriptive alt attribute in French.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -128,6 +153,24 @@
     {
       "id": "AR-8",
       "summary": "Mettre à jour l'adresse email par sv.couverture95@gmail.com dans toutes les sections du site",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Ajouter des avis clients plus récents dans la section témoignages",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Mettre à jour les avis clients jusqu'à janvier 2026 (dates plus récentes)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Ajouter des photos illustratives pour chaque type de service/spécificité (ex: réparation, pose de tuiles, etc.) dans les sections concernées",
       "reqIds": [],
       "status": "pending"
     }

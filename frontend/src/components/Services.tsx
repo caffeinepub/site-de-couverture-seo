@@ -1,54 +1,53 @@
-import { Shield, Wrench, Home, Droplets, Thermometer, Star } from 'lucide-react';
-
 interface Service {
-    icon: React.ReactNode;
     title: string;
     description: string;
     features: string[];
-    imgSrc?: string;
-    imgAlt?: string;
+    imgSrc: string;
+    imgAlt: string;
 }
 
 const services: Service[] = [
     {
-        icon: <Home size={28} />,
         title: 'Réfection de Toiture Complète',
         description: 'Remplacement intégral de votre couverture avec des matériaux de qualité supérieure. Nous intervenons sur tous types de toitures : tuiles, ardoises, zinc.',
         features: ['Diagnostic gratuit', 'Matériaux certifiés', 'Garantie 10 ans'],
-        imgSrc: '/assets/generated/roof-icon.dim_128x128.png',
-        imgAlt: 'Icône de toit en terre cuite représentant la réfection de toiture',
+        imgSrc: '/assets/generated/service-refection-toiture.dim_800x500.png',
+        imgAlt: 'Réfection complète de toiture en tuiles',
     },
     {
-        icon: <Star size={28} />,
         title: 'Pose de Tuiles & Ardoises',
         description: 'Installation experte de tuiles en terre cuite, ardoises naturelles ou synthétiques. Chaque pose est réalisée dans les règles de l\'art pour une étanchéité parfaite.',
         features: ['Tuiles terre cuite', 'Ardoises naturelles', 'Zinc et cuivre'],
-        imgSrc: '/assets/generated/services-icon.dim_128x128.png',
-        imgAlt: 'Icône d\'outils de couverture représentant la pose de tuiles et ardoises',
+        imgSrc: '/assets/generated/service-pose-tuiles.dim_800x500.png',
+        imgAlt: 'Pose de tuiles et ardoises sur toiture',
     },
     {
-        icon: <Wrench size={28} />,
         title: 'Réparation & Entretien',
         description: 'Intervention rapide pour réparer fuites, tuiles cassées ou gouttières endommagées. Entretien préventif pour prolonger la durée de vie de votre toiture.',
         features: ['Intervention 48h', 'Nettoyage mousse', 'Traitement hydrofuge'],
+        imgSrc: '/assets/generated/service-reparation.dim_800x500.png',
+        imgAlt: 'Réparation et entretien de toiture',
     },
     {
-        icon: <Thermometer size={28} />,
         title: 'Isolation Thermique',
         description: 'Amélioration de l\'isolation de votre toiture pour réduire vos factures d\'énergie. Travaux éligibles aux aides de l\'État (MaPrimeRénov\').',
         features: ['Éligible MaPrimeRénov\'', 'Économies d\'énergie', 'Confort amélioré'],
+        imgSrc: '/assets/generated/service-isolation.dim_800x500.png',
+        imgAlt: 'Isolation thermique de toiture',
     },
     {
-        icon: <Droplets size={28} />,
         title: 'Zinguerie & Évacuation',
         description: 'Pose et remplacement de gouttières, chéneaux, descentes d\'eau pluviale. Travaux de zinguerie pour une étanchéité durable.',
         features: ['Gouttières aluminium', 'Zinc naturel', 'Cuivre traditionnel'],
+        imgSrc: '/assets/generated/service-zinguerie.dim_800x500.png',
+        imgAlt: 'Zinguerie et évacuation des eaux pluviales',
     },
     {
-        icon: <Shield size={28} />,
         title: 'Traitement & Protection',
         description: 'Nettoyage haute pression, traitement anti-mousse et application d\'hydrofuge pour protéger et embellir votre toiture durablement.',
         features: ['Nettoyage HP', 'Anti-mousse', 'Hydrofuge longue durée'],
+        imgSrc: '/assets/generated/service-nettoyage.dim_800x500.png',
+        imgAlt: 'Nettoyage et traitement hydrofuge de toiture',
     },
 ];
 
@@ -83,27 +82,25 @@ export default function Services() {
                     {services.map((service, index) => (
                         <article
                             key={service.title}
-                            className="card-service group"
+                            className="card-service group overflow-hidden"
                             aria-label={`Service : ${service.title}`}
                         >
-                            {/* Icon */}
-                            <div className="flex items-start gap-4 mb-4">
-                                <div className="flex-shrink-0 w-14 h-14 rounded-lg bg-[oklch(0.55_0.13_42/0.1)] flex items-center justify-center text-[oklch(0.55_0.13_42)] group-hover:bg-[oklch(0.55_0.13_42)] group-hover:text-white transition-all duration-300">
-                                    {service.imgSrc ? (
-                                        <img
-                                            src={service.imgSrc}
-                                            alt={service.imgAlt}
-                                            className="w-8 h-8 object-contain group-hover:brightness-0 group-hover:invert transition-all duration-300"
-                                        />
-                                    ) : (
-                                        service.icon
-                                    )}
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                    <h3 className="text-lg font-bold text-[oklch(0.22_0.015_50)] leading-snug" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
-                                        {service.title}
-                                    </h3>
-                                </div>
+                            {/* Service Photo */}
+                            <div className="relative -mx-6 -mt-6 mb-5 overflow-hidden h-44">
+                                <img
+                                    src={service.imgSrc}
+                                    alt={service.imgAlt}
+                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                />
+                                {/* Subtle overlay for text readability */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-[oklch(0.22_0.015_50/0.35)] to-transparent" aria-hidden="true" />
+                            </div>
+
+                            {/* Title */}
+                            <div className="mb-3">
+                                <h3 className="text-lg font-bold text-[oklch(0.22_0.015_50)] leading-snug" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+                                    {service.title}
+                                </h3>
                             </div>
 
                             {/* Description */}
@@ -122,7 +119,7 @@ export default function Services() {
                             </ul>
 
                             {/* Number badge */}
-                            <div className="absolute top-4 right-4 text-[oklch(0.87_0.015_70)] text-4xl font-bold select-none" style={{ fontFamily: "'Playfair Display', Georgia, serif" }} aria-hidden="true">
+                            <div className="absolute top-4 right-4 text-white/70 text-4xl font-bold select-none drop-shadow" style={{ fontFamily: "'Playfair Display', Georgia, serif" }} aria-hidden="true">
                                 {String(index + 1).padStart(2, '0')}
                             </div>
                         </article>

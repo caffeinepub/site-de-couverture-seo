@@ -2,22 +2,40 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-replace-the-existing-email-address-with-sv-couverture95-gmail-com-in-all-locations-where-an-email-address-appears-across-the-site-the-contact-section-info-card-the-footer-contact-details-and-the-json-ld-localbusiness-structured-data-in-index-html-if-an-email-field-is-present-the-email-must-be-displayed-as-a-clickable-mailto-link-and-formatted-consistently-everywhere-it-appears",
-      "featureTitle": "Replace the existing email address with 'sv.couverture95@gmail.com' in all locations where an email address appears across the site: the Contact section info card, the Footer contact details, and the JSON-LD LocalBusiness structured data in index.html (if an email field is present). The email must be displayed as a clickable mailto: link and formatted consistently everywhere it appears.",
+      "featureId": "feature-update-all-testimonial-dates-in-frontend-src-components-testimonials-tsx-so-that-the-most-recent-reviews-are-dated-up-to-january-2026-distribute-dates-realistically-across-2025-and-early-2026-keeping-all-other-review-content-names-locations-ratings-service-types-review-text-unchanged",
+      "featureTitle": "Update all testimonial dates in frontend/src/components/Testimonials.tsx so that the most recent reviews are dated up to January 2026. Distribute dates realistically across 2025 and early 2026, keeping all other review content (names, locations, ratings, service types, review text) unchanged.",
       "files": [
-        "frontend/index.html",
-        "frontend/src/components/Contact.tsx",
-        "frontend/src/components/Footer.tsx"
+        "frontend/src/components/Testimonials.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
       ],
       "testIds": [
-        "REQ-9"
+        "REQ-11"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-replace-the-icon-square-placeholder-in-each-service-card-within-frontend-src-components-services-tsx-with-a-relevant-illustrative-photo-each-of-the-six-service-cards-e-g-r-fection-de-toiture-pose-de-tuiles-r-paration-isolation-zinguerie-nettoyage-traitement-must-display-a-dedicated-photo-image-instead-of-the-current-icon-square-images-must-be-rendered-from-frontend-public-assets-generated-fit-the-card-layout-and-include-a-descriptive-alt-attribute-in-french",
+      "featureTitle": "Replace the icon/square placeholder in each service card within frontend/src/components/Services.tsx with a relevant illustrative photo. Each of the six service cards (e.g., réfection de toiture, pose de tuiles, réparation, isolation, zinguerie, nettoyage/traitement) must display a dedicated photo image instead of the current icon square. Images must be rendered from frontend/public/assets/generated, fit the card layout, and include a descriptive alt attribute in French.",
+      "files": [
+        "frontend/src/components/Services.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-12"
       ],
       "confidence": "high"
     }

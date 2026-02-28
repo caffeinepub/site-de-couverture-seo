@@ -1,40 +1,55 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-28T01:28:20.444Z",
+  "generatedAt": "2026-02-28T01:44:46.055Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 1,
-    "implemented": 1,
+    "total": 2,
+    "implemented": 2,
     "items": [
       {
-        "id": "REQ-9",
-        "summary": "Replace the existing email address with 'sv.couverture95@gmail.com' in all locations where an email address appears across the site: the Contact section info card, the Footer contact details, and the JSON-LD LocalBusiness structured data in index.html (if an email field is present). The email must be displayed as a clickable mailto: link and formatted consistently everywhere it appears.",
+        "id": "REQ-11",
+        "summary": "Update all testimonial dates in frontend/src/components/Testimonials.tsx so that the most recent reviews are dated up to January 2026. Distribute dates realistically across 2025 and early 2026, keeping all other review content (names, locations, ratings, service types, review text) unchanged.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/Contact.tsx",
-          "frontend/src/components/Footer.tsx",
-          "frontend/index.html"
+          "frontend/src/components/Testimonials.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/Contact.tsx",
-          "frontend/src/components/Footer.tsx",
-          "frontend/index.html"
+          "frontend/src/components/Testimonials.tsx"
+        ]
+      },
+      {
+        "id": "REQ-12",
+        "summary": "Replace the icon/square placeholder in each service card within frontend/src/components/Services.tsx with a relevant illustrative photo. Each of the six service cards (e.g., réfection de toiture, pose de tuiles, réparation, isolation, zinguerie, nettoyage/traitement) must display a dedicated photo image instead of the current icon square. Images must be rendered from frontend/public/assets/generated, fit the card layout, and include a descriptive alt attribute in French.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/Services.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/Services.tsx"
         ]
       }
     ]
   },
   "changedFiles": [
+    "backend/blob-storage/Mixin.mo",
+    "backend/blob-storage/Storage.mo",
     "build-request.json",
+    "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/index.html",
-    "frontend/src/components/Contact.tsx",
-    "frontend/src/components/Footer.tsx",
+    "frontend/public/assets/generated/service-isolation.dim_800x500.png",
+    "frontend/public/assets/generated/service-nettoyage.dim_800x500.png",
+    "frontend/public/assets/generated/service-pose-tuiles.dim_800x500.png",
+    "frontend/public/assets/generated/service-refection-toiture.dim_800x500.png",
+    "frontend/public/assets/generated/service-reparation.dim_800x500.png",
+    "frontend/public/assets/generated/service-zinguerie.dim_800x500.png",
+    "frontend/src/components/Services.tsx",
+    "frontend/src/components/Testimonials.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",
