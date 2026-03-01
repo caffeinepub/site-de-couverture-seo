@@ -13,6 +13,6 @@
   "frontend/public/google2ea9c3e7d5d4abde.html": "Unchanged Google Search Console HTML verification file with the correct google-site-verification meta tag and body content.",
   "frontend/public/sitemap.xml": "Valid XML sitemap with the canonical production URL https://verdiercouverture.fr/ (replacing the old caffeine.xyz domain) and lastmod updated to 2026-03-01.",
   "frontend/public/robots.txt": "Plain-text robots.txt with the Sitemap directive updated to point to https://verdiercouverture.fr/sitemap.xml (replacing the old caffeine.xyz domain).",
-  "No files were modified — all existing files are already correctly configured for the production domain https": "//site-de-couverture-seo-3wk.caffeine.xyz/ and no changes are required.",
+  "No files were modified — all existing files are already correctly configured for the production domain https": "//verdiercouverture.fr/ and no draft subdomain references exist anywhere in the codebase.",
   "frontend/src/hooks/useQueries.ts": "Minimal React Query hooks file with a useHealthCheck hook that safely calls the backend healthCheck method with error handling and retry disabled."
 }

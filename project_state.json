@@ -4,41 +4,16 @@
   "summary": "New project",
   "architectural_notes": [],
   "known_issues": [
-    "Pages bloquées avec erreur 4xx signalées dans Google Search Console"
+    "draft-editor: disallowed origin error for https://everyday-silver-qev-draft.caffeine.xyz reported by Google Search Console"
   ],
   "isFixRequest": true,
-  "existing_features": [
-    {
-      "id": "feature-ensure-the-sitemap-xml-and-robots-txt-only-reference-valid-reachable-urls-the-sitemap-must-not-list-any-url-that-returns-a-4xx-response-the-robots-txt-must-not-accidentally-disallow-crawlers-from-key-pages",
-      "title": "Ensure the sitemap.xml and robots.txt only reference valid, reachable URLs. The sitemap must not list any URL that returns a 4xx response. The robots.txt must not accidentally disallow crawlers from key pages.",
-      "reqIds": [
-        "REQ-2"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-ensure-the-canonical-url-declared-in-the-open-graph-tags-twitter-card-meta-tags-json-ld-structured-data-and-the-link-rel-canonical-tag-in-frontend-index-html-all-match-the-actual-production-domain-exactly-no-trailing-slash-mismatch-no-http-vs-https-mismatch-to-prevent-google-from-flagging-them-as-4xx-alternate-urls",
-      "title": "Ensure the canonical URL declared in the Open Graph tags, Twitter Card meta tags, JSON-LD structured data, and the <link rel='canonical'> tag in frontend/index.html all match the actual production domain exactly (no trailing slash mismatch, no http vs https mismatch) to prevent Google from flagging them as 4xx alternate URLs.",
-      "reqIds": [
-        "REQ-4"
-      ],
-      "version": 1
-    }
-  ],
+  "existing_features": [],
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Audit the frontend routing and all internal links to ensure no broken or missing routes (404s) exist. All navigation links, CTA buttons, and anchor scroll targets must resolve correctly without producing 4xx responses.",
+      "summary": "Remove or replace all references to the draft subdomain URL (https://everyday-silver-qev-draft.caffeine.xyz) from every file that contains canonical URLs, Open Graph tags, Twitter Card tags, JSON-LD structured data, sitemap entries, robots.txt directives, and Google Site Verification tags. All such references must exclusively point to the production domain https://verdiercouverture.fr.",
       "reqIds": [
         "REQ-1"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-3",
-      "summary": "Verify the Google Search Console verification file (google2ea9c3e7d5d4abde.html) is publicly accessible at the root of the deployed site without authentication or redirect, so that the verification request does not return a 4xx.",
-      "reqIds": [
-        "REQ-3"
       ],
       "status": "pending"
     }
