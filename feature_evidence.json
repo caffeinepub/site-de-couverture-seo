@@ -1,4 +1,90 @@
 {
   "kind": "feature_evidence_report",
-  "features": []
+  "features": [
+    {
+      "featureId": "feature-update-all-occurrences-of-the-region-occitanie-to-le-de-france-across-all-frontend-components-navigation-hero-footer-contact-about-serviceareas-testimonials-and-any-other-component-that-references-the-region",
+      "featureTitle": "Update all occurrences of the region 'Occitanie' to 'Île-de-France' across all frontend components (Navigation, Hero, Footer, Contact, About, ServiceAreas, Testimonials, and any other component that references the region).",
+      "files": [
+        "frontend/src/components/About.tsx",
+        "frontend/src/components/Contact.tsx",
+        "frontend/src/components/Footer.tsx",
+        "frontend/src/components/Hero.tsx",
+        "frontend/src/components/Services.tsx",
+        "frontend/src/components/Testimonials.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-restore-the-company-email-address-in-the-contact-section-contact-tsx-footer-footer-tsx-and-any-other-component-where-it-was-previously-displayed-but-is-now-missing-use-the-canonical-email-for-verdier-couverture",
+      "featureTitle": "Restore the company email address in the Contact section (Contact.tsx), Footer (Footer.tsx), and any other component where it was previously displayed but is now missing. Use the canonical email for Verdier Couverture.",
+      "files": [
+        "frontend/src/components/Contact.tsx",
+        "frontend/src/components/Footer.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-restore-the-company-phone-number-in-the-contact-section-contact-tsx-navigation-navigation-tsx-hero-hero-tsx-footer-footer-tsx-and-any-other-component-where-it-was-previously-displayed-but-is-now-missing",
+      "featureTitle": "Restore the company phone number in the Contact section (Contact.tsx), Navigation (Navigation.tsx), Hero (Hero.tsx), Footer (Footer.tsx), and any other component where it was previously displayed but is now missing.",
+      "files": [
+        "frontend/src/components/Contact.tsx",
+        "frontend/src/components/Footer.tsx",
+        "frontend/src/components/Hero.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-restore-the-company-physical-address-in-the-contact-section-contact-tsx-and-footer-footer-tsx-and-any-other-component-where-it-was-previously-displayed-but-is-now-missing-the-address-must-reflect-an-le-de-france-location",
+      "featureTitle": "Restore the company physical address in the Contact section (Contact.tsx) and Footer (Footer.tsx), and any other component where it was previously displayed but is now missing. The address must reflect an Île-de-France location.",
+      "files": [
+        "frontend/src/components/Contact.tsx",
+        "frontend/src/components/Footer.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    }
+  ]
 }

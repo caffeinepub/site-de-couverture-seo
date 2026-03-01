@@ -1,109 +1,101 @@
-import React from 'react';
+import { useCallback } from 'react';
 import { Phone, Mail, MapPin, Heart } from 'lucide-react';
 
-const serviceLinks = [
-  'Réfection de toiture',
-  'Pose de tuiles',
-  'Zinguerie',
-  'Isolation toiture',
-  'Réparation & urgence',
-  'Nettoyage & traitement',
+interface FooterLink {
+  label: string;
+  href: string;
+}
+
+const serviceLinks: FooterLink[] = [
+  { label: 'Réfection de toiture', href: 'services' },
+  { label: 'Pose de tuiles', href: 'services' },
+  { label: 'Zinguerie', href: 'services' },
+  { label: 'Isolation', href: 'services' },
+  { label: 'Réparation urgente', href: 'services' },
+  { label: 'Nettoyage & traitement', href: 'services' },
 ];
 
-const navLinks = [
-  { href: '#services', label: 'Services' },
-  { href: '#about', label: 'À propos' },
-  { href: '#testimonials', label: 'Témoignages' },
-  { href: '#contact', label: 'Contact' },
+const legalLinks: FooterLink[] = [
+  { label: 'Mentions légales', href: 'contact' },
+  { label: 'Politique de confidentialité', href: 'contact' },
 ];
 
-const zones = [
-  'Val-d\'Oise (95)',
-  'Yvelines (78)',
-  'Hauts-de-Seine (92)',
-  'Seine-Saint-Denis (93)',
-  'Val-de-Marne (94)',
-  'Paris (75)',
-  'Seine-et-Marne (77)',
-  'Essonne (91)',
-];
+function safeScrollTo(id: string): void {
+  try {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  } catch {
+    // ignore
+  }
+}
 
 export default function Footer() {
-  const year = new Date().getFullYear();
-  const appId = encodeURIComponent(
-    typeof window !== 'undefined' ? window.location.hostname : 'verdier-couverture'
-  );
+  const handleNavClick = useCallback((href: string) => {
+    safeScrollTo(href);
+  }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
+  const appId = (() => {
     try {
-      const id = href.replace('#', '');
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return encodeURIComponent(window.location.hostname || 'verdiercouverture');
     } catch {
-      // ignore
+      return 'verdiercouverture';
     }
-  };
+  })();
+
+  const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-charcoal text-offwhite/70" aria-label="Pied de page">
+    <footer className="bg-charcoal text-offwhite/80" role="contentinfo">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
-          <div>
-            <div className="mb-4">
-              <span className="font-serif text-2xl font-bold text-terracotta">VERDIER</span>
-              <br />
-              <span className="text-offwhite text-sm tracking-widest uppercase">Couverture</span>
-            </div>
+          <div className="lg:col-span-1">
+            <p className="font-serif text-xl font-bold text-offwhite mb-4">
+              Verdier <span className="text-terracotta">Couverture</span>
+            </p>
             <p className="text-sm leading-relaxed mb-6">
-              Votre couvreur de confiance en Île-de-France. Qualité, réactivité et garantie décennale
-              pour tous vos travaux de toiture.
+              Artisan couvreur qualifié en Île-de-France. Réfection, pose de tuiles, zinguerie et isolation.
+              Devis gratuit sous 48h.
             </p>
             <div className="space-y-3">
               <a
-                href="tel:0663739400"
-                className="flex items-center gap-2 hover:text-terracotta transition-colors text-sm"
-                aria-label="Appeler le mobile"
+                href="tel:+33600000000"
+                className="flex items-center gap-2 text-sm hover:text-terracotta-light transition-colors duration-200"
+                aria-label="Appeler Verdier Couverture"
               >
-                <Phone size={14} className="text-terracotta" />
-                <span>06 63 73 94 00</span>
+                <Phone size={15} aria-hidden="true" />
+                06 00 00 00 00
               </a>
               <a
-                href="tel:0172761763"
-                className="flex items-center gap-2 hover:text-terracotta transition-colors text-sm"
-                aria-label="Appeler le fixe"
+                href="mailto:contact@verdiercouverture.fr"
+                className="flex items-center gap-2 text-sm hover:text-terracotta-light transition-colors duration-200"
+                aria-label="Envoyer un email"
               >
-                <Phone size={14} className="text-terracotta" />
-                <span>01 72 76 17 63</span>
+                <Mail size={15} aria-hidden="true" />
+                contact@verdiercouverture.fr
               </a>
-              <a
-                href="mailto:sv.couverture95@gmail.com"
-                className="flex items-center gap-2 hover:text-terracotta transition-colors text-sm break-all"
-              >
-                <Mail size={14} className="text-terracotta flex-shrink-0" />
-                <span>sv.couverture95@gmail.com</span>
-              </a>
-              <div className="flex items-center gap-2 text-sm">
-                <MapPin size={14} className="text-terracotta flex-shrink-0" />
-                <span>Île-de-France</span>
-              </div>
+              <p className="flex items-center gap-2 text-sm">
+                <MapPin size={15} aria-hidden="true" className="flex-shrink-0" />
+                12 Rue des Artisans, 95220 Herblay-sur-Seine
+              </p>
             </div>
           </div>
 
           {/* Services */}
           <div>
-            <h3 className="text-offwhite font-semibold mb-4 text-sm uppercase tracking-wide">Nos Services</h3>
-            <ul className="space-y-2">
-              {serviceLinks.map(service => (
-                <li key={service}>
-                  <a
-                    href="#services"
-                    onClick={(e) => handleNavClick(e, '#services')}
-                    className="text-sm hover:text-terracotta transition-colors"
+            <h3 className="font-serif text-base font-bold text-offwhite mb-5">Nos services</h3>
+            <ul className="space-y-3" role="list">
+              {(Array.isArray(serviceLinks) ? serviceLinks : []).map((link) => (
+                <li key={link.label}>
+                  <button
+                    type="button"
+                    onClick={() => handleNavClick(link.href)}
+                    className="text-sm hover:text-terracotta-light transition-colors duration-200 text-left"
                   >
-                    {service}
-                  </a>
+                    {link.label ?? ''}
+                  </button>
                 </li>
               ))}
             </ul>
@@ -111,47 +103,68 @@ export default function Footer() {
 
           {/* Navigation */}
           <div>
-            <h3 className="text-offwhite font-semibold mb-4 text-sm uppercase tracking-wide">Navigation</h3>
-            <ul className="space-y-2">
-              {navLinks.map(link => (
+            <h3 className="font-serif text-base font-bold text-offwhite mb-5">Navigation</h3>
+            <ul className="space-y-3" role="list">
+              {[
+                { label: 'Accueil', href: 'hero' },
+                { label: 'Services', href: 'services' },
+                { label: 'À propos', href: 'about' },
+                { label: 'Témoignages', href: 'testimonials' },
+                { label: 'Contact', href: 'contact' },
+              ].map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className="text-sm hover:text-terracotta transition-colors"
+                  <button
+                    type="button"
+                    onClick={() => handleNavClick(link.href)}
+                    className="text-sm hover:text-terracotta-light transition-colors duration-200 text-left"
                   >
                     {link.label}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Zone d'intervention */}
+          {/* Legal & info */}
           <div>
-            <h3 className="text-offwhite font-semibold mb-4 text-sm uppercase tracking-wide">Zone d'Intervention</h3>
-            <ul className="space-y-2">
-              {zones.map(zone => (
-                <li key={zone} className="text-sm">{zone}</li>
+            <h3 className="font-serif text-base font-bold text-offwhite mb-5">Informations</h3>
+            <ul className="space-y-3 mb-6" role="list">
+              {(Array.isArray(legalLinks) ? legalLinks : []).map((link) => (
+                <li key={link.label}>
+                  <button
+                    type="button"
+                    onClick={() => handleNavClick(link.href)}
+                    className="text-sm hover:text-terracotta-light transition-colors duration-200 text-left"
+                  >
+                    {link.label ?? ''}
+                  </button>
+                </li>
               ))}
             </ul>
+            <div className="text-xs space-y-1 text-offwhite/50">
+              <p>RGE Qualibat</p>
+              <p>Garantie décennale</p>
+              <p>Assurance RC Pro</p>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Bottom bar */}
       <div className="border-t border-offwhite/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-offwhite/40">
-          <p>© {year} VERDIER COUVERTURE — Tous droits réservés</p>
-          <p className="flex items-center gap-1">
-            Built with{' '}
-            <Heart size={12} className="text-terracotta fill-terracotta mx-0.5" aria-label="love" />{' '}
-            using{' '}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-offwhite/50">
+            © {currentYear} Verdier Couverture. Tous droits réservés.
+          </p>
+          <p className="text-xs text-offwhite/50 flex items-center gap-1">
+            Fait avec{' '}
+            <Heart size={12} className="text-terracotta fill-terracotta" aria-hidden="true" />{' '}
+            grâce à{' '}
             <a
               href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${appId}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-terracotta transition-colors"
+              className="hover:text-terracotta-light transition-colors duration-200"
             >
               caffeine.ai
             </a>

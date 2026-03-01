@@ -4,17 +4,48 @@
   "summary": "New project",
   "architectural_notes": [],
   "known_issues": [
-    "draft-editor: disallowed origin error for https://everyday-silver-qev-draft.caffeine.xyz reported by Google Search Console"
+    "Profile contact info showing wrong region (Occitanie instead of Île-de-France) and missing email, phone number, and address fields"
   ],
   "isFixRequest": true,
-  "existing_features": [],
-  "new_feature_requests": [
+  "existing_features": [
     {
-      "id": "AR-1",
-      "summary": "Remove or replace all references to the draft subdomain URL (https://everyday-silver-qev-draft.caffeine.xyz) from every file that contains canonical URLs, Open Graph tags, Twitter Card tags, JSON-LD structured data, sitemap entries, robots.txt directives, and Google Site Verification tags. All such references must exclusively point to the production domain https://verdiercouverture.fr.",
+      "id": "feature-update-all-occurrences-of-the-region-occitanie-to-le-de-france-across-all-frontend-components-navigation-hero-footer-contact-about-serviceareas-testimonials-and-any-other-component-that-references-the-region",
+      "title": "Update all occurrences of the region 'Occitanie' to 'Île-de-France' across all frontend components (Navigation, Hero, Footer, Contact, About, ServiceAreas, Testimonials, and any other component that references the region).",
       "reqIds": [
         "REQ-1"
       ],
+      "version": 1
+    },
+    {
+      "id": "feature-restore-the-company-email-address-in-the-contact-section-contact-tsx-footer-footer-tsx-and-any-other-component-where-it-was-previously-displayed-but-is-now-missing-use-the-canonical-email-for-verdier-couverture",
+      "title": "Restore the company email address in the Contact section (Contact.tsx), Footer (Footer.tsx), and any other component where it was previously displayed but is now missing. Use the canonical email for Verdier Couverture.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-restore-the-company-phone-number-in-the-contact-section-contact-tsx-navigation-navigation-tsx-hero-hero-tsx-footer-footer-tsx-and-any-other-component-where-it-was-previously-displayed-but-is-now-missing",
+      "title": "Restore the company phone number in the Contact section (Contact.tsx), Navigation (Navigation.tsx), Hero (Hero.tsx), Footer (Footer.tsx), and any other component where it was previously displayed but is now missing.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-restore-the-company-physical-address-in-the-contact-section-contact-tsx-and-footer-footer-tsx-and-any-other-component-where-it-was-previously-displayed-but-is-now-missing-the-address-must-reflect-an-le-de-france-location",
+      "title": "Restore the company physical address in the Contact section (Contact.tsx) and Footer (Footer.tsx), and any other component where it was previously displayed but is now missing. The address must reflect an Île-de-France location.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Fix profile/contact info: update region from Occitanie to Île-de-France, restore missing email, phone number, and address",
+      "reqIds": [],
       "status": "pending"
     }
   ],

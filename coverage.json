@@ -1,35 +1,79 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-03-01T02:07:13.097Z",
+  "generatedAt": "2026-03-01T12:24:54.963Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 1,
-    "implemented": 0,
+    "total": 4,
+    "implemented": 4,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Remove or replace all references to the draft subdomain URL (https://everyday-silver-qev-draft.caffeine.xyz) from every file that contains canonical URLs, Open Graph tags, Twitter Card tags, JSON-LD structured data, sitemap entries, robots.txt directives, and Google Site Verification tags. All such references must exclusively point to the production domain https://verdiercouverture.fr.",
-        "status": "missing",
+        "summary": "Update all occurrences of the region 'Occitanie' to 'Île-de-France' across all frontend components (Navigation, Hero, Footer, Contact, About, ServiceAreas, Testimonials, and any other component that references the region).",
+        "status": "implemented",
         "plannedFiles": [
-          "frontend/index.html",
-          "frontend/public/sitemap.xml",
-          "frontend/public/robots.txt",
-          "frontend/public/google2ea9c3e7d5d4abde.html",
-          "frontend/src/components/About.tsx",
-          "frontend/src/components/Contact.tsx",
-          "frontend/src/components/Footer.tsx",
-          "frontend/src/components/Hero.tsx",
           "frontend/src/components/Navigation.tsx",
+          "frontend/src/components/Hero.tsx",
+          "frontend/src/components/Footer.tsx",
+          "frontend/src/components/Contact.tsx",
+          "frontend/src/components/About.tsx",
           "frontend/src/components/ServiceAreas.tsx",
-          "frontend/src/components/Services.tsx",
           "frontend/src/components/Testimonials.tsx",
-          "frontend/src/App.tsx"
+          "frontend/src/components/Services.tsx"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/src/components/Hero.tsx",
+          "frontend/src/components/Footer.tsx",
+          "frontend/src/components/Contact.tsx",
+          "frontend/src/components/About.tsx",
+          "frontend/src/components/Testimonials.tsx",
+          "frontend/src/components/Services.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Restore the company email address in the Contact section (Contact.tsx), Footer (Footer.tsx), and any other component where it was previously displayed but is now missing. Use the canonical email for Verdier Couverture.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/Contact.tsx",
+          "frontend/src/components/Footer.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/Contact.tsx",
+          "frontend/src/components/Footer.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Restore the company phone number in the Contact section (Contact.tsx), Navigation (Navigation.tsx), Hero (Hero.tsx), Footer (Footer.tsx), and any other component where it was previously displayed but is now missing.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/Navigation.tsx",
+          "frontend/src/components/Hero.tsx",
+          "frontend/src/components/Contact.tsx",
+          "frontend/src/components/Footer.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/Hero.tsx",
+          "frontend/src/components/Contact.tsx",
+          "frontend/src/components/Footer.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Restore the company physical address in the Contact section (Contact.tsx) and Footer (Footer.tsx), and any other component where it was previously displayed but is now missing. The address must reflect an Île-de-France location.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/Contact.tsx",
+          "frontend/src/components/Footer.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/Contact.tsx",
+          "frontend/src/components/Footer.tsx"
+        ]
       }
     ]
   },
@@ -38,6 +82,12 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
+    "frontend/src/components/About.tsx",
+    "frontend/src/components/Contact.tsx",
+    "frontend/src/components/Footer.tsx",
+    "frontend/src/components/Hero.tsx",
+    "frontend/src/components/Services.tsx",
+    "frontend/src/components/Testimonials.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

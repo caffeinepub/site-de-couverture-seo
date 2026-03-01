@@ -1,86 +1,125 @@
-import React, { useState } from 'react';
-import { CheckCircle, Award, Users, Wrench } from 'lucide-react';
+import { useCallback } from 'react';
+import { Award, Home, Wrench } from 'lucide-react';
 
-const strengths = [
-  { icon: Award, text: 'Plus de 15 ans d\'expérience dans la couverture' },
-  { icon: CheckCircle, text: 'Garantie décennale sur tous nos travaux' },
-  { icon: Users, text: 'Équipe de couvreurs qualifiés et certifiés' },
-  { icon: Wrench, text: 'Matériaux de qualité professionnelle' },
+interface Strength {
+  id: string;
+  icon: React.ElementType;
+  iconImage?: string;
+  iconImageAlt?: string;
+  title: string;
+  description: string;
+}
+
+const strengths: Strength[] = [
+  {
+    id: 'quality',
+    icon: Award,
+    iconImage: '/assets/generated/quality-icon.dim_128x128.png',
+    iconImageAlt: 'Icône qualité',
+    title: 'Qualité garantie',
+    description: 'Travaux réalisés dans les règles de l\'art avec des matériaux sélectionnés. Garantie décennale sur tous nos chantiers.',
+  },
+  {
+    id: 'expertise',
+    icon: Home,
+    iconImage: '/assets/generated/roof-icon.dim_128x128.png',
+    iconImageAlt: 'Icône toiture',
+    title: 'Expertise locale',
+    description: 'Plus de 15 ans d\'expérience en Île-de-France. Nous connaissons les spécificités climatiques et architecturales de la région.',
+  },
+  {
+    id: 'services',
+    icon: Wrench,
+    iconImage: '/assets/generated/services-icon.dim_128x128.png',
+    iconImageAlt: 'Icône services',
+    title: 'Service complet',
+    description: 'De l\'étude à la réception des travaux, nous gérons l\'intégralité de votre projet de couverture.',
+  },
 ];
 
 export default function About() {
-  const [imgError, setImgError] = useState(false);
+  const handleImageError = useCallback((e: React.SyntheticEvent<HTMLImageElement>) => {
+    const target = e.currentTarget;
+    target.style.display = 'none';
+  }, []);
 
   return (
-    <section id="about" className="py-20 bg-cream" aria-labelledby="about-heading">
+    <section id="about" className="py-20 lg:py-28 bg-cream" aria-labelledby="about-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Text content */}
+          {/* Left column - text */}
           <div>
-            <span className="text-terracotta text-sm font-medium tracking-widest uppercase">À Propos</span>
-            <h2 id="about-heading" className="font-serif text-4xl lg:text-5xl font-bold text-charcoal mt-2 mb-6">
-              VERDIER COUVERTURE,<br />
-              <span className="text-terracotta">Votre Expert Toiture</span>
-            </h2>
-            <p className="text-charcoal/70 text-lg leading-relaxed mb-6">
-              Entreprise familiale basée en Île-de-France, VERDIER COUVERTURE intervient depuis plus de
-              15 ans sur tous types de toitures. Notre engagement : qualité, réactivité et transparence
-              à chaque étape de vos travaux.
+            <p className="text-terracotta font-semibold tracking-widest uppercase text-sm mb-3">
+              À propos
             </p>
-            <p className="text-charcoal/70 leading-relaxed mb-8">
-              Nous réalisons des devis gratuits et détaillés, sans engagement. Notre équipe de couvreurs
-              expérimentés intervient rapidement sur toute l'Île-de-France pour répondre à vos besoins,
-              qu'il s'agisse d'une urgence ou d'un projet de rénovation planifié.
+            <h2
+              id="about-heading"
+              className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6"
+            >
+              Artisan couvreur de confiance en Île-de-France
+            </h2>
+            <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+              Verdier Couverture est une entreprise familiale fondée sur des valeurs de sérieux,
+              de qualité et de proximité. Basés en Île-de-France, nous intervenons sur tous types
+              de toitures dans un rayon de 80 km.
+            </p>
+            <p className="text-muted-foreground leading-relaxed mb-8">
+              Notre équipe de couvreurs qualifiés maîtrise toutes les techniques de couverture
+              traditionnelle et moderne. Chaque chantier est suivi personnellement par notre
+              chef d'équipe pour garantir un résultat à la hauteur de vos attentes.
             </p>
 
-            <ul className="space-y-4">
-              {strengths.map(({ icon: Icon, text }) => (
-                <li key={text} className="flex items-start gap-3">
-                  <Icon size={20} className="text-terracotta flex-shrink-0 mt-0.5" />
-                  <span className="text-charcoal/80">{text}</span>
-                </li>
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-6">
+              {[
+                { value: '15+', label: 'Ans d\'expérience' },
+                { value: '500+', label: 'Chantiers réalisés' },
+                { value: '100%', label: 'Clients satisfaits' },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <p className="font-serif text-3xl font-bold text-terracotta mb-1">
+                    {stat.value ?? ''}
+                  </p>
+                  <p className="text-muted-foreground text-xs leading-tight">
+                    {stat.label ?? ''}
+                  </p>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
 
-          {/* Image / visual */}
-          <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-charcoal/10 aspect-[4/3]">
-              {!imgError ? (
-                <img
-                  src="/assets/generated/quality-icon.dim_128x128.png"
-                  alt="Qualité VERDIER COUVERTURE"
-                  className="w-32 h-32 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20"
-                  loading="lazy"
-                  decoding="async"
-                  onError={() => setImgError(true)}
-                />
-              ) : null}
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                <div className="w-20 h-20 rounded-full bg-terracotta/20 flex items-center justify-center mb-4">
-                  <Award size={40} className="text-terracotta" />
-                </div>
-                <h3 className="font-serif text-2xl font-bold text-charcoal mb-2">Couvreur Certifié</h3>
-                <p className="text-charcoal/60 text-sm leading-relaxed">
-                  Entreprise qualifiée, assurée et garantie décennale pour tous vos travaux de toiture
-                  en Île-de-France.
-                </p>
-                <div className="mt-6 grid grid-cols-2 gap-4 w-full max-w-xs">
-                  <div className="bg-terracotta/10 rounded-lg p-3 text-center">
-                    <div className="font-serif text-2xl font-bold text-terracotta">500+</div>
-                    <div className="text-xs text-charcoal/60 mt-1">Chantiers</div>
+          {/* Right column - strengths */}
+          <div className="space-y-8">
+            {(Array.isArray(strengths) ? strengths : []).map((strength) => {
+              const Icon = strength.icon ?? null;
+              return (
+                <div key={strength.id} className="flex gap-5 items-start">
+                  {/* Icon */}
+                  <div className="flex-shrink-0 w-14 h-14 rounded-sm bg-terracotta/10 flex items-center justify-center">
+                    {strength.iconImage ? (
+                      <img
+                        src={strength.iconImage}
+                        alt={strength.iconImageAlt ?? ''}
+                        className="w-8 h-8 object-contain"
+                        loading="lazy"
+                        onError={handleImageError}
+                      />
+                    ) : Icon ? (
+                      <Icon size={28} className="text-terracotta" aria-hidden="true" />
+                    ) : null}
                   </div>
-                  <div className="bg-terracotta/10 rounded-lg p-3 text-center">
-                    <div className="font-serif text-2xl font-bold text-terracotta">15+</div>
-                    <div className="text-xs text-charcoal/60 mt-1">Années</div>
+                  {/* Text */}
+                  <div>
+                    <h3 className="font-serif text-lg font-bold text-foreground mb-2">
+                      {strength.title ?? ''}
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {strength.description ?? ''}
+                    </p>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Decorative element */}
-            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-terracotta/20 rounded-full -z-10" aria-hidden="true" />
-            <div className="absolute -top-4 -left-4 w-16 h-16 bg-terracotta/10 rounded-full -z-10" aria-hidden="true" />
+              );
+            })}
           </div>
         </div>
       </div>

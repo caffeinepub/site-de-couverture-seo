@@ -1,41 +1,92 @@
 {
   "kind": "build_request",
-  "title": "Fix disallowed origin error for draft subdomain in Google Search Console",
+  "title": "Fix contact info: update region to Île-de-France, restore email, phone, and address",
   "projectName": "Verdier Couverture",
   "priority": "high",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Remove or replace all references to the draft subdomain URL (https://everyday-silver-qev-draft.caffeine.xyz) from every file that contains canonical URLs, Open Graph tags, Twitter Card tags, JSON-LD structured data, sitemap entries, robots.txt directives, and Google Site Verification tags. All such references must exclusively point to the production domain https://verdiercouverture.fr.",
+      "text": "Update all occurrences of the region 'Occitanie' to 'Île-de-France' across all frontend components (Navigation, Hero, Footer, Contact, About, ServiceAreas, Testimonials, and any other component that references the region).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-4"
         ],
         "quotes": [
-          "draft-editor:error disallowed origin: https://everyday-silver-qev-draft.caffeine.xyz"
+          "je suis pas en occitanie je suis en ils de france"
         ]
       },
       "acceptanceCriteria": [
-        "No occurrence of 'everyday-silver-qev-draft.caffeine.xyz' exists in frontend/index.html, frontend/public/sitemap.xml, frontend/public/robots.txt, or any component file.",
-        "The canonical <link> tag in frontend/index.html points to https://verdiercouverture.fr.",
-        "Open Graph og:url and Twitter Card url tags in frontend/index.html point to https://verdiercouverture.fr.",
-        "JSON-LD structured data in frontend/index.html references https://verdiercouverture.fr as the URL.",
-        "frontend/public/sitemap.xml lists only https://verdiercouverture.fr/ as the canonical URL.",
-        "frontend/public/robots.txt Sitemap directive points to https://verdiercouverture.fr/sitemap.xml.",
-        "Google Search Console no longer reports a disallowed origin error for the draft subdomain."
+        "No component renders the text 'Occitanie'",
+        "All region references display 'Île-de-France'",
+        "ServiceAreas component lists communes relevant to Île-de-France (or at minimum removes Occitanie references)"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Restore the company email address in the Contact section (Contact.tsx), Footer (Footer.tsx), and any other component where it was previously displayed but is now missing. Use the canonical email for Verdier Couverture.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "il n'y a plus l'adresse mail"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A visible email address is rendered in the Contact section",
+        "A visible email address is rendered in the Footer",
+        "The email is clickable as a mailto link"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Restore the company phone number in the Contact section (Contact.tsx), Navigation (Navigation.tsx), Hero (Hero.tsx), Footer (Footer.tsx), and any other component where it was previously displayed but is now missing.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "mon numéro de téléphone"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A visible phone number is rendered in the Navigation bar",
+        "A visible phone number is rendered in the Hero quick-contact links",
+        "A visible phone number is rendered in the Contact section",
+        "A visible phone number is rendered in the Footer",
+        "The phone number is clickable as a tel: link"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Restore the company physical address in the Contact section (Contact.tsx) and Footer (Footer.tsx), and any other component where it was previously displayed but is now missing. The address must reflect an Île-de-France location.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "ainsi que mon adresse"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A visible physical address is rendered in the Contact section",
+        "A visible physical address is rendered in the Footer",
+        "The address reflects an Île-de-France location (not Occitanie)"
       ]
     }
   ],
   "constraints": [
-    "Do not alter the Google Site Verification file content (frontend/public/google2ea9c3e7d5d4abde.html) other than ensuring it contains no draft-domain references.",
-    "Do not change any backend logic.",
-    "Do not modify files listed in frontend.immutablePaths."
+    "Do not modify any file under frontend/src/hooks/ or frontend/src/components/ui/",
+    "Do not alter the overall page layout or visual design"
   ],
   "nonGoals": [
-    "Adding new SEO features or pages.",
-    "Changing the visual design or layout of any component.",
-    "Modifying backend actor code."
+    "Adding new pages or sections",
+    "Changing the backend logic",
+    "Redesigning the UI theme or color scheme"
   ],
   "imageRequirements": {
     "required": [],

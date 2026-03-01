@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import React, { Component, ReactNode } from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -9,26 +9,33 @@ import Footer from './components/Footer';
 
 interface ErrorBoundaryState {
   hasError: boolean;
-  error?: Error;
+  sectionName: string;
 }
 
-class ErrorBoundary extends Component<{ children: ReactNode; fallback?: ReactNode }, ErrorBoundaryState> {
-  constructor(props: { children: ReactNode; fallback?: ReactNode }) {
+interface ErrorBoundaryProps {
+  children: ReactNode;
+  sectionName: string;
+}
+
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, sectionName: props.sectionName };
   }
 
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return { hasError: true, error };
+  static getDerivedStateFromError(): Partial<ErrorBoundaryState> {
+    return { hasError: true };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Section render error:', error, errorInfo);
+  componentDidCatch(error: Error, info: React.ErrorInfo) {
+    if (process.env.NODE_ENV !== 'production') {
+      console.error(`Error in section [${this.state.sectionName}]:`, error, info);
+    }
   }
 
   render() {
     if (this.state.hasError) {
-      return this.props.fallback || null;
+      return null;
     }
     return this.props.children;
   }
@@ -37,27 +44,27 @@ class ErrorBoundary extends Component<{ children: ReactNode; fallback?: ReactNod
 function App() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <ErrorBoundary>
+      <ErrorBoundary sectionName="Navigation">
         <Navigation />
       </ErrorBoundary>
       <main>
-        <ErrorBoundary>
+        <ErrorBoundary sectionName="Hero">
           <Hero />
         </ErrorBoundary>
-        <ErrorBoundary>
+        <ErrorBoundary sectionName="Services">
           <Services />
         </ErrorBoundary>
-        <ErrorBoundary>
+        <ErrorBoundary sectionName="About">
           <About />
         </ErrorBoundary>
-        <ErrorBoundary>
+        <ErrorBoundary sectionName="Testimonials">
           <Testimonials />
         </ErrorBoundary>
-        <ErrorBoundary>
+        <ErrorBoundary sectionName="Contact">
           <Contact />
         </ErrorBoundary>
       </main>
-      <ErrorBoundary>
+      <ErrorBoundary sectionName="Footer">
         <Footer />
       </ErrorBoundary>
     </div>

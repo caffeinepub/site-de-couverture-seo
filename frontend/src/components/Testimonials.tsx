@@ -1,74 +1,85 @@
-import React from 'react';
 import { Star } from 'lucide-react';
 
 interface Testimonial {
+  id: string;
   name: string;
   location: string;
   rating: number;
   date: string;
   text: string;
-  service: string;
 }
 
 const testimonials: Testimonial[] = [
   {
-    name: 'Marie L.',
-    location: 'Cergy (95)',
+    id: '1',
+    name: 'Marie-Claire D.',
+    location: 'Cergy',
     rating: 5,
-    date: '2024-03-15',
-    text: 'Excellent travail ! VERDIER COUVERTURE a refait entièrement notre toiture en 3 jours. Équipe sérieuse, propre et très professionnelle. Je recommande vivement.',
-    service: 'Réfection de toiture',
+    date: '2025-11-15',
+    text: 'Excellent travail ! L\'équipe est intervenue rapidement après la tempête. Toiture réparée en une journée, propre et soignée. Je recommande vivement.',
   },
   {
-    name: 'Pierre M.',
-    location: 'Pontoise (95)',
+    id: '2',
+    name: 'Jean-Pierre M.',
+    location: 'Argenteuil',
     rating: 5,
-    date: '2024-02-20',
-    text: 'Intervention rapide suite à une fuite urgente. Diagnostic précis, réparation efficace. Tarif honnête et devis respecté. Très satisfait du résultat.',
-    service: 'Réparation urgente',
+    date: '2025-10-03',
+    text: 'Réfection complète de ma toiture en tuiles canal. Travail impeccable, délais respectés et prix honnête. Très professionnel.',
   },
   {
-    name: 'Sophie B.',
-    location: 'Versailles (78)',
+    id: '3',
+    name: 'Sophie L.',
+    location: 'Versailles',
     rating: 5,
-    date: '2024-01-10',
-    text: 'Travaux de zinguerie impeccables. L\'équipe a été ponctuelle, soigneuse et a laissé le chantier propre. Le résultat est parfait, plus aucune infiltration.',
-    service: 'Zinguerie',
+    date: '2025-09-20',
+    text: 'Nettoyage et traitement hydrofuge de ma toiture. Résultat bluffant ! La toiture est comme neuve. Équipe sympathique et sérieuse.',
   },
   {
-    name: 'Jean-Claude R.',
-    location: 'Saint-Denis (93)',
+    id: '4',
+    name: 'Robert T.',
+    location: 'Saint-Denis',
     rating: 5,
-    date: '2023-11-05',
-    text: 'Très bonne entreprise. Devis clair et détaillé, travaux réalisés dans les délais. La nouvelle isolation a vraiment amélioré le confort de notre maison.',
-    service: 'Isolation toiture',
+    date: '2025-08-12',
+    text: 'Remplacement des gouttières et zinguerie complète. Travail soigné, devis respecté. Je ferai appel à eux pour la prochaine réfection.',
   },
   {
-    name: 'Isabelle T.',
-    location: 'Boulogne-Billancourt (92)',
+    id: '5',
+    name: 'Isabelle F.',
+    location: 'Pontoise',
     rating: 5,
-    date: '2023-10-18',
-    text: 'Nettoyage et traitement de toiture réalisés avec soin. Résultat bluffant, la toiture est comme neuve. Prix raisonnable et équipe sympathique.',
-    service: 'Nettoyage & traitement',
+    date: '2025-07-28',
+    text: 'Isolation de toiture par l\'extérieur. Économies d\'énergie visibles dès la première facture. Très satisfaite du résultat.',
   },
   {
-    name: 'François D.',
-    location: 'Évry (91)',
+    id: '6',
+    name: 'Michel B.',
+    location: 'Évry',
     rating: 5,
-    date: '2023-09-22',
-    text: 'Pose de tuiles réalisée avec expertise. Très satisfait de la qualité des matériaux utilisés et du soin apporté aux finitions. Je recommande sans hésitation.',
-    service: 'Pose de tuiles',
+    date: '2025-06-14',
+    text: 'Intervention d\'urgence suite à une fuite. Réponse rapide, diagnostic précis et réparation efficace. Merci à toute l\'équipe !',
   },
 ];
 
+function safeFormatDate(dateStr: string): string {
+  try {
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return '';
+    return date.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+  } catch {
+    return '';
+  }
+}
+
 function StarRating({ rating }: { rating: number }) {
+  const safeRating = Math.min(5, Math.max(0, Math.round(rating ?? 0)));
   return (
-    <div className="flex gap-0.5" aria-label={`Note : ${rating} sur 5`}>
+    <div className="flex gap-0.5" aria-label={`Note : ${safeRating} sur 5`}>
       {Array.from({ length: 5 }).map((_, i) => (
         <Star
           key={i}
-          size={14}
-          className={i < rating ? 'text-terracotta fill-terracotta' : 'text-offwhite/20'}
+          size={16}
+          className={i < safeRating ? 'text-terracotta fill-terracotta' : 'text-muted-foreground/30'}
+          aria-hidden="true"
         />
       ))}
     </div>
@@ -77,65 +88,44 @@ function StarRating({ rating }: { rating: number }) {
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="py-20 bg-offwhite" aria-labelledby="testimonials-heading">
+    <section id="testimonials" className="py-20 lg:py-28 bg-background" aria-labelledby="testimonials-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <div className="text-center mb-16">
-          <span className="text-terracotta text-sm font-medium tracking-widest uppercase">Avis Clients</span>
-          <h2 id="testimonials-heading" className="font-serif text-4xl lg:text-5xl font-bold text-charcoal mt-2 mb-4">
-            Ce Que Disent Nos Clients
+          <p className="text-terracotta font-semibold tracking-widest uppercase text-sm mb-3">
+            Témoignages
+          </p>
+          <h2
+            id="testimonials-heading"
+            className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6"
+          >
+            Ce que disent nos clients
           </h2>
-          <p className="text-charcoal/60 max-w-2xl mx-auto text-lg">
-            La satisfaction de nos clients est notre priorité. Découvrez leurs témoignages.
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            La satisfaction de nos clients est notre priorité. Découvrez leurs retours d'expérience.
           </p>
         </div>
 
+        {/* Testimonials grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((t) => (
-            <article
-              key={t.name}
-              className="testimonial-card"
-              itemScope
-              itemType="https://schema.org/Review"
-            >
-              <div
-                itemProp="itemReviewed"
-                itemScope
-                itemType="https://schema.org/LocalBusiness"
-                className="hidden"
-              >
-                <span itemProp="name">VERDIER COUVERTURE</span>
-              </div>
-
+          {testimonials.map((testimonial) => (
+            <article key={testimonial.id} className="testimonial-card" aria-label={`Témoignage de ${testimonial.name ?? ''}`}>
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <div className="font-semibold text-charcoal" itemProp="author" itemScope itemType="https://schema.org/Person">
-                    <span itemProp="name">{t.name}</span>
-                  </div>
-                  <div className="text-charcoal/50 text-sm">{t.location}</div>
+                  <p className="font-semibold text-foreground">{testimonial.name ?? ''}</p>
+                  <p className="text-muted-foreground text-sm">{testimonial.location ?? ''}</p>
                 </div>
-                <div
-                  itemProp="reviewRating"
-                  itemScope
-                  itemType="https://schema.org/Rating"
+                <time
+                  dateTime={testimonial.date ?? ''}
+                  className="text-muted-foreground text-xs"
                 >
-                  <meta itemProp="ratingValue" content={String(t.rating)} />
-                  <meta itemProp="bestRating" content="5" />
-                  <StarRating rating={t.rating} />
-                </div>
-              </div>
-
-              <p className="text-charcoal/70 text-sm leading-relaxed mb-4" itemProp="reviewBody">
-                "{t.text}"
-              </p>
-
-              <div className="flex items-center justify-between text-xs text-charcoal/40">
-                <span className="bg-terracotta/10 text-terracotta px-2 py-1 rounded-full">
-                  {t.service}
-                </span>
-                <time dateTime={t.date} itemProp="datePublished">
-                  {new Date(t.date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long' })}
+                  {safeFormatDate(testimonial.date ?? '')}
                 </time>
               </div>
+              <StarRating rating={testimonial.rating ?? 0} />
+              <p className="text-muted-foreground text-sm leading-relaxed mt-4">
+                "{testimonial.text ?? ''}"
+              </p>
             </article>
           ))}
         </div>

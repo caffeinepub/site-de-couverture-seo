@@ -1,21 +1,29 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-03-01T02:07:13.094Z",
-  "summary": "The diff shows updates to frontend/index.html, frontend/public/sitemap.xml, and frontend/public/robots.txt replacing draft subdomain references with the production domain https://verdiercouverture.fr. The file summaries confirm these changes align with REQ-1 acceptance criteria. However, the diff only covers 2 modified files (frontend-file-summaries.txt and project_state.json) rather than the actual source files, so we rely on the summary descriptions as evidence. All REQ-1 acceptance criteria appear to be addressed based on the file summaries.",
-  "missing_requirements": [],
-  "hallucinated_features": [
+  "generatedAt": "2026-03-01T12:24:54.960Z",
+  "summary": "The diff implements all four requirements: REQ-1 (Occitanie → Île-de-France across About, Hero, Services, Testimonials, Contact, Footer), REQ-2 (email restored in Contact and Footer with mailto links), REQ-3 (phone restored in Hero, Contact, Footer with tel: links), and REQ-4 (Île-de-France address added to Contact and Footer). One gap exists: Navigation.tsx phone number restoration is mentioned in REQ-3 AC but the diff summary for Navigation.tsx does not confirm a phone number was added there.",
+  "missing_requirements": [
     {
-      "description": "Inline CSS hero selector fix from #accueil to #hero in frontend/index.html",
-      "reason": "The build request only asked to remove draft subdomain references. Fixing the hero CSS selector was not requested and is an unrelated change.",
+      "id": "REQ-3",
+      "requirement": "A visible phone number is rendered in the Navigation bar (Navigation.tsx) as a tel: link",
+      "reason": "The diff summary for Navigation.tsx only states 'Sticky responsive navigation bar with defensive scroll helpers, useCallback on all handlers, mobile menu toggle, and safe event listener cleanup.' It does not mention a phone number being added. No content from Navigation.tsx is shown in the diff that confirms a phone number is rendered there.",
       "evidence": [
+        "frontend/src/components/Navigation.tsx",
         "frontend-file-summaries.txt"
       ]
     }
   ],
+  "hallucinated_features": [],
   "confidence": 0.72,
   "changed_files": [
     "frontend-file-summaries.txt",
+    "frontend/src/components/About.tsx",
+    "frontend/src/components/Contact.tsx",
+    "frontend/src/components/Footer.tsx",
+    "frontend/src/components/Hero.tsx",
+    "frontend/src/components/Services.tsx",
+    "frontend/src/components/Testimonials.tsx",
     "project_state.json"
   ]
 }

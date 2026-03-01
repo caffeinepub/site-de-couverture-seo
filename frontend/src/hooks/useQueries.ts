@@ -7,14 +7,17 @@ export function useHealthCheck() {
   return useQuery<string>({
     queryKey: ['healthCheck'],
     queryFn: async () => {
-      if (!actor) return 'Actor not ready';
+      if (!actor) return 'unavailable';
       try {
         return await actor.healthCheck();
       } catch {
-        return 'Health check failed';
+        return 'unavailable';
       }
     },
     enabled: !!actor && !isFetching,
     retry: false,
+    staleTime: 60_000,
+    gcTime: 120_000,
+    throwOnError: false,
   });
 }

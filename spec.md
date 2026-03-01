@@ -1,12 +1,13 @@
 # Specification
 
 ## Summary
-**Goal:** Remove all references to the draft subdomain URL and ensure every SEO-related file points exclusively to the production domain `https://verdiercouverture.fr`.
+**Goal:** Fix contact information across the Verdier Couverture website by updating the region to Île-de-France and restoring the missing email, phone number, and physical address.
 
 **Planned changes:**
-- Replace all occurrences of `https://everyday-silver-qev-draft.caffeine.xyz` with `https://verdiercouverture.fr` in `frontend/index.html` (canonical link, Open Graph `og:url`, Twitter Card url, and JSON-LD structured data)
-- Update `frontend/public/sitemap.xml` to list only `https://verdiercouverture.fr/` as the canonical URL
-- Update `frontend/public/robots.txt` Sitemap directive to point to `https://verdiercouverture.fr/sitemap.xml`
-- Verify no draft-domain references remain in any component files or the Google Site Verification file
+- Replace all occurrences of "Occitanie" with "Île-de-France" in all components (Navigation, Hero, Footer, Contact, About, ServiceAreas, Testimonials, etc.)
+- Update ServiceAreas to list communes relevant to Île-de-France
+- Restore the company email address in the Contact section and Footer as a clickable mailto link
+- Restore the company phone number in Navigation, Hero, Contact section, and Footer as a clickable tel: link
+- Restore the company physical address (Île-de-France location) in the Contact section and Footer
 
-**User-visible outcome:** Google Search Console will no longer report a disallowed origin error for the draft subdomain, and all SEO metadata consistently references the production domain.
+**User-visible outcome:** All pages correctly display Île-de-France as the service region, and the contact details (email, phone, address) are visible and clickable throughout the site.

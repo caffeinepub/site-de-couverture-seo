@@ -1,85 +1,131 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Fix disallowed origin error for draft subdomain in Google Search Console",
+  "title": "Fix contact info: update region to Île-de-France, restore email, phone, and address",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Replace all draft subdomain references with production domain across frontend files to resolve Google Search Console disallowed origin error",
+      "summary": "Update all occurrences of the region 'Occitanie' to 'Île-de-France' across all frontend components",
       "acceptanceCriteria": [
-        "No occurrence of 'everyday-silver-qev-draft.caffeine.xyz' exists in frontend/index.html, frontend/public/sitemap.xml, frontend/public/robots.txt, or any component file.",
-        "The canonical <link> tag in frontend/index.html points to https://verdiercouverture.fr.",
-        "Open Graph og:url and Twitter Card url tags in frontend/index.html point to https://verdiercouverture.fr.",
-        "JSON-LD structured data in frontend/index.html references https://verdiercouverture.fr as the URL.",
-        "frontend/public/sitemap.xml lists only https://verdiercouverture.fr/ as the canonical URL.",
-        "frontend/public/robots.txt Sitemap directive points to https://verdiercouverture.fr/sitemap.xml.",
-        "Google Search Console no longer reports a disallowed origin error for the draft subdomain."
+        "No component renders the text 'Occitanie'",
+        "All region references display 'Île-de-France'",
+        "ServiceAreas component lists communes relevant to Île-de-France (or at minimum removes Occitanie references)"
       ],
       "file_operations": [
         {
-          "path": "frontend/index.html",
+          "path": "frontend/src/components/Navigation.tsx",
           "operation": "modify",
-          "description": "Audit and replace any references to the draft subdomain (https://everyday-silver-qev-draft.caffeine.xyz) in the canonical link tag, Open Graph og:url tag, Twitter Card url tag, and JSON-LD structured data url property. Ensure all these meta tags and structured data exclusively point to https://verdiercouverture.fr. Verify the Google Site Verification meta tag contains no draft domain references."
-        },
-        {
-          "path": "frontend/public/sitemap.xml",
-          "operation": "modify",
-          "description": "Replace any occurrence of the draft subdomain URL (https://everyday-silver-qev-draft.caffeine.xyz) in the <loc> elements with the production domain https://verdiercouverture.fr/. Ensure the sitemap lists only the canonical production URL."
-        },
-        {
-          "path": "frontend/public/robots.txt",
-          "operation": "modify",
-          "description": "Replace any reference to the draft subdomain (https://everyday-silver-qev-draft.caffeine.xyz) in the Sitemap directive with https://verdiercouverture.fr/sitemap.xml. Ensure the robots.txt points exclusively to the production sitemap URL."
-        },
-        {
-          "path": "frontend/public/google2ea9c3e7d5d4abde.html",
-          "operation": "modify",
-          "description": "Audit the Google Site Verification file for any draft subdomain references and remove them if present. Do not alter the verification meta tag content or structure, only ensure no draft domain URLs appear anywhere in the file."
-        },
-        {
-          "path": "frontend/src/components/About.tsx",
-          "operation": "modify",
-          "description": "Search for and replace any hardcoded references to the draft subdomain (https://everyday-silver-qev-draft.caffeine.xyz) with https://verdiercouverture.fr in strings, comments, or data structures. If no references exist, no changes are needed."
-        },
-        {
-          "path": "frontend/src/components/Contact.tsx",
-          "operation": "modify",
-          "description": "Search for and replace any hardcoded references to the draft subdomain (https://everyday-silver-qev-draft.caffeine.xyz) with https://verdiercouverture.fr in strings, comments, or data structures. If no references exist, no changes are needed."
-        },
-        {
-          "path": "frontend/src/components/Footer.tsx",
-          "operation": "modify",
-          "description": "Search for and replace any hardcoded references to the draft subdomain (https://everyday-silver-qev-draft.caffeine.xyz) with https://verdiercouverture.fr in strings, comments, or data structures. If no references exist, no changes are needed."
+          "description": "Replace any occurrence of 'Occitanie' with 'Île-de-France' in text content, aria labels, or data attributes"
         },
         {
           "path": "frontend/src/components/Hero.tsx",
           "operation": "modify",
-          "description": "Search for and replace any hardcoded references to the draft subdomain (https://everyday-silver-qev-draft.caffeine.xyz) with https://verdiercouverture.fr in strings, comments, or data structures. If no references exist, no changes are needed."
+          "description": "Replace any occurrence of 'Occitanie' with 'Île-de-France' in headlines, subheadings, or descriptive text"
         },
         {
-          "path": "frontend/src/components/Navigation.tsx",
+          "path": "frontend/src/components/Footer.tsx",
           "operation": "modify",
-          "description": "Search for and replace any hardcoded references to the draft subdomain (https://everyday-silver-qev-draft.caffeine.xyz) with https://verdiercouverture.fr in strings, comments, or data structures. If no references exist, no changes are needed."
+          "description": "Replace any occurrence of 'Occitanie' with 'Île-de-France' in footer text, contact info descriptions, or service area mentions"
+        },
+        {
+          "path": "frontend/src/components/Contact.tsx",
+          "operation": "modify",
+          "description": "Replace any occurrence of 'Occitanie' with 'Île-de-France' in contact section text, form labels, or descriptions"
+        },
+        {
+          "path": "frontend/src/components/About.tsx",
+          "operation": "modify",
+          "description": "Replace any occurrence of 'Occitanie' with 'Île-de-France' in company description, stats labels, or strengths list text"
         },
         {
           "path": "frontend/src/components/ServiceAreas.tsx",
           "operation": "modify",
-          "description": "Search for and replace any hardcoded references to the draft subdomain (https://everyday-silver-qev-draft.caffeine.xyz) with https://verdiercouverture.fr in strings, comments, or data structures. If no references exist, no changes are needed."
-        },
-        {
-          "path": "frontend/src/components/Services.tsx",
-          "operation": "modify",
-          "description": "Search for and replace any hardcoded references to the draft subdomain (https://everyday-silver-qev-draft.caffeine.xyz) with https://verdiercouverture.fr in strings, comments, or data structures. If no references exist, no changes are needed."
+          "description": "Replace the current Val-d'Oise commune list with Île-de-France communes (covering Paris, Val-d'Oise, Hauts-de-Seine, Seine-Saint-Denis, Val-de-Marne, Seine-et-Marne, Yvelines, Essonne). Remove any references to Occitanie region or communes outside Île-de-France"
         },
         {
           "path": "frontend/src/components/Testimonials.tsx",
           "operation": "modify",
-          "description": "Search for and replace any hardcoded references to the draft subdomain (https://everyday-silver-qev-draft.caffeine.xyz) with https://verdiercouverture.fr in strings, comments, or structured data markup. Ensure any Schema.org Review structured data references the production domain only. If no references exist, no changes are needed."
+          "description": "Review customer testimonial locations and replace any 'Occitanie' locations with Île-de-France communes (e.g., Paris, Cergy, Argenteuil, Saint-Denis, Versailles, etc.)"
         },
         {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/src/components/Services.tsx",
           "operation": "modify",
-          "description": "Search for and replace any hardcoded references to the draft subdomain (https://everyday-silver-qev-draft.caffeine.xyz) with https://verdiercouverture.fr in strings, comments, or data structures. If no references exist, no changes are needed."
+          "description": "Replace any occurrence of 'Occitanie' with 'Île-de-France' in service descriptions or feature list text"
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Restore the company email address in the Contact section and Footer",
+      "acceptanceCriteria": [
+        "A visible email address is rendered in the Contact section",
+        "A visible email address is rendered in the Footer",
+        "The email is clickable as a mailto link"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Contact.tsx",
+          "operation": "modify",
+          "description": "Add a visible email address display with a clickable mailto link in the contact information area. Use a canonical email address for Verdier Couverture (e.g., contact@verdiercouverture.fr or info@verdiercouverture.fr). Include an envelope icon from Lucide React for visual consistency"
+        },
+        {
+          "path": "frontend/src/components/Footer.tsx",
+          "operation": "modify",
+          "description": "Add a visible email address with a clickable mailto link in the footer contact details section. Use the same canonical email as in Contact.tsx. Include an envelope icon from Lucide React for visual consistency"
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Restore the company phone number in Navigation, Hero, Contact section, and Footer",
+      "acceptanceCriteria": [
+        "A visible phone number is rendered in the Navigation bar",
+        "A visible phone number is rendered in the Hero quick-contact links",
+        "A visible phone number is rendered in the Contact section",
+        "A visible phone number is rendered in the Footer",
+        "The phone number is clickable as a tel: link"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Navigation.tsx",
+          "operation": "modify",
+          "description": "Ensure the phone CTA button displays a visible phone number as clickable tel: link. Use a French mobile or landline format (e.g., 06 XX XX XX XX or 01 XX XX XX XX). Include a phone icon from Lucide React"
+        },
+        {
+          "path": "frontend/src/components/Hero.tsx",
+          "operation": "modify",
+          "description": "Ensure the quick-contact links section includes a visible phone number as a clickable tel: link. Use the same phone number as in Navigation. Include a phone icon from Lucide React for visual consistency"
+        },
+        {
+          "path": "frontend/src/components/Contact.tsx",
+          "operation": "modify",
+          "description": "Add a visible phone number display with a clickable tel: link in the contact information area. Use the same phone number as in Navigation and Hero. Include a phone icon from Lucide React for visual consistency"
+        },
+        {
+          "path": "frontend/src/components/Footer.tsx",
+          "operation": "modify",
+          "description": "Add a visible phone number with a clickable tel: link in the footer contact details section. Use the same phone number as in other components. Include a phone icon from Lucide React for visual consistency"
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Restore the company physical address in the Contact section and Footer reflecting Île-de-France location",
+      "acceptanceCriteria": [
+        "A visible physical address is rendered in the Contact section",
+        "A visible physical address is rendered in the Footer",
+        "The address reflects an Île-de-France location (not Occitanie)"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Contact.tsx",
+          "operation": "modify",
+          "description": "Add a visible physical address display in the contact information area. The address must be located in Île-de-France (e.g., in Val-d'Oise, Paris, or another Île-de-France département). Include a map pin icon from Lucide React for visual consistency"
+        },
+        {
+          "path": "frontend/src/components/Footer.tsx",
+          "operation": "modify",
+          "description": "Add a visible physical address in the footer contact details section. Use the same Île-de-France address as in Contact.tsx. Include a map pin icon from Lucide React for visual consistency"
         }
       ]
     }
