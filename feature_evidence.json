@@ -2,10 +2,11 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-audit-every-location-in-the-codebase-where-a-contact-email-address-appears-including-the-contact-section-form-action-mailto-link-the-contact-info-card-email-display-link-the-footer-email-link-and-any-other-mailto-href-and-verify-that-each-one-uses-exactly-sv-couverture95-gmail-com-correct-any-mismatched-missing-or-malformed-email-addresses-so-that-all-mailto-links-and-form-submission-targets-point-to-sv-couverture95-gmail-com",
-      "featureTitle": "Audit every location in the codebase where a contact email address appears — including the Contact section form action/mailto link, the contact info card email display link, the Footer email link, and any other mailto: href — and verify that each one uses exactly 'sv.couverture95@gmail.com'. Correct any mismatched, missing, or malformed email addresses so that all mailto: links and form submission targets point to sv.couverture95@gmail.com.",
+      "featureId": "feature-ensure-the-sitemap-xml-and-robots-txt-only-reference-valid-reachable-urls-the-sitemap-must-not-list-any-url-that-returns-a-4xx-response-the-robots-txt-must-not-accidentally-disallow-crawlers-from-key-pages",
+      "featureTitle": "Ensure the sitemap.xml and robots.txt only reference valid, reachable URLs. The sitemap must not list any URL that returns a 4xx response. The robots.txt must not accidentally disallow crawlers from key pages.",
       "files": [
-        "frontend/src/components/Contact.tsx"
+        "frontend/public/robots.txt",
+        "frontend/public/sitemap.xml"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -16,7 +17,26 @@
         "blob-storage@4.0.0"
       ],
       "testIds": [
-        "REQ-39"
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-ensure-the-canonical-url-declared-in-the-open-graph-tags-twitter-card-meta-tags-json-ld-structured-data-and-the-link-rel-canonical-tag-in-frontend-index-html-all-match-the-actual-production-domain-exactly-no-trailing-slash-mismatch-no-http-vs-https-mismatch-to-prevent-google-from-flagging-them-as-4xx-alternate-urls",
+      "featureTitle": "Ensure the canonical URL declared in the Open Graph tags, Twitter Card meta tags, JSON-LD structured data, and the <link rel='canonical'> tag in frontend/index.html all match the actual production domain exactly (no trailing slash mismatch, no http vs https mismatch) to prevent Google from flagging them as 4xx alternate URLs.",
+      "files": [
+        "frontend/index.html"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
       ],
       "confidence": "high"
     }

@@ -1,29 +1,93 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Audit and fix contact form email address (sv.couverture95@gmail.com) in all mailto links and form fields",
+  "title": "Fix 4xx errors blocking page indexation in Google Search Console",
   "requirements": [
     {
-      "id": "REQ-39",
-      "summary": "Audit and correct all email addresses and mailto: links throughout the frontend to ensure they use exactly 'sv.couverture95@gmail.com'",
+      "id": "REQ-1",
+      "summary": "Audit frontend routing and internal links to eliminate 404s and ensure all navigation targets resolve correctly",
       "acceptanceCriteria": [
-        "Every mailto: href in Contact.tsx, Footer.tsx, and any other component uses exactly 'mailto:sv.couverture95@gmail.com' with no typos, extra spaces, or alternate addresses.",
-        "The contact form 'Envoyer' / submit button or form action opens a mailto: link pre-filled with sv.couverture95@gmail.com as the recipient.",
-        "The email displayed as text/link in the Contact section info card shows 'sv.couverture95@gmail.com' and its href is 'mailto:sv.couverture95@gmail.com'.",
-        "The email displayed as text/link in the Footer shows 'sv.couverture95@gmail.com' and its href is 'mailto:sv.couverture95@gmail.com'.",
-        "No other email address appears anywhere in the site components.",
-        "A test click on any email link opens a mail client with sv.couverture95@gmail.com as the pre-filled recipient."
+        "No navigation link or CTA button leads to a missing or unresolvable URL.",
+        "All smooth-scroll anchor targets (e.g., #contact, #services) exist in the DOM.",
+        "Loading any page of the app returns a 2xx status code, not a 4xx."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/Contact.tsx",
+          "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Audit and correct all email references in the Contact component: (1) Verify the email info card displays 'sv.couverture95@gmail.com' as text and uses 'mailto:sv.couverture95@gmail.com' as the href. (2) Ensure the contact form submit button or form action uses a mailto: link targeting 'sv.couverture95@gmail.com' with appropriate subject/body parameters. (3) Replace any incorrect, missing, or mismatched email addresses with the correct value."
+          "description": "Verify that all sections referenced by navigation anchors (#hero, #services, #about, #testimonials, #contact) have corresponding id attributes in their rendered DOM. Add explicit id attributes to each section wrapper if missing to ensure smooth-scroll navigation resolves correctly."
+        },
+        {
+          "path": "frontend/src/components/Navigation.tsx",
+          "operation": "modify",
+          "description": "Audit all href attributes in navigation links and CTA buttons to confirm they point to valid anchor targets that exist in the DOM (e.g., #services, #about, #contact). Remove or fix any broken anchor references. Ensure phone links use tel: protocol correctly and mailto links are properly formatted."
+        },
+        {
+          "path": "frontend/src/components/Hero.tsx",
+          "operation": "modify",
+          "description": "Verify that the scroll-to-contact button's anchor target (#contact) exists in the DOM. Confirm phone CTA buttons use valid tel: URIs and do not generate any 4xx requests."
         },
         {
           "path": "frontend/src/components/Footer.tsx",
           "operation": "modify",
-          "description": "Audit and correct the email link in the Footer component: Verify the email is displayed as 'sv.couverture95@gmail.com' and the href is exactly 'mailto:sv.couverture95@gmail.com'. Replace any incorrect or malformed email addresses."
+          "description": "Audit all internal navigation links in the footer to ensure they point to valid anchor targets. Verify phone and email links use proper tel: and mailto: protocols. Confirm that service links and navigation links do not reference any missing routes or anchors."
+        },
+        {
+          "path": "frontend/src/components/Services.tsx",
+          "operation": "modify",
+          "description": "Ensure all service card images reference valid asset paths under frontend/public/assets/generated/. Verify no service cards contain links that would trigger 4xx responses. Confirm lazy-loaded images have proper error handling fallbacks."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Ensure sitemap.xml and robots.txt only reference valid, reachable URLs that return 2xx responses",
+      "acceptanceCriteria": [
+        "All URLs listed in frontend/public/sitemap.xml return 2xx responses.",
+        "frontend/public/robots.txt does not disallow any URL that should be indexed.",
+        "The sitemap URL referenced in robots.txt is correct and reachable."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/sitemap.xml",
+          "operation": "modify",
+          "description": "Verify that the canonical URL listed in the sitemap exactly matches the production domain (https://verdiercouverture.fr) with no trailing slash inconsistencies. Update the lastmod date to the current date (2025-07-28 or later). Ensure the URL returns a 2xx status when accessed. Do not add any URLs that would result in 4xx responses."
+        },
+        {
+          "path": "frontend/public/robots.txt",
+          "operation": "modify",
+          "description": "Confirm the sitemap URL (https://verdiercouverture.fr/sitemap.xml) is correct and matches the actual production domain. Verify that no Disallow rules accidentally block important pages from being crawled. Ensure all Allow directives point to valid, reachable paths."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Verify Google Search Console verification file is publicly accessible without authentication or redirect",
+      "acceptanceCriteria": [
+        "GET /google2ea9c3e7d5d4abde.html returns 200 with the correct verification content.",
+        "No redirect or authentication challenge intercepts this URL."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/google2ea9c3e7d5d4abde.html",
+          "operation": "modify",
+          "description": "Confirm the file contains the correct Google verification meta tag and is located at the public root. Verify no routing configuration or authentication middleware would intercept or redirect requests to this file. Ensure the file is served as a static asset with a 200 response. Do not alter the verification content itself."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Ensure canonical URLs in meta tags, Open Graph, Twitter Card, and JSON-LD match the production domain exactly",
+      "acceptanceCriteria": [
+        "The canonical URL in <link rel='canonical'>, og:url, and JSON-LD all use the same consistent production domain with https.",
+        "The sitemap lastmod date is current (2025-07-28 or later).",
+        "No meta tag references a URL that would resolve to a 4xx."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/index.html",
+          "operation": "modify",
+          "description": "Audit and standardize all canonical URL references to use the exact production domain (https://verdiercouverture.fr) with no trailing slash. Verify <link rel='canonical'>, og:url, twitter:url, and the @id in JSON-LD structured data all match exactly. Ensure no http vs https mismatch exists. Confirm og:image and twitter:image URLs point to valid image assets that return 2xx responses. Update any placeholder or development URLs to the production domain."
         }
       ]
     }

@@ -1,40 +1,91 @@
 {
   "kind": "build_request",
-  "title": "Audit and fix contact form email address (sv.couverture95@gmail.com) in all mailto links and form fields",
+  "title": "Fix 4xx errors blocking page indexation in Google Search Console",
   "projectName": "Verdier Couverture",
   "priority": "high",
   "requirements": [
     {
-      "id": "REQ-39",
-      "text": "Audit every location in the codebase where a contact email address appears — including the Contact section form action/mailto link, the contact info card email display link, the Footer email link, and any other mailto: href — and verify that each one uses exactly 'sv.couverture95@gmail.com'. Correct any mismatched, missing, or malformed email addresses so that all mailto: links and form submission targets point to sv.couverture95@gmail.com.",
+      "id": "REQ-1",
+      "text": "Audit the frontend routing and all internal links to ensure no broken or missing routes (404s) exist. All navigation links, CTA buttons, and anchor scroll targets must resolve correctly without producing 4xx responses.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-latest"
+          "msg-last"
         ],
         "quotes": [
-          "Je ne reçois pas je me suis fait une demande a moi même je ne reçois rien peut tu regarder que cest la bonne adresse email sv.couverture95@gmail.com"
+          "Bloquée en raison d'un autre problème de type 4xx"
         ]
       },
       "acceptanceCriteria": [
-        "Every mailto: href in Contact.tsx, Footer.tsx, and any other component uses exactly 'mailto:sv.couverture95@gmail.com' with no typos, extra spaces, or alternate addresses.",
-        "The contact form 'Envoyer' / submit button or form action opens a mailto: link pre-filled with sv.couverture95@gmail.com as the recipient.",
-        "The email displayed as text/link in the Contact section info card shows 'sv.couverture95@gmail.com' and its href is 'mailto:sv.couverture95@gmail.com'.",
-        "The email displayed as text/link in the Footer shows 'sv.couverture95@gmail.com' and its href is 'mailto:sv.couverture95@gmail.com'.",
-        "No other email address appears anywhere in the site components.",
-        "A test click on any email link opens a mail client with sv.couverture95@gmail.com as the pre-filled recipient."
+        "No navigation link or CTA button leads to a missing or unresolvable URL.",
+        "All smooth-scroll anchor targets (e.g., #contact, #services) exist in the DOM.",
+        "Loading any page of the app returns a 2xx status code, not a 4xx."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Ensure the sitemap.xml and robots.txt only reference valid, reachable URLs. The sitemap must not list any URL that returns a 4xx response. The robots.txt must not accidentally disallow crawlers from key pages.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "Bloquée en raison d'un autre problème de type 4xx"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All URLs listed in frontend/public/sitemap.xml return 2xx responses.",
+        "frontend/public/robots.txt does not disallow any URL that should be indexed.",
+        "The sitemap URL referenced in robots.txt is correct and reachable."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Verify the Google Search Console verification file (google2ea9c3e7d5d4abde.html) is publicly accessible at the root of the deployed site without authentication or redirect, so that the verification request does not return a 4xx.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "Bloquée en raison d'un autre problème de type 4xx"
+        ]
+      },
+      "acceptanceCriteria": [
+        "GET /google2ea9c3e7d5d4abde.html returns 200 with the correct verification content.",
+        "No redirect or authentication challenge intercepts this URL."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Ensure the canonical URL declared in the Open Graph tags, Twitter Card meta tags, JSON-LD structured data, and the <link rel='canonical'> tag in frontend/index.html all match the actual production domain exactly (no trailing slash mismatch, no http vs https mismatch) to prevent Google from flagging them as 4xx alternate URLs.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "Bloquée en raison d'un autre problème de type 4xx"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The canonical URL in <link rel='canonical'>, og:url, and JSON-LD all use the same consistent production domain with https.",
+        "The sitemap lastmod date is current (2025-07-28 or later).",
+        "No meta tag references a URL that would resolve to a 4xx."
       ]
     }
   ],
   "constraints": [
-    "Do not change any existing SEO meta tags, JSON-LD structured data, sitemap, or robots.txt.",
-    "Do not alter any content other than email address values and their associated mailto: hrefs.",
-    "Do not modify files listed in frontend.immutablePaths."
+    "Do not modify any file under frontend/src/hooks/ or frontend/src/components/ui/.",
+    "Do not alter the Google Search Console verification file content (google2ea9c3e7d5d4abde.html).",
+    "Preserve all existing SEO meta tags, structured data, and brand content."
   ],
   "nonGoals": [
-    "Implementing a server-side email sending backend — the site uses mailto: links only.",
-    "Adding new form fields or changing the form layout.",
-    "Any SEO, performance, or scroll-related changes."
+    "Adding new pages or sections to the website.",
+    "Changing the visual design or branding.",
+    "Modifying backend Motoko logic beyond what is needed to serve valid responses.",
+    "Submitting sitemaps or requesting re-indexation directly in Google Search Console (must be done manually by the user)."
   ],
   "imageRequirements": {
     "required": [],

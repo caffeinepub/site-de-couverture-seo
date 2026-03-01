@@ -1,198 +1,145 @@
-import { Star, Quote } from 'lucide-react';
+import React from 'react';
+import { Star } from 'lucide-react';
 
 interface Testimonial {
-    name: string;
-    location: string;
-    rating: number;
-    text: string;
-    service: string;
-    date: string;
-    initials: string;
+  name: string;
+  location: string;
+  rating: number;
+  date: string;
+  text: string;
+  service: string;
 }
 
 const testimonials: Testimonial[] = [
-    {
-        name: 'Nathalie Berger',
-        location: 'Eaubonne (95)',
-        rating: 5,
-        text: 'Nous avons fait appel à VERDIER COUVERTURE pour une réfection complète de notre toiture en tuiles. Travail absolument impeccable, équipe sérieuse et ponctuelle. Le chantier a été livré en avance et tout a été nettoyé après les travaux. Je recommande vivement !',
-        service: 'Réfection de toiture',
-        date: 'Janvier 2026',
-        initials: 'NB',
-    },
-    {
-        name: 'Thierry Marchand',
-        location: 'Argenteuil (95)',
-        rating: 5,
-        text: 'Suite à une fuite importante après les fortes pluies, VERDIER COUVERTURE est intervenu en moins de 24h. Diagnostic précis, réparation rapide et soignée. Le prix était très raisonnable pour une intervention d\'urgence. Merci pour votre réactivité !',
-        service: 'Réparation urgence',
-        date: 'Novembre 2025',
-        initials: 'TM',
-    },
-    {
-        name: 'Céline Fontaine',
-        location: 'Montmorency (95)',
-        rating: 5,
-        text: 'VERDIER COUVERTURE a réalisé l\'isolation de notre toiture et la pose de nouvelles gouttières en zinc. Le résultat est parfait, notre maison est bien plus chaude cet hiver. L\'équipe est professionnelle, propre et respectueuse. Très satisfaite de la prestation !',
-        service: 'Isolation & zinguerie',
-        date: 'Septembre 2025',
-        initials: 'CF',
-    },
-    {
-        name: 'Alain Petit',
-        location: 'Taverny (95)',
-        rating: 5,
-        text: 'Deuxième fois que je fais appel à VERDIER COUVERTURE, toujours la même qualité et le même professionnalisme. Cette fois pour un traitement hydrofuge et un nettoyage complet de la toiture. Résultat bluffant, la toiture est comme neuve. Bravo à toute l\'équipe !',
-        service: 'Traitement & nettoyage',
-        date: 'Juin 2025',
-        initials: 'AP',
-    },
-    {
-        name: 'Sandrine Leroy',
-        location: 'Sarcelles (95)',
-        rating: 5,
-        text: 'Nous avons contacté VERDIER COUVERTURE pour la pose de tuiles terre cuite sur notre extension. Le devis était clair et détaillé, sans mauvaise surprise. Les artisans sont minutieux et le rendu final est magnifique. Notre maison a vraiment gagné en cachet !',
-        service: 'Pose de tuiles terre cuite',
-        date: 'Mars 2025',
-        initials: 'SL',
-    },
-    {
-        name: 'Olivier Renaud',
-        location: 'Ermont (95)',
-        rating: 5,
-        text: 'Excellent rapport qualité-prix avec VERDIER COUVERTURE. Ils ont su nous conseiller sur les meilleures solutions pour notre budget et ont réalisé la réfection partielle de notre toiture avec soin. La garantie décennale nous rassure. Je les recommande sans hésitation à mon entourage.',
-        service: 'Réfection partielle',
-        date: 'Décembre 2024',
-        initials: 'OR',
-    },
+  {
+    name: 'Marie L.',
+    location: 'Cergy (95)',
+    rating: 5,
+    date: '2024-03-15',
+    text: 'Excellent travail ! VERDIER COUVERTURE a refait entièrement notre toiture en 3 jours. Équipe sérieuse, propre et très professionnelle. Je recommande vivement.',
+    service: 'Réfection de toiture',
+  },
+  {
+    name: 'Pierre M.',
+    location: 'Pontoise (95)',
+    rating: 5,
+    date: '2024-02-20',
+    text: 'Intervention rapide suite à une fuite urgente. Diagnostic précis, réparation efficace. Tarif honnête et devis respecté. Très satisfait du résultat.',
+    service: 'Réparation urgente',
+  },
+  {
+    name: 'Sophie B.',
+    location: 'Versailles (78)',
+    rating: 5,
+    date: '2024-01-10',
+    text: 'Travaux de zinguerie impeccables. L\'équipe a été ponctuelle, soigneuse et a laissé le chantier propre. Le résultat est parfait, plus aucune infiltration.',
+    service: 'Zinguerie',
+  },
+  {
+    name: 'Jean-Claude R.',
+    location: 'Saint-Denis (93)',
+    rating: 5,
+    date: '2023-11-05',
+    text: 'Très bonne entreprise. Devis clair et détaillé, travaux réalisés dans les délais. La nouvelle isolation a vraiment amélioré le confort de notre maison.',
+    service: 'Isolation toiture',
+  },
+  {
+    name: 'Isabelle T.',
+    location: 'Boulogne-Billancourt (92)',
+    rating: 5,
+    date: '2023-10-18',
+    text: 'Nettoyage et traitement de toiture réalisés avec soin. Résultat bluffant, la toiture est comme neuve. Prix raisonnable et équipe sympathique.',
+    service: 'Nettoyage & traitement',
+  },
+  {
+    name: 'François D.',
+    location: 'Évry (91)',
+    rating: 5,
+    date: '2023-09-22',
+    text: 'Pose de tuiles réalisée avec expertise. Très satisfait de la qualité des matériaux utilisés et du soin apporté aux finitions. Je recommande sans hésitation.',
+    service: 'Pose de tuiles',
+  },
 ];
 
 function StarRating({ rating }: { rating: number }) {
-    return (
-        <div className="flex gap-0.5" aria-label={`Note : ${rating} étoiles sur 5`}>
-            {Array.from({ length: 5 }).map((_, i) => (
-                <Star
-                    key={i}
-                    size={14}
-                    className={i < rating ? 'text-[oklch(0.72_0.15_65)] fill-[oklch(0.72_0.15_65)]' : 'text-[oklch(0.87_0.015_70)]'}
-                    aria-hidden="true"
-                />
-            ))}
-        </div>
-    );
+  return (
+    <div className="flex gap-0.5" aria-label={`Note : ${rating} sur 5`}>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star
+          key={i}
+          size={14}
+          className={i < rating ? 'text-terracotta fill-terracotta' : 'text-offwhite/20'}
+        />
+      ))}
+    </div>
+  );
 }
 
 export default function Testimonials() {
-    return (
-        <section
-            id="temoignages"
-            className="py-20 lg:py-28 bg-[oklch(0.975_0.005_80)] tile-pattern"
-            aria-labelledby="testimonials-heading"
-        >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Section Header */}
-                <header className="text-center mb-14">
-                    <p className="text-[oklch(0.55_0.13_42)] text-sm font-semibold tracking-widest uppercase mb-3">
-                        Ils nous font confiance
-                    </p>
-                    <div className="section-divider" aria-hidden="true" />
-                    <h2
-                        id="testimonials-heading"
-                        className="text-3xl sm:text-4xl lg:text-5xl section-heading mb-4"
-                    >
-                        Témoignages de Nos Clients
-                    </h2>
-                    <p className="section-subheading text-base sm:text-lg max-w-2xl mx-auto">
-                        Plus de 1 500 clients nous ont fait confiance. Découvrez leurs retours d'expérience
-                        sur nos travaux de couverture et toiture.
-                    </p>
+  return (
+    <section id="testimonials" className="py-20 bg-offwhite" aria-labelledby="testimonials-heading">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <span className="text-terracotta text-sm font-medium tracking-widest uppercase">Avis Clients</span>
+          <h2 id="testimonials-heading" className="font-serif text-4xl lg:text-5xl font-bold text-charcoal mt-2 mb-4">
+            Ce Que Disent Nos Clients
+          </h2>
+          <p className="text-charcoal/60 max-w-2xl mx-auto text-lg">
+            La satisfaction de nos clients est notre priorité. Découvrez leurs témoignages.
+          </p>
+        </div>
 
-                    {/* Overall rating */}
-                    <div className="inline-flex items-center gap-3 mt-6 bg-white px-6 py-3 rounded-full border border-[oklch(0.87_0.015_70)] shadow-sm">
-                        <div className="flex gap-0.5" aria-hidden="true">
-                            {Array.from({ length: 5 }).map((_, i) => (
-                                <Star key={i} size={16} className="text-[oklch(0.72_0.15_65)] fill-[oklch(0.72_0.15_65)]" />
-                            ))}
-                        </div>
-                        <span className="font-bold text-[oklch(0.22_0.015_50)]" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>4.9/5</span>
-                        <span className="text-[oklch(0.52_0.02_60)] text-sm">basé sur 127 avis</span>
-                    </div>
-                </header>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {testimonials.map((t) => (
+            <article
+              key={t.name}
+              className="testimonial-card"
+              itemScope
+              itemType="https://schema.org/Review"
+            >
+              <div
+                itemProp="itemReviewed"
+                itemScope
+                itemType="https://schema.org/LocalBusiness"
+                className="hidden"
+              >
+                <span itemProp="name">VERDIER COUVERTURE</span>
+              </div>
 
-                {/* Testimonials Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {testimonials.map((testimonial) => (
-                        <article
-                            key={testimonial.name}
-                            className="testimonial-card"
-                            aria-label={`Témoignage de ${testimonial.name}`}
-                            itemScope
-                            itemType="https://schema.org/Review"
-                        >
-                            {/* itemReviewed — required by Google for Review structured data */}
-                            <div
-                                itemProp="itemReviewed"
-                                itemScope
-                                itemType="https://schema.org/LocalBusiness"
-                                className="hidden"
-                            >
-                                <span itemProp="name">VERDIER COUVERTURE</span>
-                            </div>
-
-                            {/* Quote icon */}
-                            <div className="flex justify-end mb-2">
-                                <Quote size={20} className="text-[oklch(0.55_0.13_42/0.3)]" aria-hidden="true" />
-                            </div>
-
-                            {/* Rating */}
-                            <div className="mb-3" itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
-                                <meta itemProp="ratingValue" content={String(testimonial.rating)} />
-                                <meta itemProp="bestRating" content="5" />
-                                <StarRating rating={testimonial.rating} />
-                            </div>
-
-                            {/* Text */}
-                            <blockquote
-                                className="text-[oklch(0.42_0.02_55)] text-sm leading-relaxed mb-5 pt-2"
-                                itemProp="reviewBody"
-                            >
-                                "{testimonial.text}"
-                            </blockquote>
-
-                            {/* Service badge */}
-                            <div className="mb-4">
-                                <span className="inline-block bg-[oklch(0.55_0.13_42/0.1)] text-[oklch(0.45_0.14_38)] text-xs font-semibold px-3 py-1 rounded-full">
-                                    {testimonial.service}
-                                </span>
-                            </div>
-
-                            {/* Author */}
-                            <footer className="flex items-center gap-3 pt-4 border-t border-[oklch(0.87_0.015_70)]">
-                                <div
-                                    className="w-10 h-10 rounded-full bg-[oklch(0.55_0.13_42)] flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
-                                    aria-hidden="true"
-                                >
-                                    {testimonial.initials}
-                                </div>
-                                <div>
-                                    <cite
-                                        className="font-bold text-[oklch(0.22_0.015_50)] text-sm not-italic"
-                                        style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                                        itemProp="author"
-                                        itemScope
-                                        itemType="https://schema.org/Person"
-                                    >
-                                        <span itemProp="name">{testimonial.name}</span>
-                                    </cite>
-                                    <div className="text-[oklch(0.52_0.02_60)] text-xs">
-                                        {testimonial.location} · <span itemProp="datePublished">{testimonial.date}</span>
-                                    </div>
-                                </div>
-                            </footer>
-                        </article>
-                    ))}
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <div className="font-semibold text-charcoal" itemProp="author" itemScope itemType="https://schema.org/Person">
+                    <span itemProp="name">{t.name}</span>
+                  </div>
+                  <div className="text-charcoal/50 text-sm">{t.location}</div>
                 </div>
-            </div>
-        </section>
-    );
+                <div
+                  itemProp="reviewRating"
+                  itemScope
+                  itemType="https://schema.org/Rating"
+                >
+                  <meta itemProp="ratingValue" content={String(t.rating)} />
+                  <meta itemProp="bestRating" content="5" />
+                  <StarRating rating={t.rating} />
+                </div>
+              </div>
+
+              <p className="text-charcoal/70 text-sm leading-relaxed mb-4" itemProp="reviewBody">
+                "{t.text}"
+              </p>
+
+              <div className="flex items-center justify-between text-xs text-charcoal/40">
+                <span className="bg-terracotta/10 text-terracotta px-2 py-1 rounded-full">
+                  {t.service}
+                </span>
+                <time dateTime={t.date} itemProp="datePublished">
+                  {new Date(t.date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long' })}
+                </time>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

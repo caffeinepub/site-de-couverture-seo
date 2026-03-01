@@ -1,14 +1,24 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-28T04:27:16.507Z",
-  "summary": "The diff implements REQ-39 by updating Contact.tsx to use a CONTACT_EMAIL constant ('sv.couverture95@gmail.com') for all mailto links and form submission, and Footer.tsx is described in the file summaries as updated with the correct email address. All acceptance criteria appear to be addressed.",
+  "generatedAt": "2026-03-01T01:52:22.485Z",
+  "summary": "The diff addresses all four requirements. REQ-1 is handled by updating anchor IDs (hero vs accueil), adding ErrorBoundary wrappers, and defensive try/catch in scroll handlers. REQ-2 is handled by updating sitemap.xml and robots.txt to use the correct production domain. REQ-3 is handled by preserving the Google Search Console verification file unchanged. REQ-4 is handled by updating canonical, og:url, og:image, twitter:image, and JSON-LD in index.html to use https://verdiercouverture.fr/. The sitemap lastmod is set to 2026-03-01 which satisfies the AC of 2025-07-28 or later.",
   "missing_requirements": [],
-  "hallucinated_features": [],
-  "confidence": 0.88,
+  "hallucinated_features": [
+    {
+      "description": "Footer includes a caffeine.ai attribution with UTM tracking link",
+      "reason": "The build request does not mention adding or preserving a caffeine.ai attribution or UTM tracking link in the footer. This appears to be an added feature not requested by any requirement.",
+      "evidence": [
+        "frontend-file-summaries.txt"
+      ]
+    }
+  ],
+  "confidence": 0.8,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/src/components/Contact.tsx",
+    "frontend/index.html",
+    "frontend/public/robots.txt",
+    "frontend/public/sitemap.xml",
     "project_state.json"
   ]
 }

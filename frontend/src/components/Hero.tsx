@@ -1,154 +1,140 @@
-import { ArrowDown, CheckCircle } from 'lucide-react';
-
-const highlights = [
-    'Plus de 20 ans d\'expérience',
-    'Devis gratuit sous 24h',
-    'Garantie décennale',
-];
+import React, { useState } from 'react';
+import { Phone, ChevronDown, Shield, Star, Clock } from 'lucide-react';
 
 export default function Hero() {
-    const handleScrollToContact = () => {
-        const el = document.querySelector('#contact');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-    };
+  const [imgError, setImgError] = useState(false);
 
-    const handleScrollToServices = () => {
-        const el = document.querySelector('#services');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-    };
+  const handleScrollToContact = (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      const el = document.getElementById('contact');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch {
+      // ignore
+    }
+  };
 
-    return (
-        <section
-            id="accueil"
-            className="relative min-h-screen flex items-center justify-center overflow-hidden"
-            aria-label="Section d'accueil - Couverture professionnelle"
-        >
-            {/* Background Image */}
-            <div className="absolute inset-0 z-0">
-                <img
-                    src="/assets/generated/hero-bg.dim_1920x1080.png"
-                    alt="Vue aérienne d'un artisan finissant un toit en ardoise traditionnel sur une maison française à l'heure dorée"
-                    className="w-full h-full object-cover"
-                    loading="eager"
-                    fetchPriority="high"
-                />
-                {/* Dark overlay for text readability */}
-                <div className="absolute inset-0 bg-[oklch(0.15_0.01_50/0.72)]" aria-hidden="true" />
-                {/* Gradient overlay bottom */}
-                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[oklch(0.15_0.01_50/0.5)] to-transparent" aria-hidden="true" />
-            </div>
+  const handleScrollToServices = (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      const el = document.getElementById('services');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch {
+      // ignore
+    }
+  };
 
-            {/* Content */}
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 text-center">
-                {/* Badge */}
-                <div className="inline-flex items-center gap-2 bg-[oklch(0.55_0.13_42/0.9)] text-white text-xs font-semibold px-4 py-1.5 rounded-full mb-6 tracking-wider uppercase">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.85_0.08_55)]" aria-hidden="true" />
-                    Couvreur Professionnel Certifié
-                </div>
+  return (
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      aria-label="Accueil VERDIER COUVERTURE"
+    >
+      {/* Background */}
+      <div className="absolute inset-0 bg-charcoal">
+        {!imgError && (
+          <img
+            src="/assets/generated/hero-bg.dim_1920x1080.png"
+            alt=""
+            role="presentation"
+            className="w-full h-full object-cover opacity-40"
+            onError={() => setImgError(true)}
+            loading="eager"
+            decoding="async"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/40 to-charcoal/80" />
+      </div>
 
-                {/* H1 - Primary keyword */}
-                <h1
-                    className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight"
-                    style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                >
-                    Expert en{' '}
-                    <span className="text-[oklch(0.72_0.09_48)] italic">Couverture</span>
-                    <br />
-                    <span className="text-white">et Toiture</span>
-                </h1>
+      {/* Tile pattern overlay */}
+      <div className="absolute inset-0 tile-pattern opacity-5" aria-hidden="true" />
 
-                {/* Subheadline with geo keywords */}
-                <p className="text-lg sm:text-xl text-white/85 max-w-2xl mx-auto mb-3 leading-relaxed font-light">
-                    Réfection complète, pose de tuiles et ardoises, réparation et entretien —
-                    nous protégeons votre maison avec savoir-faire et passion depuis plus de 20 ans.
-                </p>
-                <p className="text-base text-white/70 max-w-2xl mx-auto mb-8 leading-relaxed font-light">
-                    Couvreur à <strong className="text-white/90 font-medium">Pierrelaye</strong>,{' '}
-                    <strong className="text-white/90 font-medium">Cergy</strong>,{' '}
-                    <strong className="text-white/90 font-medium">Pontoise</strong> et dans tout le{' '}
-                    <strong className="text-white/90 font-medium">Val-d'Oise (95)</strong> — devis gratuit sous 24h.
-                </p>
+      {/* Content */}
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
+        <div className="inline-flex items-center gap-2 bg-terracotta/20 border border-terracotta/40 text-terracotta px-4 py-2 rounded-full text-sm font-medium mb-6">
+          <Shield size={14} />
+          <span>Couvreur Professionnel Certifié — Île-de-France</span>
+        </div>
 
-                {/* Highlights */}
-                <ul className="flex flex-wrap justify-center gap-4 mb-10" aria-label="Points forts">
-                    {highlights.map((item) => (
-                        <li key={item} className="flex items-center gap-2 text-white/90 text-sm font-medium">
-                            <CheckCircle size={16} className="text-[oklch(0.72_0.09_48)] flex-shrink-0" aria-hidden="true" />
-                            {item}
-                        </li>
-                    ))}
-                </ul>
+        <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-offwhite leading-tight mb-6">
+          Votre Couvreur de{' '}
+          <span className="text-terracotta">Confiance</span>
+          <br />
+          en Île-de-France
+        </h1>
 
-                {/* Phone numbers */}
-                <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
-                    <a
-                        href="tel:+33663739400"
-                        className="inline-flex items-center justify-center gap-2 text-white/90 hover:text-white text-sm font-medium transition-colors"
-                        aria-label="Appeler le 06 63 73 94 00"
-                    >
-                        <span className="text-[oklch(0.72_0.09_48)]">📱</span>
-                        06 63 73 94 00
-                    </a>
-                    <span className="hidden sm:block text-white/30">|</span>
-                    <a
-                        href="tel:+33172761763"
-                        className="inline-flex items-center justify-center gap-2 text-white/90 hover:text-white text-sm font-medium transition-colors"
-                        aria-label="Appeler le 01 72 76 17 63"
-                    >
-                        <span className="text-[oklch(0.72_0.09_48)]">☎</span>
-                        01 72 76 17 63
-                    </a>
-                </div>
+        <p className="text-offwhite/80 text-lg sm:text-xl max-w-2xl mx-auto mb-8 leading-relaxed">
+          VERDIER COUVERTURE — Expert en réfection de toiture, zinguerie, isolation et réparations.
+          Devis gratuit sous 24h, intervention rapide.
+        </p>
 
-                {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button
-                        onClick={handleScrollToContact}
-                        className="btn-terracotta px-8 py-4 rounded text-base font-semibold"
-                        aria-label="Demander un devis gratuit pour votre toiture"
-                    >
-                        Demander un Devis Gratuit
-                    </button>
-                    <button
-                        onClick={handleScrollToServices}
-                        className="btn-outline-terracotta px-8 py-4 rounded text-base border-white/60 text-white hover:bg-white/10 hover:border-white"
-                        style={{ border: '2px solid rgba(255,255,255,0.6)', color: 'white', background: 'transparent', fontFamily: "'Inter', system-ui, sans-serif", fontWeight: 600, letterSpacing: '0.025em', transition: 'all 0.2s ease' }}
-                        aria-label="Découvrir nos services de couverture"
-                    >
-                        Nos Services
-                    </button>
-                </div>
+        {/* Highlights */}
+        <ul className="flex flex-wrap justify-center gap-4 mb-10 text-sm text-offwhite/70">
+          <li className="flex items-center gap-2">
+            <Star size={14} className="text-terracotta" />
+            <span>Plus de 15 ans d'expérience</span>
+          </li>
+          <li className="flex items-center gap-2">
+            <Clock size={14} className="text-terracotta" />
+            <span>Intervention sous 48h</span>
+          </li>
+          <li className="flex items-center gap-2">
+            <Shield size={14} className="text-terracotta" />
+            <span>Garantie décennale</span>
+          </li>
+        </ul>
 
-                {/* Scroll indicator */}
-                <div className="mt-16 flex justify-center">
-                    <button
-                        onClick={handleScrollToServices}
-                        className="text-white/50 hover:text-white/80 transition-colors animate-bounce"
-                        aria-label="Défiler vers les services"
-                    >
-                        <ArrowDown size={28} />
-                    </button>
-                </div>
-            </div>
+        {/* CTAs */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <a
+            href="tel:0663739400"
+            className="btn-terracotta flex items-center gap-2 text-base px-8 py-4"
+            aria-label="Appeler le 06 63 73 94 00"
+          >
+            <Phone size={18} />
+            <span>06 63 73 94 00</span>
+          </a>
+          <a
+            href="tel:0172761763"
+            className="flex items-center gap-2 bg-offwhite/10 hover:bg-offwhite/20 border border-offwhite/30 text-offwhite px-8 py-4 rounded font-medium transition-colors duration-200 text-base"
+            aria-label="Appeler le 01 72 76 17 63"
+          >
+            <Phone size={18} />
+            <span>01 72 76 17 63</span>
+          </a>
+          <button
+            onClick={handleScrollToContact}
+            className="flex items-center gap-2 bg-transparent border border-terracotta text-terracotta hover:bg-terracotta hover:text-white px-8 py-4 rounded font-medium transition-colors duration-200 text-base"
+          >
+            Devis Gratuit
+          </button>
+        </div>
 
-            {/* Stats bar */}
-            <div className="absolute bottom-0 left-0 right-0 z-10 bg-[oklch(0.22_0.015_50/0.95)] backdrop-blur-sm border-t border-white/10">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-                    <dl className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-center">
-                        {[
-                            { value: '20+', label: 'Années d\'expérience' },
-                            { value: '1 500+', label: 'Toitures réalisées' },
-                            { value: '4.9/5', label: 'Note clients' },
-                            { value: '100%', label: 'Garantie décennale' },
-                        ].map((stat) => (
-                            <div key={stat.label}>
-                                <dt className="stat-number text-2xl sm:text-3xl">{stat.value}</dt>
-                                <dd className="text-white/60 text-xs sm:text-sm mt-0.5 font-medium">{stat.label}</dd>
-                            </div>
-                        ))}
-                    </dl>
-                </div>
-            </div>
-        </section>
-    );
+        {/* Stats bar */}
+        <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto bg-charcoal/60 backdrop-blur-sm border border-offwhite/10 rounded-xl p-6">
+          <div className="text-center">
+            <div className="font-serif text-3xl font-bold text-terracotta">500+</div>
+            <div className="text-offwhite/60 text-xs mt-1">Chantiers réalisés</div>
+          </div>
+          <div className="text-center border-x border-offwhite/10">
+            <div className="font-serif text-3xl font-bold text-terracotta">15+</div>
+            <div className="text-offwhite/60 text-xs mt-1">Années d'expérience</div>
+          </div>
+          <div className="text-center">
+            <div className="font-serif text-3xl font-bold text-terracotta">98%</div>
+            <div className="text-offwhite/60 text-xs mt-1">Clients satisfaits</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <button
+        onClick={handleScrollToServices}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-offwhite/40 hover:text-terracotta transition-colors animate-bounce"
+        aria-label="Défiler vers les services"
+      >
+        <ChevronDown size={32} />
+      </button>
+    </section>
+  );
 }

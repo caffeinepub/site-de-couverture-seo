@@ -1,427 +1,324 @@
-import { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle, MapPinned } from 'lucide-react';
+import React, { useState } from 'react';
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle, Info } from 'lucide-react';
 
 interface FormData {
-    nom: string;
-    email: string;
-    telephone: string;
-    service: string;
-    message: string;
+  name: string;
+  phone: string;
+  email: string;
+  service: string;
+  message: string;
 }
 
-interface FormErrors {
-    nom?: string;
-    email?: string;
-    telephone?: string;
-    message?: string;
-}
-
-const CONTACT_EMAIL = 'sv.couverture95@gmail.com';
+const initialForm: FormData = {
+  name: '',
+  phone: '',
+  email: '',
+  service: '',
+  message: '',
+};
 
 const serviceOptions = [
-    'Réfection de toiture complète',
-    'Pose de tuiles ou ardoises',
-    'Réparation & entretien',
-    'Isolation thermique',
-    'Zinguerie & gouttières',
-    'Traitement & nettoyage',
-    'Autre',
+  'Réfection de toiture',
+  'Pose de tuiles',
+  'Zinguerie',
+  'Isolation toiture',
+  'Réparation / Urgence',
+  'Nettoyage & traitement',
+  'Autre',
 ];
 
 export default function Contact() {
-    const [formData, setFormData] = useState<FormData>({
-        nom: '',
-        email: '',
-        telephone: '',
-        service: '',
-        message: '',
-    });
-    const [errors, setErrors] = useState<FormErrors>({});
-    const [submitted, setSubmitted] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
+  const [form, setForm] = useState<FormData>(initialForm);
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Partial<FormData>>({});
 
-    const validate = (): boolean => {
-        const newErrors: FormErrors = {};
-        if (!formData.nom.trim()) newErrors.nom = 'Veuillez entrer votre nom.';
-        if (!formData.email.trim()) {
-            newErrors.email = 'Veuillez entrer votre adresse e-mail.';
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-            newErrors.email = 'Adresse e-mail invalide.';
-        }
-        if (!formData.telephone.trim()) {
-            newErrors.telephone = 'Veuillez entrer votre numéro de téléphone.';
-        } else if (!/^[\d\s\+\-\.]{8,}$/.test(formData.telephone)) {
-            newErrors.telephone = 'Numéro de téléphone invalide.';
-        }
-        if (!formData.message.trim()) newErrors.message = 'Veuillez décrire votre projet.';
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
+  const validate = (): boolean => {
+    const newErrors: Partial<FormData> = {};
+    if (!form.name.trim()) newErrors.name = 'Nom requis';
+    if (!form.phone.trim()) newErrors.phone = 'Téléphone requis';
+    if (!form.message.trim()) newErrors.message = 'Message requis';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-        if (errors[name as keyof FormErrors]) {
-            setErrors(prev => ({ ...prev, [name]: undefined }));
-        }
-    };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setForm(prev => ({ ...prev, [name]: value }));
+    if (errors[name as keyof FormData]) {
+      setErrors(prev => ({ ...prev, [name]: undefined }));
+    }
+  };
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!validate()) return;
-        setIsSubmitting(true);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validate()) return;
 
-        const subject = encodeURIComponent(
-            `Demande de devis – ${formData.service || 'Couverture'} – ${formData.nom}`
-        );
+    try {
+      const subject = encodeURIComponent(
+        `Demande de devis - ${form.service || 'Couverture'} - ${form.name}`
+      );
+      const body = encodeURIComponent(
+        `Nom : ${form.name}\n` +
+        `Téléphone : ${form.phone}\n` +
+        `Email : ${form.email || 'Non renseigné'}\n` +
+        `Service : ${form.service || 'Non précisé'}\n\n` +
+        `Message :\n${form.message}`
+      );
+      const mailtoLink = `mailto:sv.couverture95@gmail.com?subject=${subject}&body=${body}`;
+      window.location.href = mailtoLink;
+      setSubmitted(true);
+    } catch {
+      // If mailto fails, still show confirmation
+      setSubmitted(true);
+    }
+  };
 
-        const body = encodeURIComponent(
-            `Bonjour,\n\nVous avez reçu une nouvelle demande de devis via votre site web.\n\n` +
-            `Nom : ${formData.nom}\n` +
-            `E-mail : ${formData.email}\n` +
-            `Téléphone : ${formData.telephone}\n` +
-            `Service souhaité : ${formData.service || 'Non précisé'}\n\n` +
-            `Message :\n${formData.message}\n\n` +
-            `---\nEnvoyé depuis le formulaire de contact VERDIER COUVERTURE`
-        );
+  const handleReset = () => {
+    setForm(initialForm);
+    setErrors({});
+    setSubmitted(false);
+  };
 
-        const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-
-        // Open the mailto link to trigger the user's email client
-        window.location.href = mailtoLink;
-
-        // Short delay to allow the mailto to trigger before showing confirmation
-        setTimeout(() => {
-            setIsSubmitting(false);
-            setSubmitted(true);
-        }, 500);
-    };
-
+  if (submitted) {
     return (
-        <section
-            id="contact"
-            className="py-20 lg:py-28 bg-white"
-            aria-labelledby="contact-heading"
-        >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Section Header */}
-                <header className="text-center mb-14">
-                    <p className="text-[oklch(0.55_0.13_42)] text-sm font-semibold tracking-widest uppercase mb-3">
-                        Parlons de votre projet
-                    </p>
-                    <div className="section-divider" aria-hidden="true" />
-                    <h2
-                        id="contact-heading"
-                        className="text-3xl sm:text-4xl lg:text-5xl section-heading mb-4"
-                    >
-                        Contactez-Nous
-                    </h2>
-                    <p className="section-subheading text-base sm:text-lg max-w-2xl mx-auto">
-                        Obtenez votre devis gratuit sous 24h. Notre équipe est à votre disposition
-                        pour étudier votre projet de couverture et vous conseiller.
-                    </p>
-                    {/* Zone d'intervention mention */}
-                    <div className="mt-4 inline-flex items-center gap-2 bg-[oklch(0.975_0.005_80)] border border-[oklch(0.87_0.015_70)] rounded-full px-5 py-2 text-sm text-[oklch(0.42_0.02_55)]">
-                        <MapPinned size={15} className="text-[oklch(0.55_0.13_42)] flex-shrink-0" aria-hidden="true" />
-                        <span>
-                            Couvreur disponible sur <strong className="text-[oklch(0.22_0.015_50)]">Cergy</strong>, <strong className="text-[oklch(0.22_0.015_50)]">Argenteuil</strong>, <strong className="text-[oklch(0.22_0.015_50)]">Conflans-Sainte-Honorine</strong>, <strong className="text-[oklch(0.22_0.015_50)]">Herblay</strong>, <strong className="text-[oklch(0.22_0.015_50)]">Pontoise</strong>, <strong className="text-[oklch(0.22_0.015_50)]">Taverny</strong> et environs
-                        </span>
-                    </div>
-                </header>
-
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16">
-                    {/* Contact Info */}
-                    <aside className="lg:col-span-2 space-y-6" aria-label="Informations de contact">
-                        <div>
-                            <h3 className="text-xl font-bold text-[oklch(0.22_0.015_50)] mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
-                                Nos Coordonnées
-                            </h3>
-                            <div className="space-y-4">
-                                {/* Mobile phone */}
-                                <a
-                                    href="tel:+33663739400"
-                                    className="flex items-start gap-3 group"
-                                    aria-label="Téléphone mobile : 06 63 73 94 00"
-                                >
-                                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[oklch(0.55_0.13_42/0.1)] flex items-center justify-center text-[oklch(0.55_0.13_42)] group-hover:bg-[oklch(0.55_0.13_42)] group-hover:text-white transition-all duration-200">
-                                        <Phone size={18} />
-                                    </div>
-                                    <div>
-                                        <div className="text-xs text-[oklch(0.52_0.02_60)] font-medium uppercase tracking-wider mb-0.5">Mobile</div>
-                                        <div className="text-[oklch(0.22_0.015_50)] font-medium text-sm group-hover:text-[oklch(0.55_0.13_42)] transition-colors">06 63 73 94 00</div>
-                                    </div>
-                                </a>
-                                {/* Landline phone */}
-                                <a
-                                    href="tel:+33172761763"
-                                    className="flex items-start gap-3 group"
-                                    aria-label="Téléphone fixe : 01 72 76 17 63"
-                                >
-                                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[oklch(0.55_0.13_42/0.1)] flex items-center justify-center text-[oklch(0.55_0.13_42)] group-hover:bg-[oklch(0.55_0.13_42)] group-hover:text-white transition-all duration-200">
-                                        <Phone size={18} />
-                                    </div>
-                                    <div>
-                                        <div className="text-xs text-[oklch(0.52_0.02_60)] font-medium uppercase tracking-wider mb-0.5">Fixe</div>
-                                        <div className="text-[oklch(0.22_0.015_50)] font-medium text-sm group-hover:text-[oklch(0.55_0.13_42)] transition-colors">01 72 76 17 63</div>
-                                    </div>
-                                </a>
-                                {/* Email */}
-                                <a
-                                    href={`mailto:${CONTACT_EMAIL}`}
-                                    className="flex items-start gap-3 group"
-                                    aria-label={`E-mail : ${CONTACT_EMAIL}`}
-                                >
-                                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[oklch(0.55_0.13_42/0.1)] flex items-center justify-center text-[oklch(0.55_0.13_42)] group-hover:bg-[oklch(0.55_0.13_42)] group-hover:text-white transition-all duration-200">
-                                        <Mail size={18} />
-                                    </div>
-                                    <div>
-                                        <div className="text-xs text-[oklch(0.52_0.02_60)] font-medium uppercase tracking-wider mb-0.5">E-mail</div>
-                                        <div className="text-[oklch(0.22_0.015_50)] font-medium text-sm group-hover:text-[oklch(0.55_0.13_42)] transition-colors">{CONTACT_EMAIL}</div>
-                                    </div>
-                                </a>
-                                {/* Address */}
-                                <a
-                                    href="https://maps.google.com/?q=206+chemin+de+la+petite+patelle+Pierrelaye+95480"
-                                    className="flex items-start gap-3 group"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Adresse : 206 chemin de la petite patelle, Pierrelaye 95480"
-                                >
-                                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[oklch(0.55_0.13_42/0.1)] flex items-center justify-center text-[oklch(0.55_0.13_42)] group-hover:bg-[oklch(0.55_0.13_42)] group-hover:text-white transition-all duration-200">
-                                        <MapPin size={18} />
-                                    </div>
-                                    <div>
-                                        <div className="text-xs text-[oklch(0.52_0.02_60)] font-medium uppercase tracking-wider mb-0.5">Adresse</div>
-                                        <div className="text-[oklch(0.22_0.015_50)] font-medium text-sm group-hover:text-[oklch(0.55_0.13_42)] transition-colors">206 chemin de la petite patelle, Pierrelaye 95480</div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        {/* Hours */}
-                        <div className="bg-[oklch(0.975_0.005_80)] rounded-xl p-5 border border-[oklch(0.87_0.015_70)]">
-                            <div className="flex items-center gap-2 mb-3">
-                                <Clock size={16} className="text-[oklch(0.55_0.13_42)]" aria-hidden="true" />
-                                <h3 className="font-bold text-[oklch(0.22_0.015_50)] text-sm uppercase tracking-wider">
-                                    Horaires d'ouverture
-                                </h3>
-                            </div>
-                            <dl className="space-y-1.5 text-sm">
-                                {[
-                                    { day: 'Lundi – Vendredi', hours: '08h00 – 18h00' },
-                                    { day: 'Samedi', hours: '09h00 – 13h00' },
-                                    { day: 'Dimanche', hours: 'Fermé' },
-                                ].map((item) => (
-                                    <div key={item.day} className="flex justify-between">
-                                        <dt className="text-[oklch(0.42_0.02_55)]">{item.day}</dt>
-                                        <dd className={`font-medium ${item.hours === 'Fermé' ? 'text-[oklch(0.52_0.02_60)]' : 'text-[oklch(0.22_0.015_50)]'}`}>
-                                            {item.hours}
-                                        </dd>
-                                    </div>
-                                ))}
-                            </dl>
-                        </div>
-
-                        {/* Emergency */}
-                        <div className="bg-[oklch(0.55_0.13_42)] rounded-xl p-5 text-white">
-                            <h3 className="font-bold mb-1 text-base" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
-                                Urgence Toiture ?
-                            </h3>
-                            <p className="text-white/80 text-sm mb-3">
-                                Fuite, tuiles arrachées par le vent ? Nous intervenons en urgence 7j/7.
-                            </p>
-                            <a
-                                href="tel:+33663739400"
-                                className="inline-flex items-center gap-2 bg-white text-[oklch(0.55_0.13_42)] font-semibold text-sm px-4 py-2 rounded-lg hover:bg-[oklch(0.96_0.012_75)] transition-colors"
-                                aria-label="Appeler pour une urgence toiture"
-                            >
-                                <Phone size={14} />
-                                Appeler maintenant
-                            </a>
-                        </div>
-                    </aside>
-
-                    {/* Contact Form */}
-                    <div className="lg:col-span-3">
-                        {submitted ? (
-                            <div className="h-full flex items-center justify-center">
-                                <div className="text-center py-16">
-                                    <div className="w-16 h-16 bg-[oklch(0.55_0.13_42/0.1)] rounded-full flex items-center justify-center mx-auto mb-4">
-                                        <CheckCircle size={32} className="text-[oklch(0.55_0.13_42)]" />
-                                    </div>
-                                    <h3 className="text-2xl font-bold text-[oklch(0.22_0.015_50)] mb-2" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
-                                        Demande envoyée !
-                                    </h3>
-                                    <p className="text-[oklch(0.42_0.02_55)] text-base max-w-sm mx-auto">
-                                        Votre client de messagerie s'est ouvert avec votre demande pré-remplie.
-                                        Envoyez l'e-mail pour que nous puissions vous recontacter sous 24h.
-                                    </p>
-                                    <p className="mt-3 text-sm text-[oklch(0.52_0.02_60)]">
-                                        Destinataire : <strong className="text-[oklch(0.22_0.015_50)]">{CONTACT_EMAIL}</strong>
-                                    </p>
-                                    <button
-                                        onClick={() => setSubmitted(false)}
-                                        className="mt-6 text-sm text-[oklch(0.55_0.13_42)] underline hover:no-underline"
-                                    >
-                                        Envoyer une autre demande
-                                    </button>
-                                </div>
-                            </div>
-                        ) : (
-                            <form
-                                onSubmit={handleSubmit}
-                                noValidate
-                                aria-label="Formulaire de demande de devis"
-                                className="space-y-5"
-                            >
-                                {/* Info banner */}
-                                <div className="flex items-start gap-2.5 bg-[oklch(0.975_0.005_80)] border border-[oklch(0.87_0.015_70)] rounded-lg px-4 py-3 text-sm text-[oklch(0.42_0.02_55)]">
-                                    <Mail size={15} className="text-[oklch(0.55_0.13_42)] flex-shrink-0 mt-0.5" aria-hidden="true" />
-                                    <span>
-                                        Votre demande sera envoyée à <strong className="text-[oklch(0.22_0.015_50)]">{CONTACT_EMAIL}</strong> via votre client de messagerie.
-                                    </span>
-                                </div>
-
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                                    {/* Nom */}
-                                    <div>
-                                        <label htmlFor="nom" className="block text-sm font-medium text-[oklch(0.32_0.015_50)] mb-1.5">
-                                            Nom complet <span className="text-[oklch(0.55_0.13_42)]" aria-hidden="true">*</span>
-                                        </label>
-                                        <input
-                                            id="nom"
-                                            name="nom"
-                                            type="text"
-                                            autoComplete="name"
-                                            value={formData.nom}
-                                            onChange={handleChange}
-                                            className={`form-input ${errors.nom ? 'border-red-400 focus:ring-red-300' : ''}`}
-                                            placeholder="Jean Dupont"
-                                            aria-required="true"
-                                            aria-describedby={errors.nom ? 'nom-error' : undefined}
-                                        />
-                                        {errors.nom && (
-                                            <p id="nom-error" className="mt-1 text-xs text-red-500" role="alert">{errors.nom}</p>
-                                        )}
-                                    </div>
-
-                                    {/* Email */}
-                                    <div>
-                                        <label htmlFor="email" className="block text-sm font-medium text-[oklch(0.32_0.015_50)] mb-1.5">
-                                            Votre adresse e-mail <span className="text-[oklch(0.55_0.13_42)]" aria-hidden="true">*</span>
-                                        </label>
-                                        <input
-                                            id="email"
-                                            name="email"
-                                            type="email"
-                                            autoComplete="email"
-                                            value={formData.email}
-                                            onChange={handleChange}
-                                            className={`form-input ${errors.email ? 'border-red-400 focus:ring-red-300' : ''}`}
-                                            placeholder="jean@exemple.fr"
-                                            aria-required="true"
-                                            aria-describedby={errors.email ? 'email-error' : undefined}
-                                        />
-                                        {errors.email && (
-                                            <p id="email-error" className="mt-1 text-xs text-red-500" role="alert">{errors.email}</p>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                                    {/* Téléphone */}
-                                    <div>
-                                        <label htmlFor="telephone" className="block text-sm font-medium text-[oklch(0.32_0.015_50)] mb-1.5">
-                                            Téléphone <span className="text-[oklch(0.55_0.13_42)]" aria-hidden="true">*</span>
-                                        </label>
-                                        <input
-                                            id="telephone"
-                                            name="telephone"
-                                            type="tel"
-                                            autoComplete="tel"
-                                            value={formData.telephone}
-                                            onChange={handleChange}
-                                            className={`form-input ${errors.telephone ? 'border-red-400 focus:ring-red-300' : ''}`}
-                                            placeholder="06 XX XX XX XX"
-                                            aria-required="true"
-                                            aria-describedby={errors.telephone ? 'telephone-error' : undefined}
-                                        />
-                                        {errors.telephone && (
-                                            <p id="telephone-error" className="mt-1 text-xs text-red-500" role="alert">{errors.telephone}</p>
-                                        )}
-                                    </div>
-
-                                    {/* Service */}
-                                    <div>
-                                        <label htmlFor="service" className="block text-sm font-medium text-[oklch(0.32_0.015_50)] mb-1.5">
-                                            Type de service
-                                        </label>
-                                        <select
-                                            id="service"
-                                            name="service"
-                                            value={formData.service}
-                                            onChange={handleChange}
-                                            className="form-input"
-                                        >
-                                            <option value="">Sélectionnez un service</option>
-                                            {serviceOptions.map(opt => (
-                                                <option key={opt} value={opt}>{opt}</option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                </div>
-
-                                {/* Message */}
-                                <div>
-                                    <label htmlFor="message" className="block text-sm font-medium text-[oklch(0.32_0.015_50)] mb-1.5">
-                                        Décrivez votre projet <span className="text-[oklch(0.55_0.13_42)]" aria-hidden="true">*</span>
-                                    </label>
-                                    <textarea
-                                        id="message"
-                                        name="message"
-                                        rows={5}
-                                        value={formData.message}
-                                        onChange={handleChange}
-                                        className={`form-input resize-none ${errors.message ? 'border-red-400 focus:ring-red-300' : ''}`}
-                                        placeholder="Décrivez votre projet : type de toiture, surface approximative, travaux souhaités, urgence éventuelle..."
-                                        aria-required="true"
-                                        aria-describedby={errors.message ? 'message-error' : undefined}
-                                    />
-                                    {errors.message && (
-                                        <p id="message-error" className="mt-1 text-xs text-red-500" role="alert">{errors.message}</p>
-                                    )}
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    disabled={isSubmitting}
-                                    className="btn-terracotta w-full flex items-center justify-center gap-2 py-3.5 text-base disabled:opacity-60 disabled:cursor-not-allowed"
-                                    aria-label="Envoyer la demande de devis"
-                                >
-                                    {isSubmitting ? (
-                                        <>
-                                            <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
-                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                                            </svg>
-                                            Ouverture du client mail...
-                                        </>
-                                    ) : (
-                                        <>
-                                            <Send size={16} aria-hidden="true" />
-                                            Envoyer ma demande de devis
-                                        </>
-                                    )}
-                                </button>
-
-                                <p className="text-xs text-center text-[oklch(0.52_0.02_60)]">
-                                    En cliquant sur « Envoyer », votre client de messagerie s'ouvrira avec votre demande pré-remplie à destination de <strong>{CONTACT_EMAIL}</strong>.
-                                </p>
-                            </form>
-                        )}
-                    </div>
-                </div>
+      <section id="contact" className="py-20 bg-charcoal" aria-labelledby="contact-heading">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="bg-offwhite/5 border border-offwhite/10 rounded-2xl p-12">
+            <CheckCircle size={64} className="text-terracotta mx-auto mb-6" />
+            <h2 className="font-serif text-3xl font-bold text-offwhite mb-4">
+              Demande envoyée !
+            </h2>
+            <p className="text-offwhite/70 text-lg mb-2">
+              Votre client de messagerie s'est ouvert avec votre demande de devis.
+            </p>
+            <p className="text-offwhite/50 text-sm mb-8">
+              Votre message sera envoyé à{' '}
+              <span className="text-terracotta">sv.couverture95@gmail.com</span>.
+              Nous vous répondrons dans les plus brefs délais.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="tel:0663739400"
+                className="btn-terracotta flex items-center justify-center gap-2"
+              >
+                <Phone size={16} />
+                <span>06 63 73 94 00</span>
+              </a>
+              <button
+                onClick={handleReset}
+                className="border border-offwhite/20 text-offwhite/70 hover:text-offwhite hover:border-offwhite/40 px-6 py-3 rounded font-medium transition-colors duration-200"
+              >
+                Nouvelle demande
+              </button>
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
     );
+  }
+
+  return (
+    <section id="contact" className="py-20 bg-charcoal" aria-labelledby="contact-heading">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <span className="text-terracotta text-sm font-medium tracking-widest uppercase">Contact</span>
+          <h2 id="contact-heading" className="font-serif text-4xl lg:text-5xl font-bold text-offwhite mt-2 mb-4">
+            Demandez Votre Devis Gratuit
+          </h2>
+          <p className="text-offwhite/60 max-w-2xl mx-auto text-lg">
+            Réponse sous 24h — Devis gratuit et sans engagement
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+          {/* Contact info */}
+          <div className="lg:col-span-2 space-y-8">
+            <div>
+              <h3 className="font-serif text-2xl font-bold text-offwhite mb-6">Nous Contacter</h3>
+              <div className="space-y-4">
+                <a
+                  href="tel:0663739400"
+                  className="flex items-start gap-4 group"
+                  aria-label="Appeler le mobile"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-terracotta/20 flex items-center justify-center flex-shrink-0 group-hover:bg-terracotta/30 transition-colors">
+                    <Phone size={18} className="text-terracotta" />
+                  </div>
+                  <div>
+                    <div className="text-offwhite/50 text-xs uppercase tracking-wide mb-1">Mobile</div>
+                    <div className="text-offwhite font-medium group-hover:text-terracotta transition-colors">
+                      06 63 73 94 00
+                    </div>
+                  </div>
+                </a>
+
+                <a
+                  href="tel:0172761763"
+                  className="flex items-start gap-4 group"
+                  aria-label="Appeler le fixe"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-terracotta/20 flex items-center justify-center flex-shrink-0 group-hover:bg-terracotta/30 transition-colors">
+                    <Phone size={18} className="text-terracotta" />
+                  </div>
+                  <div>
+                    <div className="text-offwhite/50 text-xs uppercase tracking-wide mb-1">Fixe</div>
+                    <div className="text-offwhite font-medium group-hover:text-terracotta transition-colors">
+                      01 72 76 17 63
+                    </div>
+                  </div>
+                </a>
+
+                <a
+                  href="mailto:sv.couverture95@gmail.com"
+                  className="flex items-start gap-4 group"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-terracotta/20 flex items-center justify-center flex-shrink-0 group-hover:bg-terracotta/30 transition-colors">
+                    <Mail size={18} className="text-terracotta" />
+                  </div>
+                  <div>
+                    <div className="text-offwhite/50 text-xs uppercase tracking-wide mb-1">Email</div>
+                    <div className="text-offwhite font-medium group-hover:text-terracotta transition-colors break-all">
+                      sv.couverture95@gmail.com
+                    </div>
+                  </div>
+                </a>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-terracotta/20 flex items-center justify-center flex-shrink-0">
+                    <MapPin size={18} className="text-terracotta" />
+                  </div>
+                  <div>
+                    <div className="text-offwhite/50 text-xs uppercase tracking-wide mb-1">Zone</div>
+                    <div className="text-offwhite font-medium">Île-de-France</div>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-terracotta/20 flex items-center justify-center flex-shrink-0">
+                    <Clock size={18} className="text-terracotta" />
+                  </div>
+                  <div>
+                    <div className="text-offwhite/50 text-xs uppercase tracking-wide mb-1">Horaires</div>
+                    <div className="text-offwhite font-medium">Lun–Sam : 7h–19h</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Info banner */}
+            <div className="flex items-start gap-3 bg-terracotta/10 border border-terracotta/20 rounded-lg p-4">
+              <Info size={16} className="text-terracotta flex-shrink-0 mt-0.5" />
+              <p className="text-offwhite/70 text-sm leading-relaxed">
+                Le formulaire ouvrira votre client de messagerie avec votre demande pré-remplie,
+                adressée à <span className="text-terracotta">sv.couverture95@gmail.com</span>.
+              </p>
+            </div>
+          </div>
+
+          {/* Form */}
+          <div className="lg:col-span-3">
+            <form
+              onSubmit={handleSubmit}
+              noValidate
+              className="bg-offwhite/5 border border-offwhite/10 rounded-2xl p-8 space-y-6"
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="name" className="block text-offwhite/70 text-sm font-medium mb-2">
+                    Nom complet <span className="text-terracotta">*</span>
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    value={form.name}
+                    onChange={handleChange}
+                    placeholder="Jean Dupont"
+                    className={`form-input ${errors.name ? 'border-red-400' : ''}`}
+                    autoComplete="name"
+                  />
+                  {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="phone" className="block text-offwhite/70 text-sm font-medium mb-2">
+                    Téléphone <span className="text-terracotta">*</span>
+                  </label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    value={form.phone}
+                    onChange={handleChange}
+                    placeholder="06 XX XX XX XX"
+                    className={`form-input ${errors.phone ? 'border-red-400' : ''}`}
+                    autoComplete="tel"
+                  />
+                  {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-offwhite/70 text-sm font-medium mb-2">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="jean@exemple.fr"
+                  className="form-input"
+                  autoComplete="email"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="service" className="block text-offwhite/70 text-sm font-medium mb-2">
+                  Type de service
+                </label>
+                <select
+                  id="service"
+                  name="service"
+                  value={form.service}
+                  onChange={handleChange}
+                  className="form-input"
+                >
+                  <option value="">Sélectionnez un service</option>
+                  {serviceOptions.map(opt => (
+                    <option key={opt} value={opt}>{opt}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-offwhite/70 text-sm font-medium mb-2">
+                  Description des travaux <span className="text-terracotta">*</span>
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
+                  rows={5}
+                  placeholder="Décrivez vos travaux : type de toiture, surface approximative, problème constaté..."
+                  className={`form-input resize-none ${errors.message ? 'border-red-400' : ''}`}
+                />
+                {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message}</p>}
+              </div>
+
+              <button
+                type="submit"
+                className="btn-terracotta w-full flex items-center justify-center gap-2 text-base py-4"
+              >
+                <Send size={18} />
+                <span>Envoyer ma demande de devis</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

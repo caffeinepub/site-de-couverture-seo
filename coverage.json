@@ -1,25 +1,59 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-28T04:27:16.511Z",
+  "generatedAt": "2026-03-01T01:52:22.488Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 1,
-    "implemented": 1,
+    "total": 4,
+    "implemented": 2,
     "items": [
       {
-        "id": "REQ-39",
-        "summary": "Audit every location in the codebase where a contact email address appears — including the Contact section form action/mailto link, the contact info card email display link, the Footer email link, and any other mailto: href — and verify that each one uses exactly 'sv.couverture95@gmail.com'. Correct any mismatched, missing, or malformed email addresses so that all mailto: links and form submission targets point to sv.couverture95@gmail.com.",
+        "id": "REQ-1",
+        "summary": "Audit the frontend routing and all internal links to ensure no broken or missing routes (404s) exist. All navigation links, CTA buttons, and anchor scroll targets must resolve correctly without producing 4xx responses.",
+        "status": "missing",
+        "plannedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/Navigation.tsx",
+          "frontend/src/components/Hero.tsx",
+          "frontend/src/components/Footer.tsx",
+          "frontend/src/components/Services.tsx"
+        ],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Ensure the sitemap.xml and robots.txt only reference valid, reachable URLs. The sitemap must not list any URL that returns a 4xx response. The robots.txt must not accidentally disallow crawlers from key pages.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/Contact.tsx",
-          "frontend/src/components/Footer.tsx"
+          "frontend/public/sitemap.xml",
+          "frontend/public/robots.txt"
         ],
         "matchedFiles": [
-          "frontend/src/components/Contact.tsx"
+          "frontend/public/sitemap.xml",
+          "frontend/public/robots.txt"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Verify the Google Search Console verification file (google2ea9c3e7d5d4abde.html) is publicly accessible at the root of the deployed site without authentication or redirect, so that the verification request does not return a 4xx.",
+        "status": "missing",
+        "plannedFiles": [
+          "frontend/public/google2ea9c3e7d5d4abde.html"
+        ],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Ensure the canonical URL declared in the Open Graph tags, Twitter Card meta tags, JSON-LD structured data, and the <link rel='canonical'> tag in frontend/index.html all match the actual production domain exactly (no trailing slash mismatch, no http vs https mismatch) to prevent Google from flagging them as 4xx alternate URLs.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/index.html"
+        ],
+        "matchedFiles": [
+          "frontend/index.html"
         ]
       }
     ]
@@ -29,7 +63,9 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/Contact.tsx",
+    "frontend/index.html",
+    "frontend/public/robots.txt",
+    "frontend/public/sitemap.xml",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

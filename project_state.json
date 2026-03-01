@@ -1,283 +1,26 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 35,
-  "summary": "Site de couverture (landing page) avec référencement naturel (SEO) optimisé pour VERDIER COUVERTURE, Pierrelaye 95480.",
-  "architectural_notes": [
-    "Site statique HTML/CSS/JS pour maximiser les performances et le SEO",
-    "Structure sémantique HTML5 pour favoriser l'indexation par les moteurs de recherche"
-  ],
+  "projectStateVersion": 3,
+  "summary": "New project",
+  "architectural_notes": [],
   "known_issues": [
-    "Erreur Google Rich Results : champ 'itemReviewed' manquant dans les données structurées des avis (Review/AggregateRating)",
-    "Google Search Console : aucun sitemap référent détecté, aucune page d'origine détectée",
-    "Google Search Console : 'Adresse de sitemap incorrecte' — le sitemap.xml n'est pas reconnu comme valide par Google",
-    "Google Search Console : problèmes d'exploration — 'Dernière exploration Sans objet', URL canonique non détectée, page non récupérée ni indexée par Google",
-    "Google PageSpeed Insights : mauvais scores FCP (First Contentful Paint) et LCP (Largest Contentful Paint) — vitesse de chargement insuffisante",
-    "Bug de scroll : les sections défilent de manière incorrecte ou des éléments 'suivent' le scroll vers le bas (comportement de sticky/fixed mal configuré)",
-    "Formulaire de contact : l'utilisateur ne reçoit pas les demandes de devis à sv.couverture95@gmail.com — adresse email à vérifier dans tous les liens mailto et champs du formulaire"
+    "Pages bloquées avec erreur 4xx signalées dans Google Search Console"
   ],
   "isFixRequest": true,
   "existing_features": [
     {
-      "id": "feature-create-a-modern-responsive-landing-page-with-a-clear-hero-section-navigation-bar-services-section-about-section-testimonials-section-and-a-contact-call-to-action-section-all-content-must-be-written-in-french-and-target-a-roofing-couverture-business",
-      "title": "Create a modern, responsive landing page with a clear hero section, navigation bar, services section, about section, testimonials section, and a contact/call-to-action section. All content must be written in French and target a roofing (couverture) business.",
-      "reqIds": [
-        "REQ-1"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-on-page-seo-best-practices-add-a-semantic-html-structure-with-a-single-h1-per-page-hierarchical-h2-h3-headings-a-descriptive-meta-title-and-meta-description-tag-in-the-document-head-open-graph-tags-structured-data-json-ld-for-localbusiness-clean-url-friendly-section-ids-and-descriptive-alt-attributes-on-all-images",
-      "title": "Implement on-page SEO best practices: add a semantic HTML structure with a single H1 per page, hierarchical H2/H3 headings, a descriptive meta title and meta description tag in the document head, Open Graph tags, structured data (JSON-LD for LocalBusiness), clean URL-friendly section IDs, and descriptive alt attributes on all images.",
+      "id": "feature-ensure-the-sitemap-xml-and-robots-txt-only-reference-valid-reachable-urls-the-sitemap-must-not-list-any-url-that-returns-a-4xx-response-the-robots-txt-must-not-accidentally-disallow-crawlers-from-key-pages",
+      "title": "Ensure the sitemap.xml and robots.txt only reference valid, reachable URLs. The sitemap must not list any URL that returns a 4xx response. The robots.txt must not accidentally disallow crawlers from key pages.",
       "reqIds": [
         "REQ-2"
       ],
       "version": 1
     },
     {
-      "id": "feature-apply-a-cohesive-visual-theme-suited-to-a-professional-roofing-business-use-a-warm-earthy-color-palette-slate-grays-terracotta-off-white-strong-serif-or-slab-serif-typography-for-headings-and-clean-sans-serif-for-body-text-bold-section-separators-and-subtle-texture-cues-that-evoke-roofing-materials-enforce-the-theme-consistently-across-all-sections",
-      "title": "Apply a cohesive visual theme suited to a professional roofing business: use a warm, earthy color palette (slate grays, terracotta, off-white), strong serif or slab-serif typography for headings and clean sans-serif for body text, bold section separators, and subtle texture cues that evoke roofing materials. Enforce the theme consistently across all sections.",
-      "reqIds": [
-        "REQ-3"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-render-the-generated-hero-background-image-and-any-other-generated-static-assets-from-frontend-public-assets-generated-within-the-appropriate-page-sections",
-      "title": "Render the generated hero background image and any other generated static assets from frontend/public/assets/generated within the appropriate page sections.",
+      "id": "feature-ensure-the-canonical-url-declared-in-the-open-graph-tags-twitter-card-meta-tags-json-ld-structured-data-and-the-link-rel-canonical-tag-in-frontend-index-html-all-match-the-actual-production-domain-exactly-no-trailing-slash-mismatch-no-http-vs-https-mismatch-to-prevent-google-from-flagging-them-as-4xx-alternate-urls",
+      "title": "Ensure the canonical URL declared in the Open Graph tags, Twitter Card meta tags, JSON-LD structured data, and the <link rel='canonical'> tag in frontend/index.html all match the actual production domain exactly (no trailing slash mismatch, no http vs https mismatch) to prevent Google from flagging them as 4xx alternate URLs.",
       "reqIds": [
         "REQ-4"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-remove-all-mentions-of-rge-label-badge-certification-text-from-every-component-across-the-site-including-the-floating-rge-badge-in-the-about-section-any-rge-references-in-the-certifications-list-and-any-rge-text-in-the-footer",
-      "title": "Remove all mentions of 'RGE' (label, badge, certification text) from every component across the site, including the floating RGE badge in the About section, any RGE references in the certifications list, and any RGE text in the Footer.",
-      "reqIds": [
-        "REQ-5"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-replace-the-company-site-name-throughout-the-entire-site-with-verdier-couverture-update-it-in-the-navigation-logo-hero-section-headline-subtext-about-section-footer-brand-name-the-html-title-tag-open-graph-meta-tags-and-the-json-ld-localbusiness-structured-data-in-index-html",
-      "title": "Replace the company/site name throughout the entire site with 'VERDIER COUVERTURE'. Update it in the Navigation logo, Hero section headline/subtext, About section, Footer brand name, the HTML <title> tag, Open Graph meta tags, and the JSON-LD LocalBusiness structured data in index.html.",
-      "reqIds": [
-        "REQ-6"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-replace-the-existing-mobile-phone-number-with-06-63-73-94-00-and-add-a-landline-number-01-72-76-17-63-in-all-locations-where-contact-phone-numbers-appear-navigation-cta-button-hero-section-highlights-contact-section-info-cards-and-footer-contact-details-both-numbers-must-be-displayed-and-formatted-consistently",
-      "title": "Replace the existing mobile phone number with '06 63 73 94 00' and add a landline number '01 72 76 17 63' in all locations where contact phone numbers appear: Navigation CTA button, Hero section highlights, Contact section info cards, and Footer contact details. Both numbers must be displayed and formatted consistently.",
-      "reqIds": [
-        "REQ-7"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-the-company-address-to-206-chemin-de-la-petite-patelle-pierrelaye-95480-in-all-locations-where-the-address-appears-contact-section-info-card-footer-contact-details-and-the-json-ld-localbusiness-structured-data-in-index-html-streetaddress-addresslocality-postalcode-fields",
-      "title": "Update the company address to '206 chemin de la petite patelle, Pierrelaye 95480' in all locations where the address appears: Contact section info card, Footer contact details, and the JSON-LD LocalBusiness structured data in index.html (streetAddress, addressLocality, postalCode fields).",
-      "reqIds": [
-        "REQ-8"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-replace-the-existing-email-address-with-sv-couverture95-gmail-com-in-all-locations-where-an-email-address-appears-across-the-site-the-contact-section-info-card-the-footer-contact-details-and-the-json-ld-localbusiness-structured-data-in-index-html-if-an-email-field-is-present-the-email-must-be-displayed-as-a-clickable-mailto-link-and-formatted-consistently-everywhere-it-appears",
-      "title": "Replace the existing email address with 'sv.couverture95@gmail.com' in all locations where an email address appears across the site: the Contact section info card, the Footer contact details, and the JSON-LD LocalBusiness structured data in index.html (if an email field is present). The email must be displayed as a clickable mailto: link and formatted consistently everywhere it appears.",
-      "reqIds": [
-        "REQ-9"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-replace-the-existing-testimonials-in-the-testimonials-section-frontend-src-components-testimonials-tsx-with-a-new-set-of-at-least-6-recent-customer-reviews-each-review-must-include-a-realistic-french-customer-name-a-location-in-the-le-de-france-region-a-star-rating-4-or-5-stars-a-service-type-e-g-r-fection-de-toiture-pose-de-tuiles-r-paration-isolation-a-recent-date-2024-or-2025-and-a-detailed-review-text-in-french-praising-the-quality-of-work-by-verdier-couverture-initials-avatars-must-be-derived-from-the-customer-names-and-styled-consistently-with-the-existing-earthy-roofing-theme",
-      "title": "Replace the existing testimonials in the Testimonials section (frontend/src/components/Testimonials.tsx) with a new set of at least 6 recent customer reviews. Each review must include: a realistic French customer name, a location in the Île-de-France region, a star rating (4 or 5 stars), a service type (e.g., réfection de toiture, pose de tuiles, réparation, isolation), a recent date (2024 or 2025), and a detailed review text in French praising the quality of work by VERDIER COUVERTURE. Initials avatars must be derived from the customer names and styled consistently with the existing earthy roofing theme.",
-      "reqIds": [
-        "REQ-10"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-all-testimonial-dates-in-frontend-src-components-testimonials-tsx-so-that-the-most-recent-reviews-are-dated-up-to-january-2026-distribute-dates-realistically-across-2025-and-early-2026-keeping-all-other-review-content-names-locations-ratings-service-types-review-text-unchanged",
-      "title": "Update all testimonial dates in frontend/src/components/Testimonials.tsx so that the most recent reviews are dated up to January 2026. Distribute dates realistically across 2025 and early 2026, keeping all other review content (names, locations, ratings, service types, review text) unchanged.",
-      "reqIds": [
-        "REQ-11"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-replace-the-icon-square-placeholder-in-each-service-card-within-frontend-src-components-services-tsx-with-a-relevant-illustrative-photo-each-of-the-six-service-cards-e-g-r-fection-de-toiture-pose-de-tuiles-r-paration-isolation-zinguerie-nettoyage-traitement-must-display-a-dedicated-photo-image-instead-of-the-current-icon-square-images-must-be-rendered-from-frontend-public-assets-generated-fit-the-card-layout-and-include-a-descriptive-alt-attribute-in-french",
-      "title": "Replace the icon/square placeholder in each service card within frontend/src/components/Services.tsx with a relevant illustrative photo. Each of the six service cards (e.g., réfection de toiture, pose de tuiles, réparation, isolation, zinguerie, nettoyage/traitement) must display a dedicated photo image instead of the current icon square. Images must be rendered from frontend/public/assets/generated, fit the card layout, and include a descriptive alt attribute in French.",
-      "reqIds": [
-        "REQ-12"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-enrich-the-meta-title-and-meta-description-in-frontend-index-html-with-an-expanded-set-of-geo-targeted-keywords-covering-verdier-couverture-s-service-area-pierrelaye-cergy-pontoise-saint-ouen-l-aum-ne-conflans-sainte-honorine-herblay-taverny-ermont-argenteuil-osny-jouy-le-moutier-vaur-al-neuville-sur-oise-m-ry-sur-oise-eaubonne-sannois-franconville-cormeilles-en-parisis-montigny-l-s-cormeilles-l-isle-adam-beaumont-sur-oise-persan-saint-leu-la-for-t-bouff-mont-domont-sarcelles-garges-l-s-gonesse-val-d-oise-95-and-le-de-france-keywords-must-also-cover-services-couvreur-toiture-r-fection-r-paration-pose-de-tuiles-zinguerie-isolation-nettoyage-toiture-traitement-toiture-couvreur-urgence-couvreur-pas-cher",
-      "title": "Enrich the meta title and meta description in frontend/index.html with an expanded set of geo-targeted keywords covering VERDIER COUVERTURE's service area: Pierrelaye, Cergy, Pontoise, Saint-Ouen-l'Aumône, Conflans-Sainte-Honorine, Herblay, Taverny, Ermont, Argenteuil, Osny, Jouy-le-Moutier, Vauréal, Neuville-sur-Oise, Méry-sur-Oise, Eaubonne, Sannois, Franconville, Cormeilles-en-Parisis, Montigny-lès-Cormeilles, L'Isle-Adam, Beaumont-sur-Oise, Persan, Saint-Leu-la-Forêt, Bouffémont, Domont, Sarcelles, Garges-lès-Gonesse, Val-d'Oise (95), and Île-de-France. Keywords must also cover services: couvreur, toiture, réfection, réparation, pose de tuiles, zinguerie, isolation, nettoyage toiture, traitement toiture, couvreur urgence, couvreur pas cher.",
-      "reqIds": [
-        "REQ-13"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-a-dedicated-hidden-but-indexable-seo-keyword-section-visually-minimal-styled-with-small-muted-text-or-integrated-as-a-zones-d-intervention-section-in-the-page-either-in-the-footer-or-as-a-new-section-between-contact-and-footer-listing-all-served-cities-and-towns-pierrelaye-cergy-pontoise-saint-ouen-l-aum-ne-conflans-sainte-honorine-herblay-taverny-ermont-argenteuil-osny-jouy-le-moutier-vaur-al-neuville-sur-oise-m-ry-sur-oise-eaubonne-sannois-franconville-cormeilles-en-parisis-montigny-l-s-cormeilles-l-isle-adam-beaumont-sur-oise-persan-saint-leu-la-for-t-bouff-mont-domont-sarcelles-garges-l-s-gonesse-val-d-oise-95-le-de-france-present-them-as-zones-d-intervention-using-proper-h2-h3-heading-and-a-responsive-tag-cloud-or-grid-layout-consistent-with-the-existing-earthy-roofing-theme",
-      "title": "Add a dedicated hidden-but-indexable SEO keyword section (visually minimal, styled with small muted text or integrated as a 'zones d'intervention' section) in the page — either in the Footer or as a new section between Contact and Footer — listing all served cities and towns: Pierrelaye, Cergy, Pontoise, Saint-Ouen-l'Aumône, Conflans-Sainte-Honorine, Herblay, Taverny, Ermont, Argenteuil, Osny, Jouy-le-Moutier, Vauréal, Neuville-sur-Oise, Méry-sur-Oise, Eaubonne, Sannois, Franconville, Cormeilles-en-Parisis, Montigny-lès-Cormeilles, L'Isle-Adam, Beaumont-sur-Oise, Persan, Saint-Leu-la-Forêt, Bouffémont, Domont, Sarcelles, Garges-lès-Gonesse, Val-d'Oise (95), Île-de-France. Present them as 'Zones d'intervention' using proper H2/H3 heading and a responsive tag-cloud or grid layout consistent with the existing earthy roofing theme.",
-      "reqIds": [
-        "REQ-14"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-the-text-content-of-the-hero-section-frontend-src-components-hero-tsx-about-section-frontend-src-components-about-tsx-and-contact-section-frontend-src-components-contact-tsx-to-naturally-weave-in-geo-targeted-keywords-referencing-neighboring-cities-for-example-the-hero-subtitle-should-mention-pierrelaye-cergy-pontoise-et-toute-la-r-gion-val-d-oise-the-about-section-should-mention-the-intervention-area-the-contact-section-should-reinforce-couvreur-disponible-sur-cergy-argenteuil-conflans-herblay-et-environs",
-      "title": "Update the text content of the Hero section (frontend/src/components/Hero.tsx), About section (frontend/src/components/About.tsx), and Contact section (frontend/src/components/Contact.tsx) to naturally weave in geo-targeted keywords referencing neighboring cities. For example, the Hero subtitle should mention 'Pierrelaye, Cergy, Pontoise et toute la région Val-d'Oise'; the About section should mention the intervention area; the Contact section should reinforce 'couvreur disponible sur Cergy, Argenteuil, Conflans, Herblay et environs'.",
-      "reqIds": [
-        "REQ-15"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-the-json-ld-localbusiness-structured-data-block-in-frontend-index-html-to-add-an-areaserved-property-as-an-array-of-city-objects-covering-all-neighboring-municipalities-pierrelaye-cergy-pontoise-saint-ouen-l-aum-ne-conflans-sainte-honorine-herblay-taverny-ermont-argenteuil-osny-jouy-le-moutier-vaur-al-neuville-sur-oise-m-ry-sur-oise-eaubonne-sannois-franconville-cormeilles-en-parisis-montigny-l-s-cormeilles-l-isle-adam-beaumont-sur-oise-persan-saint-leu-la-for-t-bouff-mont-domont-sarcelles-garges-l-s-gonesse-also-add-a-knowsabout-array-listing-the-main-roofing-services-as-keywords",
-      "title": "Update the JSON-LD LocalBusiness structured data block in frontend/index.html to add an 'areaServed' property as an array of City objects covering all neighboring municipalities: Pierrelaye, Cergy, Pontoise, Saint-Ouen-l'Aumône, Conflans-Sainte-Honorine, Herblay, Taverny, Ermont, Argenteuil, Osny, Jouy-le-Moutier, Vauréal, Neuville-sur-Oise, Méry-sur-Oise, Eaubonne, Sannois, Franconville, Cormeilles-en-Parisis, Montigny-lès-Cormeilles, L'Isle-Adam, Beaumont-sur-Oise, Persan, Saint-Leu-la-Forêt, Bouffémont, Domont, Sarcelles, Garges-lès-Gonesse. Also add a 'knowsAbout' array listing the main roofing services as keywords.",
-      "reqIds": [
-        "REQ-16"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-create-the-google-search-console-ownership-verification-file-at-frontend-public-google2ea9c3e7d5d4abde-html-the-file-must-be-a-minimal-html-page-containing-only-the-google-required-verification-string-google-site-verification-google2ea9c3e7d5d4abde-so-that-google-can-confirm-site-ownership-at-https-site-de-couverture-seo-3wk-caffeine-xyz-google2ea9c3e7d5d4abde-html-the-file-must-never-be-deleted",
-      "title": "Create the Google Search Console ownership verification file at `frontend/public/google2ea9c3e7d5d4abde.html`. The file must be a minimal HTML page containing only the Google-required verification string (google-site-verification: google2ea9c3e7d5d4abde) so that Google can confirm site ownership at https://site-de-couverture-seo-3wk.caffeine.xyz/google2ea9c3e7d5d4abde.html. The file must never be deleted.",
-      "reqIds": [
-        "REQ-17"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-in-frontend-index-html-add-meta-name-google-site-verification-content-phjap9bjessqiqarsiznet4pvxtvf-5b1rprlknzhjk-inside-the-head-section-alongside-the-existing-meta-tags-and-add-a-matching-meta-name-google-site-verification-content-phjap9bjessqiqarsiznet4pvxtvf-5b1rprlknzhjk-tag-inside-the-body-element-as-well",
-      "title": "In `frontend/index.html`, add `<meta name=\"google-site-verification\" content=\"phjaP9BjessQIqarSIznET4pvxtvF-5B1rpRlkNzHJk\" />` inside the `<head>` section (alongside the existing meta tags) AND add a matching `<meta name=\"google-site-verification\" content=\"phjaP9BjessQIqarSIznET4pvxtvF-5B1rpRlkNzHJk\" />` tag inside the `<body>` element as well.",
-      "reqIds": [
-        "REQ-18"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-create-a-static-sitemap-file-at-frontend-public-sitemap-xml-listing-the-canonical-url-of-the-site-https-site-de-couverture-seo-3wk-caffeine-xyz-with-all-relevant-anchor-section-urls-e-g-services-about-contact-temoignages-set-lastmod-to-the-current-date-changefreq-to-monthly-and-priority-to-1-0-for-the-root-url-and-0-8-for-section-anchors-the-file-must-be-valid-xml-conforming-to-the-sitemap-protocol-xmlns-http-www-sitemaps-org-schemas-sitemap-0-9",
-      "title": "Create a static sitemap file at `frontend/public/sitemap.xml` listing the canonical URL of the site (`https://site-de-couverture-seo-3wk.caffeine.xyz/`) with all relevant anchor section URLs (e.g., `/#services`, `/#about`, `/#contact`, `/#temoignages`). Set `<lastmod>` to the current date, `<changefreq>` to `monthly`, and `<priority>` to `1.0` for the root URL and `0.8` for section anchors. The file must be valid XML conforming to the sitemap protocol (xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\").",
-      "reqIds": [
-        "REQ-20"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-create-a-frontend-public-robots-txt-file-that-allows-all-crawlers-user-agent-allow-and-includes-a-sitemap-directive-pointing-to-https-site-de-couverture-seo-3wk-caffeine-xyz-sitemap-xml-so-search-engines-can-autodiscover-the-sitemap",
-      "title": "Create a `frontend/public/robots.txt` file that allows all crawlers (`User-agent: *`, `Allow: /`) and includes a `Sitemap:` directive pointing to `https://site-de-couverture-seo-3wk.caffeine.xyz/sitemap.xml` so search engines can autodiscover the sitemap.",
-      "reqIds": [
-        "REQ-21"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-in-frontend-index-html-add-a-link-rel-sitemap-type-application-xml-title-sitemap-href-sitemap-xml-tag-inside-the-head-section-to-advertise-the-sitemap-to-crawlers-via-html-discovery",
-      "title": "In `frontend/index.html`, add a `<link rel=\"sitemap\" type=\"application/xml\" title=\"Sitemap\" href=\"/sitemap.xml\" />` tag inside the `<head>` section to advertise the sitemap to crawlers via HTML discovery.",
-      "reqIds": [
-        "REQ-22"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-rewrite-frontend-public-sitemap-xml-so-it-is-a-fully-valid-xml-sitemap-that-google-search-console-accepts-the-file-must-1-use-the-correct-xml-declaration-xml-version-1-0-encoding-utf-8-2-use-the-exact-namespace-xmlns-http-www-sitemaps-org-schemas-sitemap-0-9-3-list-only-absolute-crawlable-urls-the-root-https-site-de-couverture-seo-3wk-caffeine-xyz-plus-section-anchors-https-site-de-couverture-seo-3wk-caffeine-xyz-services-https-site-de-couverture-seo-3wk-caffeine-xyz-about-https-site-de-couverture-seo-3wk-caffeine-xyz-temoignages-https-site-de-couverture-seo-3wk-caffeine-xyz-contact-4-include-a-lastmod-today-s-date-in-yyyy-mm-dd-changefreq-monthly-changefreq-and-priority-1-0-for-root-0-8-for-anchors-for-every-url-entry-5-contain-no-extra-whitespace-bom-characters-html-tags-or-any-content-before-the-xml-declaration-that-could-cause-a-parse-error",
-      "title": "Rewrite `frontend/public/sitemap.xml` so it is a fully valid XML sitemap that Google Search Console accepts. The file must: (1) use the correct XML declaration `<?xml version=\"1.0\" encoding=\"UTF-8\"?>`, (2) use the exact namespace `xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"`, (3) list only absolute, crawlable URLs — the root `https://site-de-couverture-seo-3wk.caffeine.xyz/` plus section anchors `https://site-de-couverture-seo-3wk.caffeine.xyz/#services`, `https://site-de-couverture-seo-3wk.caffeine.xyz/#about`, `https://site-de-couverture-seo-3wk.caffeine.xyz/#temoignages`, `https://site-de-couverture-seo-3wk.caffeine.xyz/#contact`, (4) include a `<lastmod>` (today's date in YYYY-MM-DD), `<changefreq>monthly</changefreq>`, and `<priority>` (1.0 for root, 0.8 for anchors) for every `<url>` entry, (5) contain no extra whitespace, BOM characters, HTML tags, or any content before the XML declaration that could cause a parse error.",
-      "reqIds": [
-        "REQ-25"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-verify-that-frontend-index-html-contains-a-link-rel-sitemap-type-application-xml-title-sitemap-href-sitemap-xml-tag-in-the-head-section-pointing-to-the-correct-root-relative-path-sitemap-xml-if-missing-or-incorrect-add-or-correct-it",
-      "title": "Verify that `frontend/index.html` contains a `<link rel=\"sitemap\" type=\"application/xml\" title=\"Sitemap\" href=\"/sitemap.xml\" />` tag in the `<head>` section pointing to the correct root-relative path `/sitemap.xml`. If missing or incorrect, add or correct it.",
-      "reqIds": [
-        "REQ-27"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-rewrite-frontend-public-sitemap-xml-to-contain-only-the-canonical-root-url-https-site-de-couverture-seo-3wk-caffeine-xyz-as-a-single-url-entry-remove-all-fragment-anchor-urls-e-g-services-about-contact-temoignages-because-google-search-console-rejects-fragment-based-urls-as-non-crawlable-the-file-must-1-start-with-exactly-xml-version-1-0-encoding-utf-8-with-no-bom-no-leading-whitespace-no-blank-lines-before-the-xml-declaration-2-use-namespace-xmlns-http-www-sitemaps-org-schemas-sitemap-0-9-3-include-lastmod-2025-07-17-lastmod-changefreq-monthly-changefreq-and-priority-1-0-priority-for-the-root-url-entry-4-contain-no-html-tags-no-comments-and-no-extra-whitespace-that-could-cause-a-parse-error",
-      "title": "Rewrite `frontend/public/sitemap.xml` to contain ONLY the canonical root URL `https://site-de-couverture-seo-3wk.caffeine.xyz/` as a single `<url>` entry. Remove all fragment/anchor URLs (e.g. `/#services`, `/#about`, `/#contact`, `/#temoignages`) because Google Search Console rejects fragment-based URLs as non-crawlable. The file must: (1) start with exactly `<?xml version=\"1.0\" encoding=\"UTF-8\"?>` with no BOM, no leading whitespace, no blank lines before the XML declaration; (2) use namespace `xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"`; (3) include `<lastmod>2025-07-17</lastmod>`, `<changefreq>monthly</changefreq>`, and `<priority>1.0</priority>` for the root URL entry; (4) contain no HTML tags, no comments, and no extra whitespace that could cause a parse error.",
-      "reqIds": [
-        "REQ-28"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-in-frontend-public-robots-txt-ensure-the-file-allows-all-crawlers-and-the-sitemap-directive-points-to-exactly-https-site-de-couverture-seo-3wk-caffeine-xyz-sitemap-xml-with-no-trailing-slash-on-the-filename-and-no-extra-whitespace-the-file-must-be-plain-text-with-no-bom-and-no-html-content",
-      "title": "In `frontend/public/robots.txt`, ensure the file allows all crawlers and the `Sitemap:` directive points to exactly `https://site-de-couverture-seo-3wk.caffeine.xyz/sitemap.xml` with no trailing slash on the filename and no extra whitespace. The file must be plain text with no BOM and no HTML content.",
-      "reqIds": [
-        "REQ-29"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-in-frontend-index-html-audit-and-fix-all-crawlability-and-indexability-signals-to-resolve-the-google-search-console-sans-objet-n-a-crawl-status-1-ensure-there-is-no-meta-name-robots-content-noindex-or-meta-name-robots-content-nofollow-or-any-x-robots-tag-that-would-block-indexing-2-ensure-the-canonical-link-rel-canonical-href-https-site-de-couverture-seo-3wk-caffeine-xyz-tag-is-present-and-correct-in-head-3-ensure-the-link-rel-sitemap-type-application-xml-title-sitemap-href-sitemap-xml-tag-is-present-in-head-4-verify-the-open-graph-og-url-meta-tag-is-set-to-https-site-de-couverture-seo-3wk-caffeine-xyz-5-remove-any-noindex-directives-that-may-be-embedded-anywhere-in-the-document",
-      "title": "In `frontend/index.html`, audit and fix all crawlability and indexability signals to resolve the Google Search Console 'Sans objet' (N/A) crawl status: (1) Ensure there is NO `<meta name=\"robots\" content=\"noindex\">` or `<meta name=\"robots\" content=\"nofollow\">` or any `X-Robots-Tag` that would block indexing. (2) Ensure the canonical `<link rel=\"canonical\" href=\"https://site-de-couverture-seo-3wk.caffeine.xyz/\" />` tag is present and correct in `<head>`. (3) Ensure the `<link rel=\"sitemap\" type=\"application/xml\" title=\"Sitemap\" href=\"/sitemap.xml\" />` tag is present in `<head>`. (4) Verify the Open Graph `og:url` meta tag is set to `https://site-de-couverture-seo-3wk.caffeine.xyz/`. (5) Remove any `noindex` directives that may be embedded anywhere in the document.",
-      "reqIds": [
-        "REQ-30"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-in-frontend-index-html-fix-the-json-ld-localbusiness-structured-data-to-ensure-it-does-not-trigger-google-validation-errors-1-remove-any-review-objects-from-the-json-ld-if-they-lack-a-valid-itemreviewed-property-either-add-the-required-itemreviewed-field-with-type-localbusiness-name-verdier-couverture-to-each-review-object-or-remove-the-inline-reviews-array-from-the-json-ld-entirely-and-keep-only-the-aggregaterating-2-ensure-the-aggregaterating-is-correctly-nested-as-a-direct-property-of-the-localbusiness-entity-3-validate-that-the-resulting-json-ld-is-syntactically-correct-no-trailing-commas-no-unclosed-brackets",
-      "title": "In `frontend/index.html`, fix the JSON-LD LocalBusiness structured data to ensure it does not trigger Google validation errors: (1) Remove any `Review` objects from the JSON-LD if they lack a valid `itemReviewed` property — either add the required `itemReviewed` field with `{ \"@type\": \"LocalBusiness\", \"name\": \"VERDIER COUVERTURE\" }` to each `Review` object, or remove the inline reviews array from the JSON-LD entirely and keep only the `AggregateRating`. (2) Ensure the `AggregateRating` is correctly nested as a direct property of the `LocalBusiness` entity. (3) Validate that the resulting JSON-LD is syntactically correct (no trailing commas, no unclosed brackets).",
-      "reqIds": [
-        "REQ-31"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-in-frontend-index-html-add-link-rel-preconnect-href-https-fonts-googleapis-com-and-link-rel-preconnect-href-https-fonts-gstatic-com-crossorigin-before-the-google-fonts-link-stylesheet-tag-additionally-convert-the-google-fonts-link-rel-stylesheet-to-use-media-print-onload-this-media-all-for-non-blocking-font-loading-and-add-a-noscript-fallback-this-eliminates-render-blocking-font-requests-that-delay-first-contentful-paint",
-      "title": "In `frontend/index.html`, add `<link rel='preconnect' href='https://fonts.googleapis.com' />` and `<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />` before the Google Fonts `<link>` stylesheet tag. Additionally, convert the Google Fonts `<link rel='stylesheet'>` to use `media='print' onload=\"this.media='all'\"` for non-blocking font loading, and add a `<noscript>` fallback. This eliminates render-blocking font requests that delay First Contentful Paint.",
-      "reqIds": [
-        "REQ-32"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-in-frontend-src-components-services-tsx-add-loading-lazy-to-all-six-service-card-img-elements-so-that-off-screen-images-are-not-downloaded-during-initial-page-load-all-other-images-below-the-fold-in-about-tsx-testimonials-tsx-and-footer-tsx-should-also-receive-loading-lazy-if-not-already-set-only-the-hero-image-above-the-fold-must-remain-eager",
-      "title": "In `frontend/src/components/Services.tsx`, add `loading='lazy'` to all six service card `<img>` elements so that off-screen images are not downloaded during initial page load. All other images below the fold in `About.tsx`, `Testimonials.tsx`, and `Footer.tsx` should also receive `loading='lazy'` if not already set. Only the hero image (above the fold) must remain eager.",
-      "reqIds": [
-        "REQ-34"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-in-frontend-index-html-add-a-link-rel-preload-as-image-href-assets-generated-hero-image-filename-tag-inside-head-to-preload-the-hero-lcp-image-use-the-exact-filename-of-the-hero-background-image-currently-referenced-in-hero-tsx-this-tells-the-browser-to-start-fetching-the-hero-image-as-soon-as-the-html-is-parsed-before-css-and-js-are-processed",
-      "title": "In `frontend/index.html`, add a `<link rel='preload' as='image' href='/assets/generated/[hero-image-filename]' />` tag inside `<head>` to preload the hero/LCP image. Use the exact filename of the hero background image currently referenced in `Hero.tsx`. This tells the browser to start fetching the hero image as soon as the HTML is parsed, before CSS and JS are processed.",
-      "reqIds": [
-        "REQ-35"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-in-frontend-index-html-inline-the-critical-above-the-fold-css-font-face-declarations-hero-section-base-styles-navigation-styles-and-color-custom-properties-from-index-css-directly-in-a-style-tag-inside-head-extract-only-the-styles-needed-to-render-the-visible-viewport-without-waiting-for-the-external-css-bundle-this-reduces-render-blocking-time-and-improves-first-contentful-paint",
-      "title": "In `frontend/index.html`, inline the critical above-the-fold CSS (font-face declarations, hero section base styles, navigation styles, and color custom properties from `index.css`) directly in a `<style>` tag inside `<head>`. Extract only the styles needed to render the visible viewport without waiting for the external CSS bundle. This reduces render-blocking time and improves First Contentful Paint.",
-      "reqIds": [
-        "REQ-36"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-in-frontend-index-html-add-meta-http-equiv-cache-control-content-max-age-31536000-immutable-for-static-assets-and-ensure-the-html-tag-has-lang-fr-set-if-not-already-also-add-a-dns-prefetch-hint-link-rel-dns-prefetch-href-https-fonts-googleapis-com-to-speed-up-dns-resolution-for-external-font-resources",
-      "title": "In `frontend/index.html`, add `<meta http-equiv='Cache-Control' content='max-age=31536000, immutable' />` for static assets and ensure the `<html>` tag has `lang='fr'` set (if not already). Also add a DNS prefetch hint `<link rel='dns-prefetch' href='https://fonts.googleapis.com' />` to speed up DNS resolution for external font resources.",
-      "reqIds": [
-        "REQ-37"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-audit-every-location-in-the-codebase-where-a-contact-email-address-appears-including-the-contact-section-form-action-mailto-link-the-contact-info-card-email-display-link-the-footer-email-link-and-any-other-mailto-href-and-verify-that-each-one-uses-exactly-sv-couverture95-gmail-com-correct-any-mismatched-missing-or-malformed-email-addresses-so-that-all-mailto-links-and-form-submission-targets-point-to-sv-couverture95-gmail-com",
-      "title": "Audit every location in the codebase where a contact email address appears — including the Contact section form action/mailto link, the contact info card email display link, the Footer email link, and any other mailto: href — and verify that each one uses exactly 'sv.couverture95@gmail.com'. Correct any mismatched, missing, or malformed email addresses so that all mailto: links and form submission targets point to sv.couverture95@gmail.com.",
-      "reqIds": [
-        "REQ-39"
       ],
       "version": 1
     }
@@ -285,181 +28,22 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Page de couverture (landing page) responsive et moderne",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-2",
-      "summary": "Optimisation SEO on-page : balises meta, titres H1/H2, descriptions, données structurées",
-      "reqIds": [],
+      "summary": "Audit the frontend routing and all internal links to ensure no broken or missing routes (404s) exist. All navigation links, CTA buttons, and anchor scroll targets must resolve correctly without producing 4xx responses.",
+      "reqIds": [
+        "REQ-1"
+      ],
       "status": "pending"
     },
     {
       "id": "AR-3",
-      "summary": "Contenu optimisé pour le référencement naturel (mots-clés, textes alt, URL propres)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-4",
-      "summary": "Supprimer la mention RGE du site",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-5",
-      "summary": "Remplacer le nom du site par VERDIER COUVERTURE",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-6",
-      "summary": "Remplacer le numéro de téléphone mobile par 06 63 73 94 00 et ajouter le fixe 01 72 76 17 63",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-7",
-      "summary": "Mettre à jour l'adresse : 206 chemin de la petite patelle, Pierrelaye 95480",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-8",
-      "summary": "Mettre à jour l'adresse email par sv.couverture95@gmail.com dans toutes les sections du site",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-9",
-      "summary": "Ajouter des avis clients plus récents dans la section témoignages",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-10",
-      "summary": "Mettre à jour les avis clients jusqu'à janvier 2026 (dates plus récentes)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-11",
-      "summary": "Ajouter des photos illustratives pour chaque type de service/spécificité (ex: réparation, pose de tuiles, etc.) dans les sections concernées",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-12",
-      "summary": "Enrichir le contenu SEO avec un maximum de mots-clés ciblés incluant toutes les villes voisines de Pierrelaye (Val-d'Oise, Île-de-France) : Cergy, Pontoise, Saint-Ouen-l'Aumône, Conflans-Sainte-Honorine, Herblay, Taverny, Ermont, Argenteuil, etc.",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-13",
-      "summary": "Ajouter le fichier de vérification Google Search Console (google2ea9c3e7d5d4abde.html) pour confirmer la propriété du site",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-14",
-      "summary": "Ajouter la balise meta google-site-verification (phjaP9BjessQIqarSIznET4pvxtvF-5B1rpRlkNzHJk) dans le <head> et le <body> de index.html",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-15",
-      "summary": "Corriger l'erreur Schema.org : ajouter le champ 'itemReviewed' manquant dans les données structurées des avis (Review) pour passer la validation Google",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-16",
-      "summary": "In `frontend/index.html`, update the JSON-LD structured data block to fix the Google Rich Results error 'Champ itemReviewed manquant'. Each `Review` object inside the `review` array of the `LocalBusiness` schema must include an `itemReviewed` property referencing the business (type `LocalBusiness`, with `name: 'VERDIER COUVERTURE'`). If an `AggregateRating` is present, ensure it is correctly nested inside the `LocalBusiness` entity. Validate that the resulting JSON-LD passes Google's Rich Results Test without the 'itemReviewed missing' error.",
+      "summary": "Verify the Google Search Console verification file (google2ea9c3e7d5d4abde.html) is publicly accessible at the root of the deployed site without authentication or redirect, so that the verification request does not return a 4xx.",
       "reqIds": [
-        "REQ-19"
+        "REQ-3"
       ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-17",
-      "summary": "Créer et référencer un fichier sitemap.xml pour le site afin que Google Search Console puisse détecter et indexer les pages",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-18",
-      "summary": "Ensure the current application build — including the sitemap.xml, robots.txt, Google Search Console verification file, all SEO improvements, and all existing features — is deployed and live in production without any changes to the codebase.",
-      "reqIds": [
-        "REQ-23"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-19",
-      "summary": "Ensure the current application build — including the sitemap.xml, robots.txt, Google Search Console verification file, all SEO improvements, and all existing features — is deployed and live in production without any changes to the codebase.",
-      "reqIds": [
-        "REQ-24"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-20",
-      "summary": "Corriger l'adresse du sitemap : Google Search Console signale une 'Adresse de sitemap incorrecte'. Vérifier et corriger l'URL et le contenu du fichier sitemap.xml pour qu'il soit accessible et valide.",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-22",
-      "summary": "Verify that `frontend/public/robots.txt` contains a `Sitemap:` directive pointing to the exact absolute URL `https://site-de-couverture-seo-3wk.caffeine.xyz/sitemap.xml` (no trailing slash issues, no relative path). If the directive is missing or incorrect, correct it.",
-      "reqIds": [
-        "REQ-26"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-23",
-      "summary": "Résoudre les problèmes d'exploration Google Search Console : 'Dernière exploration Sans objet', 'Explorée avec Sans objet', 'Exploration autorisée Sans objet', 'Récupération de page Sans objet', 'Indexation autorisée Sans objet', 'URL canonique Sans objet' — le site n'est pas crawlé ni indexé par Google.",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-24",
-      "summary": "Améliorer la vitesse de chargement des pages : optimiser First Contentful Paint (FCP) et Largest Contentful Paint (LCP) selon les recommandations Google PageSpeed Insights",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-26",
-      "summary": "In `frontend/src/components/Hero.tsx`, add `loading='eager'` and `fetchpriority='high'` attributes to the hero background `<img>` element (or equivalent inline style background). If the hero image is rendered as a CSS background-image, convert it to an `<img>` tag positioned absolutely behind the content so it can receive these priority hints. This ensures the hero image — the Largest Contentful Paint element — is fetched with highest priority.",
-      "reqIds": [
-        "REQ-33"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-27",
-      "summary": "Corriger le bug de défilement : les sections/pages 'suivent' (comportement inattendu) quand on défile vers le bas sur le site",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-28",
-      "summary": "Audit and fix the scroll bug where page sections follow (stick to) the viewport as the user scrolls down. Identify any element in Navigation.tsx, Hero.tsx, Services.tsx, About.tsx, Testimonials.tsx, Contact.tsx, ServiceAreas.tsx, or Footer.tsx that incorrectly uses `position: fixed`, `position: sticky`, `transform`, or `will-change` CSS properties causing sections to trail the scroll position. Remove or correct the offending styles so every section scrolls naturally and remains static relative to the document flow. The Navigation bar may remain fixed at the top as intended, but no other section or element should follow the scroll.",
-      "reqIds": [
-        "REQ-38"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-29",
-      "summary": "Vérifier et corriger l'adresse email du formulaire de contact : s'assurer que sv.couverture95@gmail.com est bien configurée dans tous les liens mailto et champs du formulaire de devis",
-      "reqIds": [],
       "status": "pending"
     }
   ],
-  "gameProjectType": "none",
-  "projectName": "Site de Couverture SEO",
+  "projectName": "Verdier Couverture",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }
